@@ -1,14 +1,14 @@
 //
-//  SignUpViewController.swift
+//  SignUp3ViewController.swift
 //  jajko
 //
-//  Created by Esteban Garro on 2015-06-11.
+//  Created by Esteban Garro on 2015-06-12.
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUp3ViewController: UIViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -40,4 +40,3 @@ class SignUpViewController: UIViewController {
         return didLogin
     }
 }
-

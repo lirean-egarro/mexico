@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */; };
+		335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
 		33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A51B294D4400CED73C /* LoginViewController.swift */; };
 		33F133AB1B294D4500CED73C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F133AA1B294D4500CED73C /* Images.xcassets */; };
 		33F133AE1B294D4500CED73C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F133AC1B294D4500CED73C /* LaunchScreen.xib */; };
-		33F133C41B29681800CED73C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133C31B29681800CED73C /* SignUpViewController.swift */; };
+		33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133C31B29681800CED73C /* SignUp1ViewController.swift */; };
 		33F133C91B29C53E00CED73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F133C71B29C53E00CED73C /* Main.storyboard */; };
+		33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp3ViewController.swift; sourceTree = "<group>"; };
+		335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp4ViewController.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F133A21B294D4400CED73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F133A31B294D4400CED73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33F133A51B294D4400CED73C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		33F133AA1B294D4500CED73C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33F133AD1B294D4500CED73C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		33F133C31B29681800CED73C /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		33F133C31B29681800CED73C /* SignUp1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp1ViewController.swift; sourceTree = "<group>"; };
 		33F133C81B29C53E00CED73C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +64,10 @@
 			children = (
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
-				33F133C31B29681800CED73C /* SignUpViewController.swift */,
+				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
+				33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */,
+				335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */,
+				335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */,
 				33F133C71B29C53E00CED73C /* Main.storyboard */,
 				33F133AA1B294D4500CED73C /* Images.xcassets */,
 				33F133AC1B294D4500CED73C /* LaunchScreen.xib */,
@@ -146,8 +155,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33F133C41B29681800CED73C /* SignUpViewController.swift in Sources */,
+				33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */,
+				33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */,
 				33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */,
+				335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */,
+				335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +308,7 @@
 				33F133BF1B294D4500CED73C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
