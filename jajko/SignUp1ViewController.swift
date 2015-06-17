@@ -10,34 +10,20 @@ import UIKit
 
 class SignUp1ViewController: UIViewController {
     
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var ageField: TextBox!
+    @IBOutlet weak var genderSegment:Segments!
+    @IBOutlet weak var polishSegment:Segments!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        genderSegment.components = ["Male","Female"]
+        polishSegment.components = ["None","Beg","Inter","Adv","Fluent"]
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func login(sender: AnyObject) {
-        if doLogin() {
-            
-        } else {
-            
-        }
-    }
-    
-    func doLogin() -> Bool {
-        var didLogin = false
-        let username = self.usernameField.text
-        let password = self.passwordField.text
-        
-        
-        return didLogin
     }
 }
 

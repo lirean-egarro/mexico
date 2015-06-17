@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33113A1D1B309B3300F87275 /* TextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A1C1B309B3300F87275 /* TextBox.swift */; };
 		335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */; };
 		335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */; };
+		3368AD331B31089800F7D9CA /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD321B31089800F7D9CA /* Segments.swift */; };
+		3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD371B31146200F7D9CA /* UISegmentedControl+Resize.m */; };
+		33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D321B3128D2009814EE /* ControlsConfig.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
 		33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A51B294D4400CED73C /* LoginViewController.swift */; };
 		33F133AB1B294D4500CED73C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F133AA1B294D4500CED73C /* Images.xcassets */; };
@@ -19,8 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33113A1C1B309B3300F87275 /* TextBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBox.swift; sourceTree = "<group>"; };
 		335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp3ViewController.swift; sourceTree = "<group>"; };
 		335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp4ViewController.swift; sourceTree = "<group>"; };
+		3368AD321B31089800F7D9CA /* Segments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segments.swift; sourceTree = "<group>"; };
+		3368AD351B31146100F7D9CA /* jajko-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jajko-Bridging-Header.h"; sourceTree = "<group>"; };
+		3368AD361B31146200F7D9CA /* UISegmentedControl+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+Resize.h"; sourceTree = "<group>"; };
+		3368AD371B31146200F7D9CA /* UISegmentedControl+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+Resize.m"; sourceTree = "<group>"; };
+		33731D321B3128D2009814EE /* ControlsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsConfig.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F133A21B294D4400CED73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F133A31B294D4400CED73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +53,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33113A191B309AF000F87275 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				33113A1C1B309B3300F87275 /* TextBox.swift */,
+				3368AD321B31089800F7D9CA /* Segments.swift */,
+				33731D321B3128D2009814EE /* ControlsConfig.swift */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		3368AD341B31140100F7D9CA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				3368AD361B31146200F7D9CA /* UISegmentedControl+Resize.h */,
+				3368AD371B31146200F7D9CA /* UISegmentedControl+Resize.m */,
+				3368AD351B31146100F7D9CA /* jajko-Bridging-Header.h */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		33F133951B294D4400CED73C = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +92,8 @@
 		33F133A01B294D4400CED73C /* jajko */ = {
 			isa = PBXGroup;
 			children = (
+				3368AD341B31140100F7D9CA /* Categories */,
+				33113A191B309AF000F87275 /* CustomViews */,
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
 				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
@@ -156,11 +188,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */,
+				33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */,
 				33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */,
 				33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */,
 				335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */,
 				335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */,
+				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
+				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
+				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,11 +305,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iOS Development: Esteban Garro (68GLTSZ4RH)";
 				INFOPLIST_FILE = jajko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "jajko/jajko-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -281,11 +320,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = jajko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "jajko/jajko-Bridging-Header.h";
 			};
 			name = Release;
 		};

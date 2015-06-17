@@ -8,25 +8,33 @@
 
 import UIKit
 
-class SignUp2ViewController: UIViewController {
+class SignUp2ViewController: UIViewController, SegmentsDelegate {
     
-    @IBOutlet weak var visualField: UITextField!
-    @IBOutlet weak var visualLine: UIView!
-    
-    @IBOutlet weak var hearingField: UITextField!
-    @IBOutlet weak var hearingLine: UIView!
-    
-    @IBOutlet weak var learningField: UITextField!
-    @IBOutlet weak var learningLine: UIView!
-    
-    @IBOutlet weak var neuroField: UITextField!
-    @IBOutlet weak var neuroLine: UIView!
-    
-    
+    @IBOutlet weak var dexteritySegment:Segments!
+    @IBOutlet weak var visualSegment:Segments!
+    @IBOutlet weak var hearingSegment:Segments!
+    @IBOutlet weak var learningSegment:Segments!
+    @IBOutlet weak var neuroSegment:Segments!
+
+    @IBOutlet weak var visualField: TextBox!
+    @IBOutlet weak var hearingField: TextBox!
+    @IBOutlet weak var learningField: TextBox!
+    @IBOutlet weak var neuroField: TextBox!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        dexteritySegment.components = ["Right handed","Left Handed"]
+        visualSegment.components = ["No","Yes"]
+        hearingSegment.components = ["No","Yes"]
+        learningSegment.components = ["No","Yes"]
+        neuroSegment.components = ["No","Yes"]
+        
+        dexteritySegment.delegate = self;
+        visualSegment.delegate = self;
+        hearingSegment.delegate = self;
+        learningSegment.delegate = self;
+        neuroSegment.delegate = self;
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,29 +42,29 @@ class SignUp2ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func displayTextField(sender: AnyObject) {
-        var tag = (sender as UIView).tag
-        var state = (sender as UISegmentedControl).selectedSegmentIndex
-        var hide = true
-        if state == 1 {
-            hide = false
-        }
-        
-        switch tag {
-            case 10:
-                visualField.hidden = hide
-                visualLine.hidden = hide
-            case 20:
-                hearingField.hidden = hide
-                hearingLine.hidden = hide
-            case 30:
-                learningField.hidden = hide
-                learningLine.hidden = hide
-            case 40:
-                neuroField.hidden = hide
-                neuroLine.hidden = hide
-            default:
-                println("Unknown segmented control tag")
+// MARK: SegmentsDelegate Methods
+    func didUpdate(control: Segments, toValue newValue:String?) {
+        if newValue != nil {
+            var tag = control.tag
+            var state = newValue!.lowercaseString
+
+            var hide = true
+            if state == "yes" {
+                hide = false
+            }
+            
+            switch tag {
+                case 20:
+                    visualField.hidden = hide
+                case 30:
+                    hearingField.hidden = hide
+                case 40:
+                    learningField.hidden = hide
+                case 50:
+                    neuroField.hidden = hide
+                default:
+                    println("Unknown segmented control tag")
+            }
         }
     }
 }
