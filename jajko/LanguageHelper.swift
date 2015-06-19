@@ -499,6 +499,10 @@ let languages = [
 
 class LanguageHelper : NSObject {
     
+    class func allLanguages() -> [AnyObject] {
+        return (languages as NSDictionary).allValues
+    }
+    
     class func languageStringFor(code: String) -> String? {
         return languages[code]
     }
