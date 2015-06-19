@@ -8,21 +8,27 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, TextBoxDelegate {
 
     @IBOutlet weak var usernameField: TextBox!
     @IBOutlet weak var passwordField: TextBox!
+    @IBOutlet weak var containerView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
+        usernameField.setUpView()
+        passwordField.setUpView()
+        
+        usernameField.delegate = self
+        passwordField.delegate = self
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func login(sender: AnyObject) {
         if doLogin() {
         
@@ -45,6 +51,18 @@ class LoginViewController: UIViewController {
         
         
         return didLogin
+    }
+
+// MARK: TextBoxDelegate methods
+    func didBeginEditing(textBox: TextBox) {
+        if textBox.title!.lowercaseString == "username" {
+            self.containerView.setContentOffset(CGPointMake(0.0, 30.0), animated: true)
+        } else {
+            self.containerView.setContentOffset(CGPointMake(0.0, 120.0), animated: true)
+        }
+    }
+    func didEndEditing(textBox: TextBox) {
+        self.containerView.setContentOffset(CGPointMake(0.0, 0.0), animated: true)
     }
 }
 
