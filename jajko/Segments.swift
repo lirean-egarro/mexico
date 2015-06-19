@@ -20,7 +20,6 @@ protocol SegmentsDelegate : NSObjectProtocol {
     func didUpdate(control:Segments, toValue newValue:String?)
 }
 
-@IBDesignable
 class Segments : UIView {
     
     weak var delegate:SegmentsDelegate? = nil

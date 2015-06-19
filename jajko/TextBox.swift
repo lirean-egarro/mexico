@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class TextBox : UIView, UITextFieldDelegate {
     
     var titleLabel:UILabel!
