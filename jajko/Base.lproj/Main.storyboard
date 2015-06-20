@@ -68,7 +68,7 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" ambiguous="YES" image="LetterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Mao-bi-8UD">
                                         <rect key="frame" x="104" y="80" width="300" height="159"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZVS-fU-1fc" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                    <view tag="10" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZVS-fU-1fc" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="252" width="508" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="Q6c-4c-e2j"/>
@@ -78,7 +78,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please enter your user name"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-ie-78f" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                    <view tag="20" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RaJ-ie-78f" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="340" width="508" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="ktv-w0-lTx"/>
@@ -86,6 +86,7 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="PASSWORD"/>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please enter your password"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="secure" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -183,7 +184,6 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hsc-Gd-vc2" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="308" width="528" height="58"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="gUZ-ie-HUJ"/>
                                 </constraints>
@@ -296,7 +296,6 @@
                             </button>
                             <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U35-Eb-3z8" customClass="Segments" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="115" width="528" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="xwy-AI-S6k"/>
                                 </constraints>
@@ -306,7 +305,6 @@
                             </view>
                             <view tag="20" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCY-vm-Bi8" customClass="Segments" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="201" width="200" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="GYA-RN-Sgf"/>
                                     <constraint firstAttribute="height" constant="56" id="enQ-vq-r0C"/>
@@ -317,7 +315,6 @@
                             </view>
                             <view tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nu0-bf-PSH" customClass="Segments" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="287" width="200" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="8qw-Ad-Lyp"/>
                                     <constraint firstAttribute="height" constant="56" id="F7z-kP-rNs"/>
@@ -328,7 +325,6 @@
                             </view>
                             <view tag="40" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLF-eD-kZb" customClass="Segments" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="373" width="200" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="Qax-lb-wUu"/>
                                     <constraint firstAttribute="width" constant="200" id="qJu-dl-T2e"/>
@@ -339,7 +335,6 @@
                             </view>
                             <view tag="50" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Br-Nb-4nm" customClass="Segments" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="459" width="200" height="56"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="DHT-gU-747"/>
                                     <constraint firstAttribute="width" constant="200" id="Ela-Vh-Mg4"/>
@@ -350,7 +345,6 @@
                             </view>
                             <view hidden="YES" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goR-jA-7wo" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="287" width="434" height="58"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="7On-m7-nCx"/>
                                 </constraints>
@@ -360,7 +354,6 @@
                             </view>
                             <view hidden="YES" tag="400" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJa-am-Nn2" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="374" width="434" height="58"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="7BY-2E-WAO"/>
                                 </constraints>
@@ -370,7 +363,6 @@
                             </view>
                             <view hidden="YES" tag="500" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIL-GE-VGL" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="458" width="434" height="58"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="5Hd-bi-ZCZ"/>
                                 </constraints>
@@ -380,7 +372,6 @@
                             </view>
                             <view hidden="YES" tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THp-Uo-VfS" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="201" width="434" height="58"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="mVu-Ud-vvP"/>
                                 </constraints>
@@ -569,6 +560,7 @@
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="CR4-w5-Hmw">
                                 <rect key="frame" x="36" y="430" width="528" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="oyD-NE-h1R"/>
                                 </constraints>
@@ -595,7 +587,7 @@
                             <constraint firstItem="CR4-w5-Hmw" firstAttribute="leading" secondItem="WJf-6g-1hJ" secondAttribute="leadingMargin" constant="20" id="ihg-0I-9Yq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kmO-VW-M4N" secondAttribute="trailing" constant="50" id="t8M-fk-j18"/>
                             <constraint firstItem="fvW-Vg-39q" firstAttribute="leading" secondItem="WJf-6g-1hJ" secondAttribute="leadingMargin" constant="20" id="teZ-xr-RfT"/>
-                            <constraint firstItem="CR4-w5-Hmw" firstAttribute="top" secondItem="0ds-RW-jf6" secondAttribute="bottom" constant="26" id="u0M-wt-qgE"/>
+                            <constraint firstItem="CR4-w5-Hmw" firstAttribute="top" secondItem="0ds-RW-jf6" secondAttribute="bottom" priority="750" constant="26" id="u0M-wt-qgE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CR4-w5-Hmw" secondAttribute="trailing" constant="20" id="u5F-BA-CCt"/>
                             <constraint firstItem="vAd-aX-GRv" firstAttribute="leading" secondItem="WJf-6g-1hJ" secondAttribute="leadingMargin" constant="14" id="yKN-Pn-TrF"/>
                         </constraints>
@@ -603,6 +595,7 @@
                     <navigationItem key="navigationItem" id="2KA-1y-kKI"/>
                     <connections>
                         <outlet property="addButton" destination="0ds-RW-jf6" id="0aS-um-A9Y"/>
+                        <outlet property="bottomConstraint" destination="TrI-b7-eYG" id="396-ys-vB5"/>
                         <outlet property="fatherField" destination="bwe-yn-od5" id="hWs-MJ-yVw"/>
                         <outlet property="motherField" destination="fvW-Vg-39q" id="atD-k5-WVN"/>
                         <outlet property="otherButtons" destination="CR4-w5-Hmw" id="9Lj-58-zXf"/>
@@ -661,19 +654,126 @@
                                     <segue destination="vGe-ag-feG" kind="unwind" unwindAction="cancelToLoginViewController:" id="6Hb-hv-JeL"/>
                                 </connections>
                             </button>
+                            <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xt1-N0-vko" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                <rect key="frame" x="36" y="95" width="250" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="19A-0r-jvP"/>
+                                    <constraint firstAttribute="width" constant="250" id="Zur-1c-dwy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Country"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="PLACE OF BIRTH"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8T-4S-5a4" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                <rect key="frame" x="36" y="173" width="250" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="wox-6h-H9t"/>
+                                    <constraint firstAttribute="width" constant="250" id="xPI-at-PBw"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Country"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="PLACE OF CURRENT RESIDENCE"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZO-Tb-hGc" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                <rect key="frame" x="36" y="251" width="358" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="CKK-2P-il3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="160" id="IE5-Qp-RD3"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter age you had"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="SINCE WHAT AGE?"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCQ-2p-Sos">
+                                <rect key="frame" x="534" y="342" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Mzd-Xa-H8h"/>
+                                    <constraint firstAttribute="width" constant="30" id="ydc-Ds-ysn"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="+">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewPlace" destination="LoF-NS-8d1" eventType="touchUpInside" id="3sT-fa-i9b"/>
+                                </connections>
+                            </button>
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcO-tW-aXY" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                                <rect key="frame" x="196" y="251" width="368" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="160" id="OJk-LJ-4vX"/>
+                                    <constraint firstAttribute="height" constant="58" id="vIi-Gk-yHy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="# of months"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="FOR HOW LONG?"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view tag="20" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7VI-wv-YpL" customClass="Segments" customModule="jajko" customModuleProvider="target">
+                                <rect key="frame" x="36" y="329" width="290" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="ME5-Sl-FSz"/>
+                                    <constraint firstAttribute="height" constant="56" id="ynB-iu-cKO"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="HAVE YOU LIVED IN OTHER PLACES?"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="rA9-UO-VP6">
+                                <rect key="frame" x="36" y="398" width="528" height="103"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="ey8-9x-nlJ"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dBk-7B-0iE" firstAttribute="top" secondItem="rA9-UO-VP6" secondAttribute="bottom" constant="20" id="4o6-uH-YaD"/>
                             <constraint firstItem="zfN-C3-CGd" firstAttribute="top" secondItem="dBk-7B-0iE" secondAttribute="bottom" constant="20" id="8bo-SV-g4n"/>
+                            <constraint firstItem="j8T-4S-5a4" firstAttribute="top" secondItem="Xt1-N0-vko" secondAttribute="bottom" constant="20" id="AOi-to-DWE"/>
+                            <constraint firstItem="7VI-wv-YpL" firstAttribute="top" secondItem="dZO-Tb-hGc" secondAttribute="bottom" constant="20" id="Fki-Ng-Zpx"/>
+                            <constraint firstItem="bcO-tW-aXY" firstAttribute="top" secondItem="dZO-Tb-hGc" secondAttribute="top" id="FvZ-un-wEy"/>
+                            <constraint firstItem="FCQ-2p-Sos" firstAttribute="leading" secondItem="7VI-wv-YpL" secondAttribute="trailing" priority="750" constant="15" id="HRL-oT-qYR"/>
                             <constraint firstItem="pm8-ah-fEg" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="14" id="Ijh-lj-kEK"/>
+                            <constraint firstItem="Xt1-N0-vko" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="20" id="KgN-Bu-iTm"/>
                             <constraint firstItem="pm8-ah-fEg" firstAttribute="top" secondItem="B6a-l4-yHn" secondAttribute="bottom" constant="15" id="NYe-Fo-LZM"/>
+                            <constraint firstItem="Xt1-N0-vko" firstAttribute="top" secondItem="pm8-ah-fEg" secondAttribute="bottom" constant="30" id="PeT-IC-T9b"/>
+                            <constraint firstItem="bcO-tW-aXY" firstAttribute="bottom" secondItem="dZO-Tb-hGc" secondAttribute="bottom" id="Rd8-4C-NH7"/>
+                            <constraint firstItem="bcO-tW-aXY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dZO-Tb-hGc" secondAttribute="trailing" constant="2" id="T4Q-Fw-nGu"/>
                             <constraint firstItem="P2M-A7-RdK" firstAttribute="top" secondItem="B6a-l4-yHn" secondAttribute="bottom" constant="16" id="UPN-df-qgo"/>
+                            <constraint firstItem="7VI-wv-YpL" firstAttribute="centerY" secondItem="FCQ-2p-Sos" secondAttribute="centerY" id="b2G-aF-47q"/>
+                            <constraint firstItem="7VI-wv-YpL" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="20" id="cY7-oW-tJh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bcO-tW-aXY" secondAttribute="trailing" constant="20" id="g34-WF-k2m"/>
+                            <constraint firstItem="dZO-Tb-hGc" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="20" id="hSz-vI-Imy"/>
+                            <constraint firstItem="rA9-UO-VP6" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="20" id="hcs-yb-qK9"/>
+                            <constraint firstItem="j8T-4S-5a4" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="20" id="iNQ-KG-49r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FCQ-2p-Sos" secondAttribute="trailing" constant="20" id="lTV-p0-EHI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dBk-7B-0iE" secondAttribute="trailing" constant="50" id="lx2-cO-mbi"/>
+                            <constraint firstItem="dZO-Tb-hGc" firstAttribute="top" secondItem="j8T-4S-5a4" secondAttribute="bottom" constant="20" id="mXo-h5-PcA"/>
                             <constraint firstAttribute="centerX" secondItem="P2M-A7-RdK" secondAttribute="centerX" id="r9L-3S-OwQ"/>
                             <constraint firstItem="dBk-7B-0iE" firstAttribute="leading" secondItem="2gu-Iq-1yt" secondAttribute="leadingMargin" constant="50" id="wli-Bq-b4a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rA9-UO-VP6" secondAttribute="trailing" constant="20" id="xHK-NK-gEN"/>
+                            <constraint firstItem="rA9-UO-VP6" firstAttribute="top" secondItem="FCQ-2p-Sos" secondAttribute="bottom" priority="750" constant="26" id="xR3-ZW-t3B"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="d5c-sa-zcB"/>
+                    <connections>
+                        <outlet property="addButton" destination="FCQ-2p-Sos" id="WDb-us-rlh"/>
+                        <outlet property="ageField" destination="dZO-Tb-hGc" id="7IX-9u-jRd"/>
+                        <outlet property="birthField" destination="Xt1-N0-vko" id="IME-6X-kPG"/>
+                        <outlet property="bottomConstraint" destination="4o6-uH-YaD" id="6Ns-gL-Wp9"/>
+                        <outlet property="currentField" destination="j8T-4S-5a4" id="InB-gp-WsF"/>
+                        <outlet property="howlongField" destination="bcO-tW-aXY" id="Qai-Fi-U4p"/>
+                        <outlet property="otherFields" destination="rA9-UO-VP6" id="cYt-FS-O2Z"/>
+                        <outlet property="otherSegment" destination="7VI-wv-YpL" id="2sc-xq-5eX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yn5-5Q-efh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vGe-ag-feG" userLabel="Exit" sceneMemberID="exit"/>

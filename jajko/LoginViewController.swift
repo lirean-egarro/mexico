@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, TextBoxDelegate {
+class LoginViewController: UIViewController, InputDelegate {
 
     @IBOutlet weak var usernameField: TextBox!
     @IBOutlet weak var passwordField: TextBox!
@@ -16,9 +16,6 @@ class LoginViewController: UIViewController, TextBoxDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        usernameField.setUpView()
-        passwordField.setUpView()
         
         usernameField.delegate = self
         passwordField.delegate = self
@@ -27,6 +24,13 @@ class LoginViewController: UIViewController, TextBoxDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        usernameField.setUpView()
+        passwordField.setUpView()
     }
     
     @IBAction func login(sender: AnyObject) {
@@ -53,15 +57,15 @@ class LoginViewController: UIViewController, TextBoxDelegate {
         return didLogin
     }
 
-// MARK: TextBoxDelegate methods
-    func didBeginEditing(textBox: TextBox) {
-        if textBox.title!.lowercaseString == "username" {
+// MARK: InputDelegate methods
+    func didBeginEditing(obj:Taggable) {
+        if obj.Tag() == 10 {
             self.containerView.setContentOffset(CGPointMake(0.0, 30.0), animated: true)
         } else {
             self.containerView.setContentOffset(CGPointMake(0.0, 120.0), animated: true)
         }
     }
-    func didEndEditing(textBox: TextBox) {
+    func didEndEditing(obj:Taggable) {
         self.containerView.setContentOffset(CGPointMake(0.0, 0.0), animated: true)
     }
 }

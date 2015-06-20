@@ -8,6 +8,15 @@
 
 import Foundation
 
+protocol Taggable : NSObjectProtocol {
+    func Tag() -> Int
+}
+
+protocol InputDelegate : NSObjectProtocol {
+    func didBeginEditing(obj:Taggable)
+    func didEndEditing(obj:Taggable)
+}
+
 extension String {
     func contains(find: String) -> Bool{
         return self.rangeOfString(find) != nil

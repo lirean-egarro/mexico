@@ -8,19 +8,27 @@
 
 import UIKit
 
-protocol TextBoxDelegate : NSObjectProtocol {
-    func didBeginEditing(textBox:TextBox)
-    func didEndEditing(textBox:TextBox)
-}
-
-class TextBox : UIView, UITextFieldDelegate {
+class TextBox : UIView, UITextFieldDelegate, Taggable {
     
-    weak var delegate:TextBoxDelegate?
+    weak var delegate:InputDelegate?
 
     var titleLabel:UILabel!
     var textField:UITextField!
     
     private var _line:UIImageView!
+    
+//    override var tag:Int {
+//        set {
+//            self.tag = newValue
+//        }
+//        get {
+//            return self.tag
+//        }
+//    }
+    
+    func Tag() -> Int {
+        return self.tag
+    }
     
     @IBInspectable var secure:Bool = false {
         didSet {
@@ -74,7 +82,7 @@ class TextBox : UIView, UITextFieldDelegate {
         self.placeholder = placeholder
         self.secure = isSecured
     }
-    
+        
     func setUpView() {
         titleLabel.frame = CGRectMake(0.0, 0.0, self.frame.size.width, 20.0)
         titleLabel.textColor = UIColor.lightGrayColor()

@@ -42,6 +42,15 @@ class SignUp2ViewController: UIViewController, SegmentsDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        visualField.setUpView()
+        hearingField.setUpView()
+        learningField.setUpView()
+        neuroField.setUpView()
+    }
+    
 // MARK: SegmentsDelegate Methods
     func didUpdate(control: Segments, toValue newValue:String?) {
         if newValue != nil {

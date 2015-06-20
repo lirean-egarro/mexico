@@ -16,9 +16,15 @@ class SignUp1ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
         genderSegment.components = ["Male","Female"]
         polishSegment.components = ["None","Beg","Inter","Adv","Fluent"]
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        ageField.setUpView()
     }
     
     override func didReceiveMemoryWarning() {

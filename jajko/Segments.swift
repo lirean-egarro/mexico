@@ -116,7 +116,6 @@ class Segments : UIView {
     }
     
     func valueChanged() {
-        println("Changing the value to \(self.selection)")
         self.delegate?.didUpdate(self, toValue: self.selection)
     }
 }
