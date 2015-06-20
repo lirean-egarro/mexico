@@ -252,8 +252,8 @@ let countries = [
 
 class CountryHelper : NSObject {
     
-    class func allCountries() -> [AnyObject] {
-        return (countries as NSDictionary).allValues
+    class func allCountries() -> [String] {
+        return (countries as NSDictionary).allValues.map({ $0 as! String })
     }
     
     class func countryStringFor(code: String) -> String? {

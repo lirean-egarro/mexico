@@ -94,7 +94,7 @@ let languages = [
     "cho" : "Choctaw",
     "chp" : "Chipewyan; Dene Suline",
     "chr" : "Cherokee",
-    "chu" : "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic",
+    "chu" : "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian",
     "chv" : "Chuvash",
     "chy" : "Cheyenne",
     "cmc" : "Chamic languages",
@@ -499,8 +499,8 @@ let languages = [
 
 class LanguageHelper : NSObject {
     
-    class func allLanguages() -> [AnyObject] {
-        return (languages as NSDictionary).allValues
+    class func allLanguages() -> [String] {
+        return (languages as NSDictionary).allValues.map({ $0 as! String })
     }
     
     class func languageStringFor(code: String) -> String? {

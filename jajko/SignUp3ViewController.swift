@@ -59,7 +59,7 @@ class SignUp3ViewController: UIViewController, InputDelegate {
         let newRect = CGRectMake(0.0, newY, fatherField.frame.size.width, fatherField.frame.size.height)
         
         
-        var newPick = TextBox(frame: newRect, title: "ADDITIONAL LANGUAGE \(otherFields.count + 1)", placeholder: "Enter text here", isSecured: false)
+        var newPick = TextBox(frame: newRect, type:.Language, title: "ADDITIONAL LANGUAGE \(otherFields.count + 1)", placeholder: "Enter text here", isSecured: false)
         newPick.tag = (otherFields.count + 1) * 10 + 30
         otherFields.append(newPick)
         self.otherButtons.addSubview(newPick)

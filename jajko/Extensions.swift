@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol InputPopoverDelegate : NSObjectProtocol {
+    func InputPopoverDidFinish(value: String?)
+}
+
 protocol Taggable : NSObjectProtocol {
     func Tag() -> Int
 }

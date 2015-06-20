@@ -17,6 +17,7 @@
 		33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D321B3128D2009814EE /* ControlsConfig.swift */; };
 		33731D351B314B13009814EE /* LanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D341B314B13009814EE /* LanguageHelper.swift */; };
 		33731D381B315328009814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D371B315328009814EE /* Extensions.swift */; };
+		33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
 		33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A51B294D4400CED73C /* LoginViewController.swift */; };
 		33F133AB1B294D4500CED73C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F133AA1B294D4500CED73C /* Images.xcassets */; };
@@ -39,6 +40,7 @@
 		33731D321B3128D2009814EE /* ControlsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsConfig.swift; sourceTree = "<group>"; };
 		33731D341B314B13009814EE /* LanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageHelper.swift; sourceTree = "<group>"; };
 		33731D371B315328009814EE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPopoverVC.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F133A21B294D4400CED73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F133A31B294D4400CED73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				33113A1C1B309B3300F87275 /* TextBox.swift */,
+				33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */,
 				3368AD321B31089800F7D9CA /* Segments.swift */,
 				331672AF1B354AE400907980 /* OtherPlaces.swift */,
 				33731D321B3128D2009814EE /* ControlsConfig.swift */,
@@ -216,6 +219,7 @@
 				33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */,
 				335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */,
 				335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */,
+				33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */,
 				33731D381B315328009814EE /* Extensions.swift in Sources */,
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,

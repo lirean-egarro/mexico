@@ -55,7 +55,7 @@
                                     <segue destination="ZeR-yl-II0" kind="showDetail" id="NHl-nj-bWK"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" image="LineFiller" translatesAutoresizingMaskIntoConstraints="NO" id="YZ0-I4-nNn">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LineFiller" translatesAutoresizingMaskIntoConstraints="NO" id="YZ0-I4-nNn">
                                 <rect key="frame" x="300" y="0.0" width="0.0" height="1200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" id="Pyz-4t-SdH"/>
@@ -116,6 +116,7 @@
                             <constraint firstItem="mBs-qg-Sdc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="Ui1-bv-c0b"/>
                             <constraint firstItem="Mrp-oi-tAk" firstAttribute="centerY" secondItem="Qot-Fp-0bC" secondAttribute="centerY" id="VLg-uq-Jx7"/>
                             <constraint firstItem="Qot-Fp-0bC" firstAttribute="top" secondItem="mBs-qg-Sdc" secondAttribute="bottom" constant="8" id="nEm-Yw-3QA"/>
+                            <constraint firstItem="YZ0-I4-nNn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="oXn-LD-BgV"/>
                             <constraint firstItem="YZ0-I4-nNn" firstAttribute="leading" secondItem="Qot-Fp-0bC" secondAttribute="trailing" constant="5" id="oas-FL-Iow"/>
                             <constraint firstItem="mBs-qg-Sdc" firstAttribute="top" secondItem="GbR-sr-AGW" secondAttribute="bottom" constant="20" id="uH4-LW-8ML"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GbR-sr-AGW" secondAttribute="trailing" constant="30" id="uHC-60-ycg"/>
@@ -190,6 +191,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="AGE"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please enter you age"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aoz-QX-uUS" customClass="Segments" customModule="jajko" customModuleProvider="target">
@@ -343,7 +347,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="NEUROLOGICAL DISORDERS"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view hidden="YES" tag="300" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="goR-jA-7wo" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view hidden="YES" tag="300" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="goR-jA-7wo" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="287" width="434" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="7On-m7-nCx"/>
@@ -352,7 +356,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please specify"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view hidden="YES" tag="400" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJa-am-Nn2" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view hidden="YES" tag="400" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FJa-am-Nn2" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="374" width="434" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="7BY-2E-WAO"/>
@@ -361,7 +365,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please specify"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view hidden="YES" tag="500" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIL-GE-VGL" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view hidden="YES" tag="500" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIL-GE-VGL" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="458" width="434" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="5Hd-bi-ZCZ"/>
@@ -370,7 +374,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Please specify"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view hidden="YES" tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THp-Uo-VfS" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view hidden="YES" tag="200" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THp-Uo-VfS" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="130" y="201" width="434" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="mVu-Ud-vvP"/>
@@ -519,6 +523,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Select one here"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="YOUR LANGUAGE"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvW-Vg-39q" customClass="TextBox" customModule="jajko" customModuleProvider="target">
@@ -531,6 +538,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Select one here"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="MOTHER'S LANGUAGE"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwe-yn-od5" customClass="TextBox" customModule="jajko" customModuleProvider="target">
@@ -543,6 +553,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Select one here"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="FATHER'S LANGUAGE"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ds-RW-jf6">
@@ -664,6 +677,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Country"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="PLACE OF BIRTH"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j8T-4S-5a4" customClass="TextBox" customModule="jajko" customModuleProvider="target">
@@ -676,6 +692,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Country"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="PLACE OF CURRENT RESIDENCE"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZO-Tb-hGc" customClass="TextBox" customModule="jajko" customModuleProvider="target">
@@ -688,6 +707,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter age you had"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="SINCE WHAT AGE?"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCQ-2p-Sos">
@@ -713,6 +735,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="# of months"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="FOR HOW LONG?"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="inputType">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="20" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7VI-wv-YpL" customClass="Segments" customModule="jajko" customModuleProvider="target">

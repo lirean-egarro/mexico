@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum InputType: Int {
+    case Text     = 0
+    case Number   = 1
+    case Age      = 2
+    case Month    = 3
+    case Country  = 4
+    case Language = 5
+}
+
 @objc class ControlsConfig {
     class func textFontOfSize(size: CGFloat) -> UIFont {
         return UIFont(name: "Helvetica", size: size)!
