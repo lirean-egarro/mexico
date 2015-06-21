@@ -500,7 +500,7 @@ let languages = [
 class LanguageHelper : NSObject {
     
     class func allLanguages() -> [String] {
-        return (languages as NSDictionary).allValues.map({ $0 as! String })
+        return (languages as NSDictionary).allValues.map({ $0 as! String }).sorted { $0 < $1 }
     }
     
     class func languageStringFor(code: String) -> String? {

@@ -253,7 +253,7 @@ let countries = [
 class CountryHelper : NSObject {
     
     class func allCountries() -> [String] {
-        return (countries as NSDictionary).allValues.map({ $0 as! String })
+        return (countries as NSDictionary).allValues.map({ $0 as! String }).sorted { $0 < $1 }
     }
     
     class func countryStringFor(code: String) -> String? {
