@@ -724,10 +724,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="CKK-2P-il3"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="160" id="IE5-Qp-RD3"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="160" id="IE5-Qp-RD3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="145" id="gme-BY-DJN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter age you had"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Age you had"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="SINCE WHAT AGE?"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="inputType">
                                         <integer key="value" value="2"/>
@@ -738,7 +739,8 @@
                                 <rect key="frame" x="196" y="251" width="368" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="160" id="OJk-LJ-4vX"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="750" constant="160" id="OJk-LJ-4vX"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="145" id="eCU-qn-lJa"/>
                                     <constraint firstAttribute="height" constant="58" id="vIi-Gk-yHy"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

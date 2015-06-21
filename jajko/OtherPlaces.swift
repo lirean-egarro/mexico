@@ -49,10 +49,10 @@ class OtherPlaces : UIView, InputDelegate, Taggable {
     
     func create() {
         let incY = COMPONENT_HEIGHT + COMPONENT_SEPARATOR_HEIGHT;
-        city = TextBox(frame: CGRectMake(0.0,0.0,160.0,COMPONENT_HEIGHT), type:.Text, title: "CITY", placeholder: "City", isSecured: false)
-        pais = TextBox(frame: CGRectMake(165.0,0.0,160.0,COMPONENT_HEIGHT), type:.Country, title: "COUNTRY", placeholder: "Country", isSecured: false)
-        age = TextBox(frame: CGRectMake(0.0,incY,160.0,COMPONENT_HEIGHT), type:.Age, title: "AGE", placeholder: "Since what age?", isSecured: false)
-        months = TextBox(frame: CGRectMake(165.0,incY,160.0,COMPONENT_HEIGHT), type:.Month, title: "MONTHS", placeholder: "For how long?", isSecured: false)
+        city = TextBox(frame: CGRectMake(0.0,0.0,150.0,COMPONENT_HEIGHT), type:.Text, title: "CITY", placeholder: "City", isSecured: false)
+        pais = TextBox(frame: CGRectMake(155.0,0.0,150.0,COMPONENT_HEIGHT), type:.Country, title: "COUNTRY", placeholder: "Country", isSecured: false)
+        age = TextBox(frame: CGRectMake(0.0,incY,150.0,COMPONENT_HEIGHT), type:.Age, title: "AGE", placeholder: "Since what age?", isSecured: false)
+        months = TextBox(frame: CGRectMake(155.0,incY,150.0,COMPONENT_HEIGHT), type:.Month, title: "MONTHS", placeholder: "For how long?", isSecured: false)
         
         city.delegate = self
         pais.delegate = self
