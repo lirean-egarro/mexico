@@ -20,13 +20,11 @@ class InputPopoverVC: UIViewController {
     
     private var _picker:UIPickerView!
     private var _pickerRows:[String]!
-    var startValue: String!
     
-    convenience init(value: String?, options: [String], andView picker: UIPickerView) {
+    convenience init(options: [String], andView picker: UIPickerView) {
         self.init()
         _picker = picker
         _pickerRows = options
-        startValue = value ?? ""
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -57,8 +55,6 @@ class InputPopoverVC: UIViewController {
         //This call to _picker initializates all uninitialized variables!
         self.view.addSubview(_picker)
         
-        _picker.selectRow(rowForStartValue(startValue), inComponent: 0, animated: false)
-        
         self.view.frame = CGRectMake(0.0, 0.0, _picker.frame.size.width, _picker.frame.size.height + _picker.frame.origin.y)
         
         //Call this after this view's frame has been set to readjust the width of the button bar:
@@ -72,16 +68,6 @@ class InputPopoverVC: UIViewController {
     }
     
 // MARK: Utility Methods
-    func rowForStartValue(aValue:String) -> Int {
-        for var i = 0 ; i < _pickerRows.count ; i++ {
-            if _pickerRows[i] == aValue {
-                return i
-            }
-        }
-        
-        return 0
-    }
-    
     func valueChanged() {
         if delegate != nil {
             //Figure out the selected date:

@@ -45,21 +45,26 @@ class NotifyingNavigationController: UINavigationController, UIPickerViewDataSou
         optionsForPicker = notification.userInfo!["options"] as! [String]
         currentInputSource = notification.object as! TextBox
         let currentText = notification.userInfo!["currentValue"] as! String
-        
+        var r = 0
+        for ; r < optionsForPicker.count ; r++ {
+            if optionsForPicker[r] == currentText {
+                    break
+            }
+        }
         let picker = buildPicker()
+        picker.selectRow(r, inComponent: 0, animated: false)
         
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             picker.frame = CGRectMake(0.0, PREFERRED_PICKER_TOOLBAR_HEIGHT, widthForPicker, 162.0)
-            var inputPickerController = InputPopoverVC(value: currentText, options:optionsForPicker, andView:picker)
+            var inputPickerController = InputPopoverVC(options:optionsForPicker, andView:picker)
             inputPickerController.modalPresentationStyle = .Popover
             inputPickerController.preferredContentSize = CGSizeMake(widthForPicker,picker.frame.size.height + PREFERRED_PICKER_TOOLBAR_HEIGHT)
             
             currentInputSource.presentPopover(inputPickerController)
-        } else if !isPresentingPicker {
-            
+        } else if !isPresentingPicker {            
             isPresentingPicker = true
             let parentView = self.topViewController.view
-            
+        
             var buttonsBar = createToolBar()
             buttonsBar.frame = CGRectMake(0.0, parentView.bounds.size.height, parentView.bounds.size.width, PREFERRED_PICKER_TOOLBAR_HEIGHT)
 
