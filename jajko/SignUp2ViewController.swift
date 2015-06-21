@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SignUp2ViewController: UIViewController, SegmentsDelegate, SurpriseMaker {
+class SignUp2ViewController: UIViewController, SegmentsDelegate, JSONReceivable {
     
-    @IBOutlet weak var surpriseRevealer:UIView!
+    var submissionJSON:[String:AnyObject]!
     
     @IBOutlet weak var dexteritySegment:Segments!
     @IBOutlet weak var visualSegment:Segments!
@@ -76,6 +76,33 @@ class SignUp2ViewController: UIViewController, SegmentsDelegate, SurpriseMaker {
                 default:
                     println("Unknown segmented control tag")
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "signup2-3") {
+            //Pass data to next view
+            var biology = [String:AnyObject]()
+            biology["dexterity"] = dexteritySegment.selection!
+            
+            biology["visualImpairments"] = "no"
+            if visualSegment.selection!.lowercaseString == "yes" {
+                biology["visualImpairments"] = visualField.text ?? ""
+            }
+            biology["hearingImpairments"] = "no"
+            if hearingSegment.selection!.lowercaseString == "yes" {
+                biology["hearingImpairments"] = hearingField.text ?? ""
+            }
+            biology["learningImpairments"] = "no"
+            if learningSegment.selection!.lowercaseString == "yes" {
+                biology["learningImpairments"] = learningField.text ?? ""
+            }
+            biology["neurologicalImpairments"] = "no"
+            if neuroSegment.selection!.lowercaseString == "yes" {
+                biology["neurologicalImpairments"] = neuroField.text ?? ""
+            }
+            submissionJSON["biologicalInfo"] = biology
+            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }
 }

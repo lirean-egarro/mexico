@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SignUp3ViewController: UIViewController, InputDelegate, SurpriseMaker {
+class SignUp3ViewController: UIViewController, InputDelegate, JSONReceivable {
     
-    @IBOutlet weak var surpriseRevealer:UIView!
+    var submissionJSON:[String:AnyObject]!
     
     @IBOutlet weak var yourField: TextBox!
     @IBOutlet weak var motherField: TextBox!
@@ -75,6 +75,25 @@ class SignUp3ViewController: UIViewController, InputDelegate, SurpriseMaker {
         }
         
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "signup3-4") {
+            //Pass data to next view
+            var languageInfo = [String:AnyObject]()
+            languageInfo["self"] = yourField.text!
+            languageInfo["mother"] = motherField.text!
+            languageInfo["father"] = fatherField.text!
+            
+            var otherLanguages = [String]()
+            for var i = 0 ; i < otherFields.count ; i++ {
+                otherLanguages.append(otherFields[i].text ?? "")
+            }
+            languageInfo["other"] = otherLanguages
+            submissionJSON["languageInfo"] = languageInfo
+            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
+        }
+    }
+    
 // MARK: Helper methods
     func animateScrollView(up:Bool) {
         let movement:CGFloat = 140.0

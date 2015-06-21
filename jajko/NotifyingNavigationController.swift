@@ -14,8 +14,10 @@ let MAX_PICKER_WIDTH:CGFloat = 500.0
 let MIN_PICKER_WIDTH:CGFloat = 180.0
 let FONT_FOR_OPTIONS:UIFont = UIFont.boldSystemFontOfSize(18.0)
 
-class NotifyingNavigationController: UINavigationController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NotifyingNavigationController: UINavigationController, UIPickerViewDataSource, UIPickerViewDelegate, JSONReceivable {
     let REMOVABLE_SUBVIEW_TAG:Int = 1723
+    
+    var submissionJSON:[String:AnyObject]!
     
     var currentInputSource:TextBox!
     var optionsForPicker:[String]! {
@@ -35,6 +37,8 @@ class NotifyingNavigationController: UINavigationController, UIPickerViewDataSou
             selector: "buildAndPresentPicker:",
             name: JKONeedsToPresentPicker,
             object: nil)
+        
+        (self.viewControllers[0] as! JSONReceivable).submissionJSON = submissionJSON
     }
     
     deinit {

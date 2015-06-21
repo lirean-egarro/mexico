@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SignUp1ViewController: UIViewController, SurpriseMaker {
+class SignUp1ViewController: UIViewController, JSONReceivable {
     
-    @IBOutlet weak var surpriseRevealer:UIView!
+    var submissionJSON:[String:AnyObject]!
     
     @IBOutlet weak var ageField: TextBox!
     @IBOutlet weak var genderSegment:Segments!
@@ -33,5 +33,18 @@ class SignUp1ViewController: UIViewController, SurpriseMaker {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "signup1-2") {
+            //Pass data to next view
+            var personalInfo = [String:AnyObject]()
+            personalInfo["age"] = ageField.text!
+            personalInfo["gender"] = genderSegment.selection!
+            personalInfo["level"] = polishSegment.selection!
+            submissionJSON["personalInfo"] = personalInfo
+            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
+        }
+    }
+    
 }
 

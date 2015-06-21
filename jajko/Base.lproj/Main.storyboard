@@ -94,7 +94,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="UXW-7T-7wx"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -665,7 +665,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vGe-ag-feG" kind="unwind" unwindAction="cancelToLoginViewController:" id="GC4-Ee-sLR"/>
+                                    <segue destination="vGe-ag-feG" kind="unwind" identifier="cancelUnwind" unwindAction="cancelToLoginViewController:" id="GC4-Ee-sLR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP - Times" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2M-A7-RdK">
@@ -686,7 +686,7 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zmO-Lo-BAs"/>
-                                    <segue destination="vGe-ag-feG" kind="unwind" unwindAction="cancelToLoginViewController:" id="6Hb-hv-JeL"/>
+                                    <segue destination="vGe-ag-feG" kind="unwind" identifier="saveUnwind" unwindAction="savePlayerDetail:" id="WGq-Nw-KLm"/>
                                 </connections>
                             </button>
                             <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xt1-N0-vko" customClass="TextBox" customModule="jajko" customModuleProvider="target">

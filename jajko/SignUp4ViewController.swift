@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, SurpriseMaker {
+class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, JSONReceivable {
     
-    @IBOutlet weak var surpriseRevealer:UIView!
+    var submissionJSON:[String:AnyObject]!
     
     @IBOutlet weak var birthField: TextBox!
     @IBOutlet weak var currentField: TextBox!
@@ -57,6 +57,27 @@ class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, 
         currentField.setUpView()
         ageField.setUpView()
         howlongField.setUpView()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "saveUnwind") {
+            //Pass data to next view
+            var placesInfo = [String:AnyObject]()
+            placesInfo["birth"] = birthField.text!
+            placesInfo["current"] = currentField.text!
+            placesInfo["sinceAge"] = ageField.text!
+            placesInfo["totalMonths"] = howlongField.text!
+            
+            var other = [[String:AnyObject]]()
+            for var i = 0 ; i < places.count ; i++ {
+                other.append(places[i].dictionary)
+            }
+            placesInfo["other"] = other
+            
+            submissionJSON["places"] = placesInfo
+        } else if (segue.identifier == "cancelUnwind") {
+            println("Are you sure you want to cancel??")
+        }
     }
     
     // MARK: SegmentsDelegate Methods

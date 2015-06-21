@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, InputDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var containerView: UIScrollView!
     
+    var submissionJSON:[String:AnyObject]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,10 +49,12 @@ class LoginViewController: UIViewController, InputDelegate {
     }
     
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
+        println(submissionJSON)
+        println((segue.sourceViewController as! JSONReceivable).submissionJSON)
     }
     
     @IBAction func savePlayerDetail(segue:UIStoryboardSegue) {
-        
+        submissionJSON = (segue.sourceViewController as! JSONReceivable).submissionJSON
     }
     
     func doLogin() -> Bool {
@@ -88,11 +92,13 @@ class LoginViewController: UIViewController, InputDelegate {
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if (identifier == "startSignup") {
             let username = self.usernameField.text
-            if username != nil && username != "" // && isValidEmail(username)
+            let password = self.passwordField.text
+            if username != nil && username != "" // && isValidEmail(username) 
+                && password != nil && password != ""
             {
                 //Check if email is not taken, etc...
             } else {
-                show("You must enter a valid email address as username in order to signup!")
+                show("You must enter a valid email address and a password in order to signup!")
                 return false
             }
         }
@@ -103,6 +109,10 @@ class LoginViewController: UIViewController, InputDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "startSignup") {
             // pass data to next view
+            submissionJSON = [String:AnyObject]()
+            submissionJSON["username"] = self.usernameField.text
+            submissionJSON["password"] = self.usernameField.text
+            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }
 }

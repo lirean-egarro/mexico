@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol JSONReceivable: NSObjectProtocol {
+    var submissionJSON:[String:AnyObject]! { get set }
+}
+
 protocol SurpriseMaker: NSObjectProtocol {
     var surpriseRevealer:UIView! { get }
 }
@@ -28,5 +32,20 @@ protocol InputDelegate : NSObjectProtocol {
 extension String {
     func contains(find: String) -> Bool{
         return self.rangeOfString(find) != nil
+    }
+}
+
+extension NSDictionary {
+    func toJSONString() -> NSString? {
+        var error: NSError?
+        if let jsonData = NSJSONSerialization.dataWithJSONObject(self, options:NSJSONWritingOptions.allZeros , error: &error) {
+            if error != nil {
+                println("An error occured decoding NSDictionary:",error!.localizedDescription)
+            } else {
+                return NSString(data: jsonData, encoding: NSUTF8StringEncoding)?.stringByReplacingOccurrencesOfString("\\/", withString: "/")
+            }
+        }
+        
+        return nil
     }
 }

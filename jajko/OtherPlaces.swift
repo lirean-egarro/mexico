@@ -22,6 +22,17 @@ class OtherPlaces : UIView, InputDelegate, Taggable {
     private var age:TextBox!
     private var months:TextBox!
     
+    var dictionary:[String:AnyObject] {
+        get {
+            var resp = [String:AnyObject]()
+            resp["city"] = city.text ?? ""
+            resp["country"] = pais.text ?? ""
+            resp["sinceAge"] = age.text ?? ""
+            resp["totalMonths"] = months.text ?? ""
+            return resp
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.create()
