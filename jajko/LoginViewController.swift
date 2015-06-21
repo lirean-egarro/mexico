@@ -9,7 +9,8 @@
 import UIKit
 
 class LoginViewController: UIViewController, InputDelegate {
-
+    let MINIMUM_PASSWORD_LENGTH:Int = 5
+    
     @IBOutlet weak var usernameField: TextBox!
     @IBOutlet weak var passwordField: TextBox!
     
@@ -62,11 +63,19 @@ class LoginViewController: UIViewController, InputDelegate {
         let username = self.usernameField.text
         let password = self.passwordField.text
         
-        
         return didLogin
     }
 
 // MARK: Utility methods
+    func isValid(email:String) -> Bool {
+        return true
+        
+        let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluateWithObject(email)
+    }
+    
     func show(message: String) {
         messageLabel.text = message
         messageLabel.hidden = false
@@ -91,27 +100,32 @@ class LoginViewController: UIViewController, InputDelegate {
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if (identifier == "startSignup") {
-            let username = self.usernameField.text
-            let password = self.passwordField.text
-            if username != nil && username != "" // && isValidEmail(username) 
-                && password != nil && password != ""
-            {
-                //Check if email is not taken, etc...
+            if let username = self.usernameField.text,
+                let password = self.passwordField.text {
+                if isValid(username) {
+                        if count(password) >= MINIMUM_PASSWORD_LENGTH {
+                            //Check if username is available:
+                            submissionJSON = [String:AnyObject]()
+                            submissionJSON["username"] = username
+                            submissionJSON["password"] = password
+                            
+                            return true
+                        } else {
+                            show("Your password must contain at least \(MINIMUM_PASSWORD_LENGTH) characters")
+                        }
+                } else {
+                    show("You must enter a valid email address")
+                }
             } else {
-                show("You must enter a valid email address and a password in order to signup!")
-                return false
+                show("Both email and password must be present in order to signup")
             }
         }
-
-        return true
+        
+        return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "startSignup") {
-            // pass data to next view
-            submissionJSON = [String:AnyObject]()
-            submissionJSON["username"] = self.usernameField.text
-            submissionJSON["password"] = self.usernameField.text
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }

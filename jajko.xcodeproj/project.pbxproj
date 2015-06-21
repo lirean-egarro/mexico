@@ -26,6 +26,9 @@
 		33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133C31B29681800CED73C /* SignUp1ViewController.swift */; };
 		33F133C91B29C53E00CED73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F133C71B29C53E00CED73C /* Main.storyboard */; };
 		33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */; };
+		33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D92C1B37581800F5FE4D /* TermsViewController.swift */; };
+		33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */; };
+		33F3D9321B376F5F00F5FE4D /* Consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33F3D9311B376F5F00F5FE4D /* Consent.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		33F133C31B29681800CED73C /* SignUp1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp1ViewController.swift; sourceTree = "<group>"; };
 		33F133C81B29C53E00CED73C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp2ViewController.swift; sourceTree = "<group>"; };
+		33F3D92C1B37581800F5FE4D /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCheckbox.swift; sourceTree = "<group>"; };
+		33F3D9311B376F5F00F5FE4D /* Consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Consent.pdf; path = Assets/Consent.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,7 @@
 				33113A1C1B309B3300F87275 /* TextBox.swift */,
 				33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */,
 				3368AD321B31089800F7D9CA /* Segments.swift */,
+				33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */,
 				331672AF1B354AE400907980 /* OtherPlaces.swift */,
 				33731D321B3128D2009814EE /* ControlsConfig.swift */,
 				33731D341B314B13009814EE /* LanguageHelper.swift */,
@@ -116,12 +123,14 @@
 		33F133A01B294D4400CED73C /* jajko */ = {
 			isa = PBXGroup;
 			children = (
+				33F3D9301B376BAF00F5FE4D /* Assets */,
 				33731D361B31530F009814EE /* Extensions */,
 				3368AD341B31140100F7D9CA /* Categories */,
 				33113A191B309AF000F87275 /* CustomViews */,
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
 				33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
+				33F3D92C1B37581800F5FE4D /* TermsViewController.swift */,
 				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
 				33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */,
 				335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */,
@@ -140,6 +149,14 @@
 				33F133A21B294D4400CED73C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		33F3D9301B376BAF00F5FE4D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				33F3D9311B376F5F00F5FE4D /* Consent.pdf */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33F133C91B29C53E00CED73C /* Main.storyboard in Resources */,
+				33F3D9321B376F5F00F5FE4D /* Consent.pdf in Resources */,
 				33F133AE1B294D4500CED73C /* LaunchScreen.xib in Resources */,
 				33F133AB1B294D4500CED73C /* Images.xcassets in Resources */,
 			);
@@ -225,7 +243,9 @@
 				335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */,
 				33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */,
 				33731D381B315328009814EE /* Extensions.swift in Sources */,
+				33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */,
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
+				33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,

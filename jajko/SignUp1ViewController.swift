@@ -34,14 +34,26 @@ class SignUp1ViewController: UIViewController, JSONReceivable {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if (identifier == "startSignup") {
+            if  let age = ageField.text,
+                let gender = genderSegment.selection,
+                let level = polishSegment.selection {
+
+                var personalInfo = [String:AnyObject]()
+                personalInfo["age"] = age
+                personalInfo["gender"] = gender
+                personalInfo["level"] = level
+                submissionJSON["personalInfo"] = personalInfo
+                    
+                return true
+            }
+        }
+        return false
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "signup1-2") {
-            //Pass data to next view
-            var personalInfo = [String:AnyObject]()
-            personalInfo["age"] = ageField.text!
-            personalInfo["gender"] = genderSegment.selection!
-            personalInfo["level"] = polishSegment.selection!
-            submissionJSON["personalInfo"] = personalInfo
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }

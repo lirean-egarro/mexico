@@ -54,7 +54,7 @@ class Segments : UIView {
     
     var selection:String? {
         get {
-            if _components != nil {
+            if _components != nil && _segmentedField.selectedSegmentIndex > -1 {                
                 return _components![_segmentedField.selectedSegmentIndex]
             }
             return nil
