@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol SurpriseMaker: NSObjectProtocol {
+    var surpriseRevealer:UIView! { get }
+}
+
 protocol InputPopoverDelegate : NSObjectProtocol {
     func InputPopoverDidFinish(value: String?)
 }

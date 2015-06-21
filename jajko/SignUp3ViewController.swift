@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignUp3ViewController: UIViewController, InputDelegate {
+class SignUp3ViewController: UIViewController, InputDelegate, SurpriseMaker {
+    
+    @IBOutlet weak var surpriseRevealer:UIView!
     
     @IBOutlet weak var yourField: TextBox!
     @IBOutlet weak var motherField: TextBox!

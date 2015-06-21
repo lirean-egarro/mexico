@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+let JKONeedsToPresentPicker: String! = "JKONeedsToPresentPickerNotification"
+
 class TextBox : UIView, UITextFieldDelegate, UIPopoverControllerDelegate, Taggable, InputPopoverDelegate {
     
     weak var delegate:InputDelegate?
@@ -143,19 +146,17 @@ class TextBox : UIView, UITextFieldDelegate, UIPopoverControllerDelegate, Taggab
             println("Handling tap for an unknown InputType \(type)")
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            var inputPickerController = InputPopoverVC(value: self.text, options:options)
-            inputPickerController.modalPresentationStyle = .Popover
-            inputPickerController.preferredContentSize = CGSizeMake(inputPickerController.neededWidth,inputPickerController.neededHeight)
-            inputPickerController.delegate = self
-            
-            _popover =  UIPopoverController(contentViewController:inputPickerController)
-            _popover!.presentPopoverFromRect(self.frame, inView: self.superview!, permittedArrowDirections: UIPopoverArrowDirection.Up | UIPopoverArrowDirection.Down, animated: true)
-            _popover!.delegate = self
-        } else {
-            //
-            println("Code this for iPhone!")
-        }
+        var Info = ["currentValue":self.text ?? "", "options":options]
+        NSNotificationCenter.defaultCenter().postNotificationName(JKONeedsToPresentPicker, object: self, userInfo:Info as [NSObject : AnyObject])
+        
+    }
+    
+    func presentPopover(controller:InputPopoverVC) {
+        controller.delegate = self
+        
+        _popover =  UIPopoverController(contentViewController:controller)
+        _popover!.presentPopoverFromRect(self.frame, inView: self.superview!, permittedArrowDirections: UIPopoverArrowDirection.Up | UIPopoverArrowDirection.Down, animated: true)
+        _popover!.delegate = self
     }
     
 // MARK: UITextFieldDelegate Methods

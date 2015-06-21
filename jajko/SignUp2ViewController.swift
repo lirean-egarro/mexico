@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignUp2ViewController: UIViewController, SegmentsDelegate {
+class SignUp2ViewController: UIViewController, SegmentsDelegate, SurpriseMaker {
+    
+    @IBOutlet weak var surpriseRevealer:UIView!
     
     @IBOutlet weak var dexteritySegment:Segments!
     @IBOutlet weak var visualSegment:Segments!

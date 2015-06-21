@@ -8,72 +8,24 @@
 
 import UIKit
 
-class InputPopoverVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    let HEIGHT_FOR_CONTROL:CGFloat = 206.0
-    let PREFERRED_TOOLBAR_HEIGHT:CGFloat = 30.0
-    let MAX_WIDTH_FOR_CONTROL:CGFloat = 500.0
-    let MIN_WIDTH_FOR_CONTROL:CGFloat = 180.0
-    let FONT_FOR_OPTIONS:UIFont = UIFont.boldSystemFontOfSize(18.0)
+class InputPopoverVC: UIViewController {
     
     var delegate:InputPopoverDelegate?
     
-    var neededHeight : CGFloat {
-        get {
-            return HEIGHT_FOR_CONTROL
-        }
-    }
-    
-    lazy var neededWidth : CGFloat = {
-        var maxWidth:CGFloat = 0.0
-        let attributes = [NSFontAttributeName : self.FONT_FOR_OPTIONS]
-        for string in self.strings {
-            var textSize = (string as NSString).sizeWithAttributes(attributes)
-            if textSize.width > maxWidth {
-                maxWidth = textSize.width
-            }
-        }
-        
-        if maxWidth > self.MAX_WIDTH_FOR_CONTROL {
-            maxWidth = self.MAX_WIDTH_FOR_CONTROL
-        } else if maxWidth < self.MIN_WIDTH_FOR_CONTROL {
-            maxWidth = self.MIN_WIDTH_FOR_CONTROL
-        }
-        
-        return maxWidth + 30.0
-    }()
-    
     private var selectedValue: String! {
         get {
-            return self.strings[_picker.selectedRowInComponent(0)]
+            return self._pickerRows[_picker.selectedRowInComponent(0)]
         }
     }
     
-    lazy private var _picker : UIPickerView = {
-        var buttonsHeight = self.PREFERRED_TOOLBAR_HEIGHT
-        for view in self.view.subviews {
-            if(view.tag == 1000) {
-                buttonsHeight = view.frame.size.height
-                break
-            }
-        }
-        
-        var aPicker = UIPickerView(frame: CGRectMake(0.0, buttonsHeight, self.neededWidth, 100.0))
-        aPicker.showsSelectionIndicator = true
-        aPicker.delegate = self
-        aPicker.dataSource = self
-        aPicker.tag = 2000
-        //This call initializes the lazy loaded strings variable, and sets the value for the day-,month-, and year-Component,
-        self.strings.count
-        
-        return aPicker
-        }()
-    
+    private var _picker:UIPickerView!
+    private var _pickerRows:[String]!
     var startValue: String!
-    var strings:[String]!
     
-    convenience init(value: String?, options: [String]) {
+    convenience init(value: String?, options: [String], andView picker: UIPickerView) {
         self.init()
-        strings = options
+        _picker = picker
+        _pickerRows = options
         startValue = value ?? ""
     }
     
@@ -88,7 +40,7 @@ class InputPopoverVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var buttonsBar = UIToolbar(frame: CGRectMake(0.0, 0.0, 0.0, PREFERRED_TOOLBAR_HEIGHT))
+        var buttonsBar = UIToolbar(frame: CGRectMake(0.0, 0.0, 0.0, _picker.frame.origin.y))
         buttonsBar.barStyle = .Default
         buttonsBar.translucent = true
         buttonsBar.tag = 1000
@@ -107,7 +59,7 @@ class InputPopoverVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         _picker.selectRow(rowForStartValue(startValue), inComponent: 0, animated: false)
         
-        self.view.frame = CGRectMake(0.0, 0.0, neededWidth, neededHeight)
+        self.view.frame = CGRectMake(0.0, 0.0, _picker.frame.size.width, _picker.frame.size.height + _picker.frame.origin.y)
         
         //Call this after this view's frame has been set to readjust the width of the button bar:
         buttonsBar.sizeToFit()
@@ -121,8 +73,8 @@ class InputPopoverVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
 // MARK: Utility Methods
     func rowForStartValue(aValue:String) -> Int {
-        for var i = 0 ; i < strings.count ; i++ {
-            if strings[i] == aValue {
+        for var i = 0 ; i < _pickerRows.count ; i++ {
+            if _pickerRows[i] == aValue {
                 return i
             }
         }
@@ -140,29 +92,5 @@ class InputPopoverVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if delegate != nil {
             delegate!.InputPopoverDidFinish(nil)
         }
-    }
-    
-    // MARK: UIPickerViewDataSource Methods\
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return strings.count
-    }
-    
-    // MARK: UIPickerViewDelegate Methods	
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return HEIGHT_FOR_CONTROL
-    }
-    
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        var resp = UILabel(frame: CGRectMake(0.0, 0.0, neededWidth, 32.0));
-        resp.textAlignment = NSTextAlignment.Center
-        resp.backgroundColor = UIColor.clearColor()
-        resp.font = FONT_FOR_OPTIONS
-        resp.text = strings[row]
-        
-        return resp;
     }
 }

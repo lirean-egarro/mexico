@@ -18,6 +18,7 @@
 		33731D351B314B13009814EE /* LanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D341B314B13009814EE /* LanguageHelper.swift */; };
 		33731D381B315328009814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D371B315328009814EE /* Extensions.swift */; };
 		33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */; };
+		33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
 		33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A51B294D4400CED73C /* LoginViewController.swift */; };
 		33F133AB1B294D4500CED73C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F133AA1B294D4500CED73C /* Images.xcassets */; };
@@ -41,6 +42,7 @@
 		33731D341B314B13009814EE /* LanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageHelper.swift; sourceTree = "<group>"; };
 		33731D371B315328009814EE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPopoverVC.swift; sourceTree = "<group>"; };
+		33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyingNavigationController.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F133A21B294D4400CED73C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33F133A31B294D4400CED73C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				3368AD341B31140100F7D9CA /* Categories */,
 				33113A191B309AF000F87275 /* CustomViews */,
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
+				33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
 				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
 				33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331672B01B354AE400907980 /* OtherPlaces.swift in Sources */,
+				33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */,
 				33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */,
 				33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */,
 				331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */,

@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, InputDelegate {
         usernameField.setUpView()
         passwordField.setUpView()
     }
-    
+        
     @IBAction func login(sender: AnyObject) {
         if doLogin() {
         

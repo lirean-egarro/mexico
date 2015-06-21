@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate {
+class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, SurpriseMaker {
+    
+    @IBOutlet weak var surpriseRevealer:UIView!
     
     @IBOutlet weak var birthField: TextBox!
     @IBOutlet weak var currentField: TextBox!

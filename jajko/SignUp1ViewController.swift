@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignUp1ViewController: UIViewController {
+class SignUp1ViewController: UIViewController, SurpriseMaker {
+    
+    @IBOutlet weak var surpriseRevealer:UIView!
     
     @IBOutlet weak var ageField: TextBox!
     @IBOutlet weak var genderSegment:Segments!

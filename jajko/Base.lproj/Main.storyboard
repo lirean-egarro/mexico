@@ -440,10 +440,10 @@
             </objects>
             <point key="canvasLocation" x="1679" y="295"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Notifying Navigation Controller-->
         <scene sceneID="5RJ-gE-pqj">
             <objects>
-                <navigationController navigationBarHidden="YES" id="ZeR-yl-II0" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="ZeR-yl-II0" customClass="NotifyingNavigationController" customModule="jajko" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZXo-lm-NtE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
