@@ -20,7 +20,7 @@ class SignUp1ViewController: UIViewController, JSONReceivable {
         super.viewDidLoad()
 
         genderSegment.components = ["Male","Female"]
-        polishSegment.components = ["None","Beg","Inter","Adv","Fluent"]
+        polishSegment.components = ["None","Beg","Inter","Adv","Fluent"]        
     }
     
     override func viewDidAppear(animated: Bool) {

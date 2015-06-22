@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, InputDelegate {
+class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
     let MINIMUM_PASSWORD_LENGTH:Int = 5
     
     @IBOutlet weak var usernameField: TextBox!
@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, InputDelegate {
     @IBOutlet weak var containerView: UIScrollView!
     
     var submissionJSON:[String:AnyObject]!
+    weak var nextNavigationController:UINavigationController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,6 +125,7 @@ class LoginViewController: UIViewController, InputDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "startSignup") {
+            nextNavigationController = segue.destinationViewController as? UINavigationController
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }

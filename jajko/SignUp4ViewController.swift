@@ -42,7 +42,7 @@ class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, 
         otherSegment.components = ["No","Yes"]
         otherSegment.delegate = self;
         
-        originalConstraintValue = bottomConstraint.constant
+        originalConstraintValue = bottomConstraint.constant        
     }
     
     override func didReceiveMemoryWarning() {

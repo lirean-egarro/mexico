@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol NavigationPusher {
+    weak var nextNavigationController:UINavigationController? { get set }
+}
+
 protocol JSONReceivable: NSObjectProtocol {
     var submissionJSON:[String:AnyObject]! { get set }
 }
@@ -74,8 +78,11 @@ extension UIAlertController {
             presentFromController(visibleVC, animated: animated, completion: completion)
         } else if let tabVC = controller as? UITabBarController, let selectedVC = tabVC.selectedViewController {
             presentFromController(selectedVC, animated: animated, completion: completion)
+        }  else if let VC = controller as? NavigationPusher,
+            let nextNVC = VC.nextNavigationController {
+                nextNVC.presentViewController(self, animated: animated, completion: completion)
         } else {
-            controller.presentViewController(self, animated: animated, completion: completion)
+                controller.presentViewController(self, animated: animated, completion: completion)
         }
     }
 }
