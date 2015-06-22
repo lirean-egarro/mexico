@@ -63,6 +63,9 @@ class TextBox : UIView, UITextFieldDelegate, UIPopoverControllerDelegate, Taggab
     
     var text:String? {
         get {
+            if self.textField.text == "" {
+                return nil
+            }
             return self.textField.text
         }
         set {

@@ -79,29 +79,72 @@ class SignUp2ViewController: UIViewController, SegmentsDelegate, JSONReceivable 
         }
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if (identifier == "signup2-3") {
+            if  let dex = dexteritySegment.selection,
+                let vis = visualSegment.selection,
+                let hea = hearingSegment.selection,
+                let lea = learningSegment.selection,
+                let neu = neuroSegment.selection {
+                    
+                    var biology = [String:AnyObject]()
+                    biology["dexterity"] = dex
+                    
+                    biology["visualImpairments"] =  vis
+                    if vis.lowercaseString == "yes" {
+                        biology["visualImpairments"] = visualField.text ?? ""
+                    }
+                    biology["hearingImpairments"] =  hea
+                    if hea.lowercaseString == "yes" {
+                        biology["hearingImpairments"] = hearingField.text ?? ""
+                    }
+                    biology["learningImpairments"] =  lea
+                    if lea.lowercaseString == "yes" {
+                        biology["learningImpairments"] = learningField.text ?? ""
+                    }
+                    biology["neurologicalImpairments"] =  neu
+                    if neu.lowercaseString == "yes" {
+                        biology["neurologicalImpairments"] = neuroField.text ?? ""
+                    }
+
+                    if biology["visualImpairments"]! as! String != "" &&
+                        biology["hearingImpairments"]! as! String != "" &&
+                        biology["learningImpairments"]! as! String != "" &&
+                        biology["neurologicalImpairments"]! as! String != "" {
+                            submissionJSON["biologicalInfo"] = biology
+                            return true
+                    } else {
+                        var options:NSDictionary = [
+                            "message" : "If you answer 'Yes' to any of the questions, you must specify the type of impairment. Please try again",
+                            "yes" : "OK"
+                        ]
+                        PromptManager.sharedInstance.displayAlert(options)
+                    }
+            } else {
+                var options:NSDictionary = [
+                    "message" : "Please choose an answer for all questions.",
+                    "yes" : "Okay"
+                ]
+                PromptManager.sharedInstance.displayAlert(options)
+            }
+        } else if (identifier == "cancelUnwind") {
+            var options:NSDictionary = [
+                "message" : "If you cancel this form, you will loose all the information you've input so far. Are you sure you want to continue?",
+                "yes" : "Yes",
+                "no" : "No"
+            ]
+            PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                if resp {
+                    self.performSegueWithIdentifier("cancelUnwind", sender: nil)
+                }
+            }
+        }
+        
+        return false
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "signup2-3") {
-            //Pass data to next view
-            var biology = [String:AnyObject]()
-            biology["dexterity"] = dexteritySegment.selection!
-            
-            biology["visualImpairments"] = "no"
-            if visualSegment.selection!.lowercaseString == "yes" {
-                biology["visualImpairments"] = visualField.text ?? ""
-            }
-            biology["hearingImpairments"] = "no"
-            if hearingSegment.selection!.lowercaseString == "yes" {
-                biology["hearingImpairments"] = hearingField.text ?? ""
-            }
-            biology["learningImpairments"] = "no"
-            if learningSegment.selection!.lowercaseString == "yes" {
-                biology["learningImpairments"] = learningField.text ?? ""
-            }
-            biology["neurologicalImpairments"] = "no"
-            if neuroSegment.selection!.lowercaseString == "yes" {
-                biology["neurologicalImpairments"] = neuroField.text ?? ""
-            }
-            submissionJSON["biologicalInfo"] = biology
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }

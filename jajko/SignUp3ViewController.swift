@@ -76,20 +76,49 @@ class SignUp3ViewController: UIViewController, InputDelegate, JSONReceivable {
         
     }
 
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if (identifier == "signup3-4") {
+            if let y = yourField.text,
+                let m = motherField.text,
+                let f = fatherField.text {
+                    var languageInfo = [String:AnyObject]()
+                    languageInfo["self"] = y
+                    languageInfo["mother"] = m
+                    languageInfo["father"] = f
+                    
+                    var otherLanguages = [String]()
+                    for var i = 0 ; i < otherFields.count ; i++ {
+                        if let t = otherFields[i].text {
+                            otherLanguages.append(t)
+                        }
+                    }
+                    languageInfo["other"] = otherLanguages
+                    submissionJSON["languageInfo"] = languageInfo
+                    return true
+            } else {
+                var options:NSDictionary = [
+                    "message" : "Please fill out the three first required fields before continuing",
+                    "yes" : "Okay"
+                ]
+                PromptManager.sharedInstance.displayAlert(options)
+            }
+        } else if (identifier == "cancelUnwind") {
+            var options:NSDictionary = [
+                "message" : "If you cancel this form, you will loose all the information you've input so far. Are you sure you want to continue?",
+                "yes" : "Yes",
+                "no" : "No"
+            ]
+            PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                if resp {
+                    self.performSegueWithIdentifier("cancelUnwind", sender: nil)
+                }
+            }
+        }
+        return false
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "signup3-4") {
-            //Pass data to next view
-            var languageInfo = [String:AnyObject]()
-            languageInfo["self"] = yourField.text!
-            languageInfo["mother"] = motherField.text!
-            languageInfo["father"] = fatherField.text!
-            
-            var otherLanguages = [String]()
-            for var i = 0 ; i < otherFields.count ; i++ {
-                otherLanguages.append(otherFields[i].text ?? "")
-            }
-            languageInfo["other"] = otherLanguages
-            submissionJSON["languageInfo"] = languageInfo
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }

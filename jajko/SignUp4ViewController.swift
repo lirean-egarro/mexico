@@ -58,28 +58,49 @@ class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, 
         ageField.setUpView()
         howlongField.setUpView()
     }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "saveUnwind") {
-            //Pass data to next view
-            var placesInfo = [String:AnyObject]()
-            placesInfo["birth"] = birthField.text!
-            placesInfo["current"] = currentField.text!
-            placesInfo["sinceAge"] = ageField.text!
-            placesInfo["totalMonths"] = howlongField.text!
-            
-            var other = [[String:AnyObject]]()
-            for var i = 0 ; i < places.count ; i++ {
-                other.append(places[i].dictionary)
-            }
-            placesInfo["other"] = other
-            
-            submissionJSON["places"] = placesInfo
-        } else if (segue.identifier == "cancelUnwind") {
-            println("Are you sure you want to cancel??")
-        }
-    }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if (identifier == "saveUnwind") {
+            if let b = birthField.text,
+                let c = currentField.text,
+                let a = ageField.text,
+                let h =  howlongField.text {
+                    var placesInfo = [String:AnyObject]()
+                    placesInfo["birth"] = b
+                    placesInfo["current"] = c
+                    placesInfo["sinceAge"] = a
+                    placesInfo["totalMonths"] = h
+                    
+                    var other = [[String:AnyObject]]()
+                    for var i = 0 ; i < places.count ; i++ {
+                        other.append(places[i].dictionary)
+                    }
+                    placesInfo["other"] = other
+                    
+                    submissionJSON["places"] = placesInfo
+                    return true
+            } else {
+                var options:NSDictionary = [
+                    "message" : "Please fill out the three first required fields before continuing",
+                    "yes" : "Okay"
+                ]
+                PromptManager.sharedInstance.displayAlert(options)
+            }
+        } else if (identifier == "cancelUnwind") {
+            var options:NSDictionary = [
+                "message" : "If you cancel this form, you will loose all the information you've input so far. Are you sure you want to continue?",
+                "yes" : "Yes",
+                "no" : "No"
+            ]
+            PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                if resp {
+                    self.performSegueWithIdentifier("cancelUnwind", sender: nil)
+                }
+            }
+        }
+        return false
+    }
+        
     // MARK: SegmentsDelegate Methods
     func didUpdate(control: Segments, toValue newValue:String?) {
         if newValue != nil {

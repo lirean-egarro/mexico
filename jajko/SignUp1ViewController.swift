@@ -35,7 +35,7 @@ class SignUp1ViewController: UIViewController, JSONReceivable {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if (identifier == "startSignup") {
+        if (identifier == "signup1-2") {
             if  let age = ageField.text,
                 let gender = genderSegment.selection,
                 let level = polishSegment.selection {
@@ -47,6 +47,23 @@ class SignUp1ViewController: UIViewController, JSONReceivable {
                 submissionJSON["personalInfo"] = personalInfo
                     
                 return true
+            } else {
+                var options:NSDictionary = [
+                    "message" : "Please fill out the entire page before continuing",
+                    "yes" : "Okay"
+                ]
+                PromptManager.sharedInstance.displayAlert(options)
+            }
+        } else if (identifier == "cancelUnwind") {
+            var options:NSDictionary = [
+                "message" : "If you cancel this form, you will loose all the information you've input so far. Are you sure you want to continue?",
+                "yes" : "Yes",
+                "no" : "No"
+            ]
+            PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                if resp {
+                    self.performSegueWithIdentifier("cancelUnwind", sender: nil)
+                }
             }
         }
         return false
@@ -55,7 +72,7 @@ class SignUp1ViewController: UIViewController, JSONReceivable {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "signup1-2") {
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
-        }
+        } 
     }
     
 }

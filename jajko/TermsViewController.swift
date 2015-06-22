@@ -36,22 +36,18 @@ class TermsViewController: UIViewController, JSONReceivable {
             if agree.isChecked {
                     return true
             } else {
-                if objc_getClass("UIAlertController") != nil {
-                    var alert = UIAlertController(title: "Attention", message: "You must agree to the Terms and Conditions in order to continue", preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-                else {
-                    var alert = UIAlertView(title: "Attention", message: "You must agree to the Terms and Conditions in order to continue", delegate: nil, cancelButtonTitle: "Okay")
-                    alert.show()
-                }
+                var options:NSDictionary = [
+                    "message" : "You must agree to the Terms and Conditions in order to continue",
+                    "yes" : "Okay"
+                ]
+                PromptManager.sharedInstance.displayAlert(options)
             }
         }
         return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "signup1-2") {
+        if (segue.identifier == "signupT-1") {
             (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
         }
     }
