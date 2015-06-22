@@ -43,10 +43,25 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
     }
         
     @IBAction func login(sender: AnyObject) {
-        if doLogin() {
-        
+        if let username = self.usernameField.text,
+            let password = self.passwordField.text {
+                if isValid(username) {
+                    myIndicator.startAnimating()
+                    Webservice.sharedInstance.login(username, password: password) { (resp) in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.myIndicator.stopAnimating()
+                            if resp {
+                                self.performSegueWithIdentifier("goToDashboard", sender: nil)
+                            } else {
+                                self.show("Wrong username and password or site is unavailable")
+                            }
+                        }
+                    }
+                } else {
+                    show("Your username is the email you signed up with!")
+                }
         } else {
-        
+            show("Please enter your user name and password")
         }
     }
     

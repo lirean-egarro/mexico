@@ -30,6 +30,8 @@
 		33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */; };
 		33F3D9321B376F5F00F5FE4D /* Consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33F3D9311B376F5F00F5FE4D /* Consent.pdf */; };
 		33F3D9381B378B8F00F5FE4D /* PromptManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D9371B378B8F00F5FE4D /* PromptManager.swift */; };
+		33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D93B1B37E16400F5FE4D /* Webservice.swift */; };
+		33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D93D1B37EEC500F5FE4D /* DashboardVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCheckbox.swift; sourceTree = "<group>"; };
 		33F3D9311B376F5F00F5FE4D /* Consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Consent.pdf; path = Assets/Consent.pdf; sourceTree = "<group>"; };
 		33F3D9371B378B8F00F5FE4D /* PromptManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptManager.swift; sourceTree = "<group>"; };
+		33F3D93B1B37E16400F5FE4D /* Webservice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		33F3D93D1B37EEC500F5FE4D /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +85,6 @@
 				3368AD321B31089800F7D9CA /* Segments.swift */,
 				33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */,
 				331672AF1B354AE400907980 /* OtherPlaces.swift */,
-				33731D321B3128D2009814EE /* ControlsConfig.swift */,
-				33731D341B314B13009814EE /* LanguageHelper.swift */,
-				331672AD1B33EA1000907980 /* CountryHelper.swift */,
-				33F3D9371B378B8F00F5FE4D /* PromptManager.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -126,18 +126,15 @@
 		33F133A01B294D4400CED73C /* jajko */ = {
 			isa = PBXGroup;
 			children = (
+				33F3D93A1B37E0ED00F5FE4D /* SingletonsAndHelpers */,
+				33F3D9391B37E0A100F5FE4D /* QuestionnaireControllers */,
 				33F3D9301B376BAF00F5FE4D /* Assets */,
 				33731D361B31530F009814EE /* Extensions */,
 				3368AD341B31140100F7D9CA /* Categories */,
 				33113A191B309AF000F87275 /* CustomViews */,
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
-				33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
-				33F3D92C1B37581800F5FE4D /* TermsViewController.swift */,
-				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
-				33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */,
-				335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */,
-				335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */,
+				33F3D93D1B37EEC500F5FE4D /* DashboardVC.swift */,
 				33F133C71B29C53E00CED73C /* Main.storyboard */,
 				33F133AA1B294D4500CED73C /* Images.xcassets */,
 				33F133AC1B294D4500CED73C /* LaunchScreen.xib */,
@@ -160,6 +157,31 @@
 				33F3D9311B376F5F00F5FE4D /* Consent.pdf */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		33F3D9391B37E0A100F5FE4D /* QuestionnaireControllers */ = {
+			isa = PBXGroup;
+			children = (
+				33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */,
+				33F3D92C1B37581800F5FE4D /* TermsViewController.swift */,
+				33F133C31B29681800CED73C /* SignUp1ViewController.swift */,
+				33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */,
+				335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */,
+				335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */,
+			);
+			name = QuestionnaireControllers;
+			sourceTree = "<group>";
+		};
+		33F3D93A1B37E0ED00F5FE4D /* SingletonsAndHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				33F3D93B1B37E16400F5FE4D /* Webservice.swift */,
+				33731D321B3128D2009814EE /* ControlsConfig.swift */,
+				33731D341B314B13009814EE /* LanguageHelper.swift */,
+				331672AD1B33EA1000907980 /* CountryHelper.swift */,
+				33F3D9371B378B8F00F5FE4D /* PromptManager.swift */,
+			);
+			name = SingletonsAndHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,8 +272,10 @@
 				33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */,
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
 				33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */,
+				33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
+				33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

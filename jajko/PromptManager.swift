@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
 
-@objc class PromptManager: NSObject, UITextFieldDelegate, UIAlertViewDelegate {
+class PromptManager: NSObject, UITextFieldDelegate, UIAlertViewDelegate {
     typealias PromptManagerCompletionClosure = ((response: Bool) -> Void)
     
     private var currentAction:PromptManagerCompletionClosure?

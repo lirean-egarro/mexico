@@ -6,6 +6,25 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--DashboardVC-->
+        <scene sceneID="KZV-sJ-O0I">
+            <objects>
+                <viewController id="mdt-rt-mg9" customClass="DashboardVC" customModule="jajko" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MFX-9h-lGa"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hhd-fI-Qh7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hPB-18-ClS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XpV-jZ-p8z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jSI-wf-28u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="-1189"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -148,6 +167,7 @@
                         <outlet property="passwordField" destination="RaJ-ie-78f" id="hdA-x6-VDa"/>
                         <outlet property="signupButton" destination="Mrp-oi-tAk" id="Ro1-vU-s4t"/>
                         <outlet property="usernameField" destination="ZVS-fU-1fc" id="ROW-hv-3OJ"/>
+                        <segue destination="ZCU-7U-Za4" kind="show" identifier="goToDashboard" id="YbI-rX-VB8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -461,6 +481,22 @@
                 <exit id="nF5-Z2-moo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1679" y="295"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3XS-lR-zkn">
+            <objects>
+                <navigationController id="ZCU-7U-Za4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s7W-Dc-NGJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mdt-rt-mg9" kind="relationship" relationship="rootViewController" id="LFR-R7-xdg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0r1-ew-pXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="-479"/>
         </scene>
         <!--Notifying Navigation Controller-->
         <scene sceneID="5RJ-gE-pqj">

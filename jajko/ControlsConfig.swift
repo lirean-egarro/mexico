@@ -17,7 +17,7 @@ enum InputType: Int {
     case Language = 5
 }
 
-@objc class ControlsConfig {
+class ControlsConfig {
     class func textFontOfSize(size: CGFloat) -> UIFont {
         return UIFont(name: "Helvetica", size: size)!
     }
