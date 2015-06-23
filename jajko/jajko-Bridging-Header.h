@@ -3,3 +3,4 @@
 //
 
 #import "UISegmentedControl+Resize.h"
+#import <CommonCrypto/CommonCrypto.h>

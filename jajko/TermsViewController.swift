@@ -8,9 +8,7 @@
 
 import UIKit
 
-class TermsViewController: UIViewController, JSONReceivable {
-
-    var submissionJSON:[String:AnyObject]!
+class TermsViewController: UIViewController {
     
     @IBOutlet weak var web: UIWebView!
     @IBOutlet weak var agree: SimpleCheckbox!
@@ -37,11 +35,4 @@ class TermsViewController: UIViewController, JSONReceivable {
         }
         return false
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "signupT-1") {
-            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
-        }
-    }
-
 }

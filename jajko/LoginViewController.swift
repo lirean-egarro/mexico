@@ -20,14 +20,17 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var containerView: UIScrollView!
     
-    var submissionJSON:[String:AnyObject]!
-    weak var nextNavigationController:UINavigationController?
+    weak var nextController:UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         usernameField.delegate = self
         passwordField.delegate = self
+        
+        if let previousUser = NSUserDefaults.standardUserDefaults().objectForKey("lastUser") as? String {
+            usernameField.text = previousUser
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,10 +53,15 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
                     Webservice.sharedInstance.login(username, password: password) { (resp) in
                         dispatch_async(dispatch_get_main_queue()) {
                             self.myIndicator.stopAnimating()
-                            if resp {
-                                self.performSegueWithIdentifier("goToDashboard", sender: nil)
+                            if resp != nil {
+                                if resp! {
+                                    self.performSegueWithIdentifier("goToDashboard", sender: nil)
+                                } else {
+                                    self.show("Wrong username and password or site is unavailable")
+                                }
                             } else {
-                                self.show("Wrong username and password or site is unavailable")
+                                //User exists but hasn't yet completed the questionnaire. 
+                                self.performSegueWithIdentifier("startSignup", sender: nil)
                             }
                         }
                     }
@@ -66,12 +74,32 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
     }
     
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
-        println(submissionJSON)
-        println((segue.sourceViewController as! JSONReceivable).submissionJSON)
+        println("Submission canceled")
     }
     
     @IBAction func savePlayerDetail(segue:UIStoryboardSegue) {
-        submissionJSON = (segue.sourceViewController as! JSONReceivable).submissionJSON
+        nextController = self
+        let submissionJSON = (segue.sourceViewController as! JSONReceivable).submissionJSON
+        myIndicator.startAnimating()
+        Webservice.sharedInstance.questionnaire(submissionJSON) { (resp) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.myIndicator.stopAnimating()
+                if resp {
+                    self.performSegueWithIdentifier("goToDashboard", sender: nil)
+                } else {
+                    var options:NSDictionary = [
+                        "message" : "There was a problem saving your answers. Verify your internet connection and try again. If you decide to cancel now, you will loose all the information you've input so far",
+                        "yes" : "Cancel",
+                        "no" : "Try again"
+                    ]
+                    PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                        if !resp {
+                            self.savePlayerDetail(segue)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func doLogin() -> Bool {
@@ -112,36 +140,37 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         self.containerView.setContentOffset(CGPointMake(0.0, 0.0), animated: true)
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if (identifier == "startSignup") {
-            if let username = self.usernameField.text,
-                let password = self.passwordField.text {
+    @IBAction func SignUp() {
+        if let username = self.usernameField.text,
+            let password = self.passwordField.text {
                 if isValid(username) {
-                        if count(password) >= MINIMUM_PASSWORD_LENGTH {
-                            //Check if username is available:
-                            submissionJSON = [String:AnyObject]()
-                            submissionJSON["username"] = username
-                            submissionJSON["password"] = password
-                            
-                            return true
-                        } else {
-                            show("Your password must contain at least \(MINIMUM_PASSWORD_LENGTH) characters")
+                    if count(password) >= MINIMUM_PASSWORD_LENGTH {
+                        //Check if username is available:
+                        myIndicator.startAnimating()
+                        Webservice.sharedInstance.create(username, password: password) { (resp) in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.myIndicator.stopAnimating()
+                                if resp {
+                                    self.performSegueWithIdentifier("startSignup", sender: nil)
+                                } else {
+                                    self.show("This username is already taken or site is unavailable. Please try again")
+                                }
+                            }
                         }
+                    } else {
+                        show("Your password must contain at least \(MINIMUM_PASSWORD_LENGTH) characters")
+                    }
                 } else {
                     show("You must enter a valid email address")
                 }
-            } else {
-                show("Both email and password must be present in order to signup")
-            }
+        } else {
+            show("Both email and password must be present in order to signup")
         }
-        
-        return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "startSignup") {
-            nextNavigationController = segue.destinationViewController as? UINavigationController
-            (segue.destinationViewController as! JSONReceivable).submissionJSON = submissionJSON
+            nextController = segue.destinationViewController as? UIViewController
         }
     }
 }

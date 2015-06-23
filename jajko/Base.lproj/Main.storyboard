@@ -71,7 +71,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ZeR-yl-II0" kind="showDetail" identifier="startSignup" id="NHl-nj-bWK"/>
+                                    <action selector="SignUp" destination="BYZ-38-t0r" eventType="touchUpInside" id="j1Z-6E-n1D"/>
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LineFiller" translatesAutoresizingMaskIntoConstraints="NO" id="YZ0-I4-nNn">
@@ -168,11 +168,12 @@
                         <outlet property="signupButton" destination="Mrp-oi-tAk" id="Ro1-vU-s4t"/>
                         <outlet property="usernameField" destination="ZVS-fU-1fc" id="ROW-hv-3OJ"/>
                         <segue destination="ZCU-7U-Za4" kind="show" identifier="goToDashboard" id="YbI-rX-VB8"/>
+                        <segue destination="ZeR-yl-II0" kind="show" identifier="startSignup" id="06N-p3-r6Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="310" y="297"/>
+            <point key="canvasLocation" x="298" y="295"/>
         </scene>
         <!--Sign Up1 View Controller-->
         <scene sceneID="9ax-os-IWf">
