@@ -31,6 +31,8 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         if let previousUser = NSUserDefaults.standardUserDefaults().objectForKey("lastUser") as? String {
             usernameField.text = previousUser
         }
+        
+        Corpus()
     }
     
     override func didReceiveMemoryWarning() {

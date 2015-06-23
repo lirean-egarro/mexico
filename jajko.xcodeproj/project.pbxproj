@@ -26,6 +26,8 @@
 		33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133C31B29681800CED73C /* SignUp1ViewController.swift */; };
 		33F133C91B29C53E00CED73C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F133C71B29C53E00CED73C /* Main.storyboard */; };
 		33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */; };
+		33F140881B39B85600D55770 /* Corpus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F140871B39B85600D55770 /* Corpus.swift */; };
+		33F1408A1B39C68400D55770 /* MinimalPairs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33F140891B39C68400D55770 /* MinimalPairs.txt */; };
 		33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D92C1B37581800F5FE4D /* TermsViewController.swift */; };
 		33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */; };
 		33F3D9321B376F5F00F5FE4D /* Consent.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 33F3D9311B376F5F00F5FE4D /* Consent.pdf */; };
@@ -58,6 +60,8 @@
 		33F133C31B29681800CED73C /* SignUp1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp1ViewController.swift; sourceTree = "<group>"; };
 		33F133C81B29C53E00CED73C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33F133CA1B2AAD4900CED73C /* SignUp2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp2ViewController.swift; sourceTree = "<group>"; };
+		33F140871B39B85600D55770 /* Corpus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Corpus.swift; sourceTree = "<group>"; };
+		33F140891B39C68400D55770 /* MinimalPairs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MinimalPairs.txt; path = Assets/MinimalPairs.txt; sourceTree = "<group>"; };
 		33F3D92C1B37581800F5FE4D /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCheckbox.swift; sourceTree = "<group>"; };
 		33F3D9311B376F5F00F5FE4D /* Consent.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Consent.pdf; path = Assets/Consent.pdf; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 		33F133A01B294D4400CED73C /* jajko */ = {
 			isa = PBXGroup;
 			children = (
+				33F140861B39B83300D55770 /* Corpus */,
 				33F3D93A1B37E0ED00F5FE4D /* SingletonsAndHelpers */,
 				33F3D9391B37E0A100F5FE4D /* QuestionnaireControllers */,
 				33F3D9301B376BAF00F5FE4D /* Assets */,
@@ -151,10 +156,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		33F140861B39B83300D55770 /* Corpus */ = {
+			isa = PBXGroup;
+			children = (
+				33F140871B39B85600D55770 /* Corpus.swift */,
+			);
+			name = Corpus;
+			sourceTree = "<group>";
+		};
 		33F3D9301B376BAF00F5FE4D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				33F3D9311B376F5F00F5FE4D /* Consent.pdf */,
+				33F140891B39C68400D55770 /* MinimalPairs.txt */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -246,6 +260,7 @@
 				33F3D9321B376F5F00F5FE4D /* Consent.pdf in Resources */,
 				33F133AE1B294D4500CED73C /* LaunchScreen.xib in Resources */,
 				33F133AB1B294D4500CED73C /* Images.xcassets in Resources */,
+				33F1408A1B39C68400D55770 /* MinimalPairs.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +290,7 @@
 				33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
+				33F140881B39B85600D55770 /* Corpus.swift in Sources */,
 				33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
 			);
