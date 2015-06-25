@@ -84,4 +84,11 @@ class Session : NSObject {
     var endTime:NSDate?
     
     var blocks:[Block]?
+    
+    convenience init(type:SessionType) {
+        self.init()
+        self.type = type
+        
+        
+    }
 }

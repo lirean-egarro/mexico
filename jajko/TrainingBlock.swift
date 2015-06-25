@@ -20,6 +20,11 @@ class TrainingBlock : Block {
         return sizeMPWs * 2 * repetitions
     }
     
+    class func reset() {
+        resetTalkersPool()
+        resetMultiTalkersPool()
+    }
+    
     convenience init(condition:BlockCondition,contrastIndex:Int,andNumberOfMPWs num:Int, repeated times:Int) {
         self.init(condition:condition)
         
@@ -31,7 +36,7 @@ class TrainingBlock : Block {
             var allTalkers:Int = TrainingBlock.talkersPool.count
             if allTalkers == 0 {
                 println("WARNING: Important design error. No more talkers available while creating Single-Talker Training Block. Reseting talkersPool and moving on...")
-                resetTalkersPool()
+                TrainingBlock.resetTalkersPool()
                 allTalkers = TrainingBlock.talkersPool.count
             }
             let randomIdx:Int = Int(arc4random_uniform(UInt32(allTalkers)))
@@ -52,7 +57,7 @@ class TrainingBlock : Block {
                 var allTalkers:Int = talkerPool.count
                 if allTalkers == 0 {
                     println("WARNING: Important design error. No more talkers available while creating Multi-Talker Training Block. Reseting multitalkerPool and moving on...")
-                    resetMultiTalkersPool()
+                    TrainingBlock.resetMultiTalkersPool()
                     talkerPool = TrainingBlock.multitalkerPool[i]
                     allTalkers = talkerPool.count
                 }
@@ -73,11 +78,11 @@ class TrainingBlock : Block {
         }
     }
     
-    func resetTalkersPool() {
+    class func resetTalkersPool() {
         TrainingBlock.talkersPool = [3,4,5,6]
     }
     
-    func resetMultiTalkersPool() {
+    class func resetMultiTalkersPool() {
         TrainingBlock.multitalkerPool = Array(count:Corpus.sharedInstance.sizeOfCorpus(.Training), repeatedValue:[3,4,5,6])
     }
 }
