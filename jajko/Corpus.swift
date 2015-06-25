@@ -6,54 +6,73 @@
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
 
-enum CorpusType {
-    case Training
-    case Test
+typealias Contrast = [String]
+
+let contrast1:Contrast = ["ś-sz","si-szi","ć-cz"]
+let contrast2:Contrast = ["ź-ż","zi-żi"]
+
+let applicationContrasts = [contrast1,contrast2]
+
+enum CorpusType: Int {
+    case Training = 0, Test
 }
 
-class MinimalPair : NSObject {
-    var mpw:Int!
-    var ipa1:String!
-    var ipa2:String!
-    var type:CorpusType!
-    var contrast:Int!
+enum MPWOrder:Int {
+    case Original = 0, Reversed
+}
+
+struct MinimalPair : Hashable {
+    var mpw:Int
+    var ipa1:String
+    var ipa2:String
+    var type:CorpusType
+    var contrastIdx:Int
+    var order:MPWOrder
     
-    convenience init(mpw:Int,ipa1:String,ipa2:String,type:CorpusType,contrast:Int) {
-        self.init()
+    init(mpw:Int,ipa1:String,ipa2:String,type:CorpusType,contrastIndex:Int,order:MPWOrder) {
         self.mpw = mpw
         self.ipa1 = ipa1
         self.ipa2 = ipa2
         self.type = type
-        self.contrast = contrast
+        self.contrastIdx = contrastIndex
+        self.order = order
     }
     
-    func recordingID(ipa:Int) -> String {
-        var resp = "ct" + String(contrast) + "mpw"
+    func recordingTag() -> String {
+        var resp = "ct" + String(contrastIdx) + "mpw"
         
-        switch (type!) {
-        case .Training:
-            resp += String(format: "%02dipa%drec", mpw,ipa)
-        case .Test:
-            resp += String(format: "%dipa%drec", mpw,ipa)
+        switch (type, order) {
+        case (.Training, .Original):
+            resp += String(format: "%02dipa1rec", mpw)
+        case (.Training, .Reversed):
+            resp += String(format: "%02dipa2rec", mpw)
+        case (.Test, .Original):
+            resp += String(format: "%dipa1rec", mpw)
+        case (.Test, .Reversed):
+            resp += String(format: "%dipa2rec", mpw)
         default:
-            println("CorpusType not found")
+            println("(type,order) = (\(type),\(order)) not found")
         }
         
         return resp
     }
+    
+    var hashValue: Int {
+        get {
+            return mpw + 10*ipa1.hashValue + ipa2.hashValue + type.rawValue + contrastIdx + order.rawValue
+        }
+    }
+    
 }
 
-
+//This is our Corpus singleton:
 class Corpus: NSObject {
-    let contrast1 = ["ś-sz","si-szi","ć-cz"]
-    let contrast2 = ["ź-ż","zi-żi"]
-    
-    var contrasts:[Array<String>]!
+    var usedPairs:[MinimalPair]!
     var minimalPairWords:[MinimalPair]!
     
     override init() {
-        contrasts = [contrast1,contrast2]
         //Read the file and fill in the corpus:
+        usedPairs = [MinimalPair]()
         minimalPairWords = [MinimalPair]()
         
         if let txtPath = NSBundle.mainBundle().pathForResource("MinimalPairs", ofType: "txt") {
@@ -67,14 +86,20 @@ class Corpus: NSObject {
                         let ipa2 = tmpPieces[3]
                         let contrast = tmpPieces[5].toInt()
                         
+                        var pair:MinimalPair?
                         switch tmpPieces[4] {
-                            case "test":
-                                minimalPairWords.append(MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Test, contrast: contrast!))
-                            case "train":
-                                minimalPairWords.append(MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Training, contrast: contrast!))
-                            default:
-                                println("Unknown Type found for minimal pair word: \(tmpPieces[4])")
+                        case "test":
+                            pair = MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Test, contrastIndex: contrast!,order:.Original)
+                            minimalPairWords.append(pair!)
+                        case "train":
+                            pair = MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Training, contrastIndex: contrast!,order:.Original)
+                            minimalPairWords.append(pair!)
+                        default:
+                            println("Unknown Type found for minimal pair word: \(tmpPieces[4])")
                         }
+                        
+                        //Also append the reversed words:
+                        minimalPairWords.append(~(pair!))
                     } else {
                         println("Cannot process line from file: \(line)")
                     }
@@ -86,9 +111,72 @@ class Corpus: NSObject {
             println("Problems reading file MinimalPairs.txt from Bundle")
         }
         
-        println("MinimalPair words: \(count(minimalPairWords))")
         super.init()
     }
 
+    class var sharedInstance : Corpus {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : Corpus? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = Corpus()
+        }
+        return Static.instance!
+    }
+
+    func reset() {
+        println("WARNING: Reseting corpus")
+        for tmp in usedPairs {
+            minimalPairWords.append(tmp)
+        }
+        usedPairs.removeAll(keepCapacity: false)
+    }
+    
+    func extractAvailablePairFor(contrast:Int,andType type:CorpusType) -> MinimalPair {
+        //Remember that contrast = 0 means any contrast index!
+        if minimalPairWords.count == 0 {
+            println("WARNING: No more mpw's available in the corpus and requesting one. Calling Corpus.reset()!")
+            self.reset()
+        }
+        
+        var filteringClosure = { (mp:MinimalPair) -> Bool in
+            return mp.contrastIdx == contrast && mp.type == type
+        }
+        
+        if contrast == 0 {
+            filteringClosure = { (mp:MinimalPair) -> Bool in
+                return mp.type == type
+            }
+        }
+        
+        let filteredPool = Set(minimalPairWords.filter(filteringClosure))
+        let discardPool = Set(usedPairs)
+        let possiblePairs = filteredPool.subtract(discardPool)
+        if possiblePairs.count == 0 {
+            println("WARNING: Cannot find a mpw with contrast \(contrast) and type \(type) in the remaining corpus: \(minimalPairWords). Calling Corpus.reset() and trying again!")
+            self.reset()
+            return self.extractAvailablePairFor(contrast,andType:type)
+        }
+        
+        let resp = randomElement(possiblePairs)
+        usedPairs.append(resp)
+        
+        return resp
+    }
+    
+    func allMinimalPairWords(type:CorpusType,limit:Int) -> [MinimalPair] {
+        self.reset()
+        if limit < 0 {
+            return minimalPairWords.filter({ $0.type == type })
+        }
+        
+        var subSet: ArraySlice<MinimalPair> = minimalPairWords.filter({ $0.type == type })[0..<limit]
+        return Array(subSet)
+    }
+    
+    func sizeOfCorpus(type:CorpusType) -> Int {
+        return allMinimalPairWords(type, limit:-1).count
+    }
     
 }

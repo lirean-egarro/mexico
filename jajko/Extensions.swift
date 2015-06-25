@@ -33,6 +33,41 @@ protocol InputDelegate : NSObjectProtocol {
     func didEndEditing(obj:Taggable)
 }
 
+prefix func ~(rhs: MinimalPair) -> MinimalPair {
+    return MinimalPair(mpw: rhs.mpw, ipa1: rhs.ipa2, ipa2: rhs.ipa1, type: rhs.type, contrastIndex: rhs.contrastIdx, order:MPWOrder(rawValue:(rhs.order.rawValue+1)%2)!)
+}
+
+//Strong comparison used for Hashable, and Equatable.
+//For example, mpw's "koście - koszcie" and "koszcie - koście" are different
+func == (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
+    return (lhs.ipa1 == rhs.ipa1 && lhs.ipa2 == rhs.ipa2)
+}
+
+//Weak comparison.
+//For example, mpw's "koście - koszcie" and "koszcie - koście" are the same
+func === (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
+    return (lhs.ipa1 == rhs.ipa1 && lhs.ipa2 == rhs.ipa2) || (lhs.ipa1 == rhs.ipa2 && lhs.ipa2 == rhs.ipa1)
+}
+
+extension Array {
+    func shuffled() -> [T] {
+        var list = self
+        for i in 0..<(list.count - 1) {
+            let j = Int(arc4random_uniform(UInt32(list.count - i))) + i
+            swap(&list[i], &list[j])
+        }
+        return list
+    }
+}
+
+func randomElement<T>(s: Set<T>) -> T {
+    let n = Int(arc4random_uniform(UInt32(s.count)))
+    for (i, e) in enumerate(s) {
+        if i == n { return e }
+    }
+    fatalError("The above loop must succeed @ randomElement")
+}
+
 func nullToNil(value : AnyObject?) -> AnyObject? {
     if value is NSNull {
         return nil

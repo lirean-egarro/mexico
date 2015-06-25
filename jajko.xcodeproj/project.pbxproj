@@ -14,6 +14,9 @@
 		335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */; };
 		3368AD331B31089800F7D9CA /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD321B31089800F7D9CA /* Segments.swift */; };
 		3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD371B31146200F7D9CA /* UISegmentedControl+Resize.m */; };
+		337124A81B3B02DE00D3917B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337124A71B3B02DE00D3917B /* Session.swift */; };
+		337124AA1B3B698600D3917B /* TestingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337124A91B3B698600D3917B /* TestingBlock.swift */; };
+		337124AC1B3B6A8200D3917B /* TrainingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337124AB1B3B6A8200D3917B /* TrainingBlock.swift */; };
 		33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D321B3128D2009814EE /* ControlsConfig.swift */; };
 		33731D351B314B13009814EE /* LanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D341B314B13009814EE /* LanguageHelper.swift */; };
 		33731D381B315328009814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33731D371B315328009814EE /* Extensions.swift */; };
@@ -46,6 +49,9 @@
 		3368AD351B31146100F7D9CA /* jajko-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jajko-Bridging-Header.h"; sourceTree = "<group>"; };
 		3368AD361B31146200F7D9CA /* UISegmentedControl+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+Resize.h"; sourceTree = "<group>"; };
 		3368AD371B31146200F7D9CA /* UISegmentedControl+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+Resize.m"; sourceTree = "<group>"; };
+		337124A71B3B02DE00D3917B /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		337124A91B3B698600D3917B /* TestingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingBlock.swift; sourceTree = "<group>"; };
+		337124AB1B3B6A8200D3917B /* TrainingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingBlock.swift; sourceTree = "<group>"; };
 		33731D321B3128D2009814EE /* ControlsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsConfig.swift; sourceTree = "<group>"; };
 		33731D341B314B13009814EE /* LanguageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageHelper.swift; sourceTree = "<group>"; };
 		33731D371B315328009814EE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				33F140871B39B85600D55770 /* Corpus.swift */,
+				337124A71B3B02DE00D3917B /* Session.swift */,
+				337124A91B3B698600D3917B /* TestingBlock.swift */,
+				337124AB1B3B6A8200D3917B /* TrainingBlock.swift */,
 			);
 			name = Corpus;
 			sourceTree = "<group>";
@@ -277,6 +286,7 @@
 				33F3D9381B378B8F00F5FE4D /* PromptManager.swift in Sources */,
 				33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */,
 				331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */,
+				337124AA1B3B698600D3917B /* TestingBlock.swift in Sources */,
 				33731D351B314B13009814EE /* LanguageHelper.swift in Sources */,
 				33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */,
 				33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */,
@@ -290,9 +300,11 @@
 				33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
+				337124A81B3B02DE00D3917B /* Session.swift in Sources */,
 				33F140881B39B85600D55770 /* Corpus.swift in Sources */,
 				33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
+				337124AC1B3B6A8200D3917B /* TrainingBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
