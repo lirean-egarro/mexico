@@ -39,6 +39,17 @@ class Experience : NSObject {
     var train1Date, train2Date, train3Date, train4Date, train5Date, train6Date, train7Date, train8Date: NSDate?
     var testDate: NSDate?
     
+    var pretestBlock1Score, pretestBlock2Score: NSNumber?
+    var train1Block1Score, train1Block2Score, train1Block3Score, train1Block4Score: NSNumber?
+    var train2Block1Score, train2Block2Score, train2Block3Score, train2Block4Score: NSNumber?
+    var train3Block1Score, train3Block2Score, train3Block3Score, train3Block4Score: NSNumber?
+    var train4Block1Score, train4Block2Score, train4Block3Score, train4Block4Score: NSNumber?
+    var train5Block1Score, train5Block2Score, train5Block3Score, train5Block4Score: NSNumber?
+    var train6Block1Score, train6Block2Score, train6Block3Score, train6Block4Score: NSNumber?
+    var train7Block1Score, train7Block2Score, train7Block3Score, train7Block4Score: NSNumber?
+    var train8Block1Score, train8Block2Score, train8Block3Score, train8Block4Score: NSNumber?
+    var posttestBlock1Score, posttestBlock2Score: NSNumber?
+    
     var user: String?
     var progress: ExperienceProgress? {
         willSet {
@@ -68,6 +79,30 @@ class Experience : NSObject {
                 self.setValue(propertyValue, forKey: key)
             }
         }
+        
+        if let p1 = aDecoder.decodeObjectForKey("pretestBlock1Score") as? NSNumber {
+            self.pretestBlock1Score = p1
+        }
+        if let p2 = aDecoder.decodeObjectForKey("pretestBlock2Score") as? NSNumber {
+            self.pretestBlock2Score = p2
+        }
+        if let p3 = aDecoder.decodeObjectForKey("posttestBlock1Score") as? NSNumber {
+            self.posttestBlock1Score = p3
+        }
+        if let p4 = aDecoder.decodeObjectForKey("posttestBlock2Score") as? NSNumber {
+            self.posttestBlock2Score = p4
+        }
+        
+        //Init score matrix:
+        for var t = 1 ; t <= 8 ; t++ {
+            for var s = 1 ; s <= 4 ; t++ {
+                let key = String(format:"train%dBlock%dScore",t,s)
+                if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSNumber {
+                    self.setValue(propertyValue, forKey: key)
+                }
+            }
+        }
+        
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -77,12 +112,36 @@ class Experience : NSObject {
         if let progress = self.progress {
             aCoder.encodeObject(progress.rawValue, forKey: "progress")
         }
-        //Init all dates:
+        //Encode all dates:
         for key in ExperienceProgress.dateProperties {
             if let propertyValue = self.valueForKey(key) as? NSDate {
                 aCoder.encodeObject(propertyValue, forKey: key)
             }
         }
+        
+        if let p1 = self.pretestBlock1Score {
+            aCoder.encodeObject(p1, forKey: "pretestBlock1Score")
+        }
+        if let p2 = self.pretestBlock2Score {
+            aCoder.encodeObject(p2, forKey: "pretestBlock2Score")
+        }
+        if let p3 = self.posttestBlock1Score {
+            aCoder.encodeObject(p3, forKey: "posttestBlock1Score")
+        }
+        if let p4 = self.posttestBlock2Score {
+            aCoder.encodeObject(p4, forKey: "posttestBlock2Score")
+        }
+        
+        //Encode the matrix! :)
+        for var t = 1 ; t <= 8 ; t++ {
+            for var s = 1 ; s <= 4 ; t++ {
+                let key = String(format:"train%dBlock%dScore",t,s)
+                if let propertyValue = self.valueForKey(key) as? NSNumber {
+                    aCoder.encodeObject(propertyValue, forKey: key)
+                }
+            }
+        }
+
     }
     
     func preTestStartDate() -> NSDate {
