@@ -8,9 +8,13 @@
 
 import UIKit
 
-class GettingReadyVC: UIViewController {
+class GettingReadyVC: UIViewController, ExperienceReceiver {
     
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var whiteLabel: UILabel!
+    @IBOutlet weak var greenLabel: UILabel!
+    @IBOutlet weak var arrowButton: UIButton!
+    
+    var experience:Experience!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,6 +26,41 @@ class GettingReadyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var instructions = ""
+        var message = ""
+        
+        switch experience!.progress! {
+        case .Start:
+            instructions = "This excercise should take you about 30 minutes.\n\n"
+            instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
+            instructions += "Make your choice to move on to the next file."
+        
+            message = "Ready?"
+        case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
+            instructions = "This excercise should take you about 30 minutes.\n\n"
+            instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
+            instructions += "Make your choice to move on to the next file."
+
+            message = "Ready?"
+        case .Test:
+            instructions = "This excercise should take you about 30 minutes.\n\n"
+            instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
+            instructions += "Make your choice to move on to the next file."
+
+            message = "Ready?"
+        default:
+            println("You shouldn't be here...")
+        }
+        
+        self.whiteLabel.text = instructions
+        self.greenLabel.text = message
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "StartTest") {
+            (segue.destinationViewController as! ExperienceReceiver).experience = experience
+        }
     }
     
 }

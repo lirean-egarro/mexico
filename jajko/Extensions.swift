@@ -12,6 +12,10 @@ protocol NavigationPusher {
     weak var nextController:UIViewController? { get set }
 }
 
+protocol ExperienceReceiver: NSObjectProtocol {
+    var experience:Experience! { get set }
+}
+
 protocol JSONReceivable: NSObjectProtocol {
     var submissionJSON:[String:AnyObject]! { get set }
 }

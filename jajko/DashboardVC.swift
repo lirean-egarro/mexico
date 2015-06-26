@@ -74,7 +74,9 @@ class DashboardVC: UIViewController {
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if (identifier == "DashToTest") {
-            
+            if experience == nil {
+                return false
+            }
         } else if (identifier == "DashToScores") {
             
         } else if (identifier == "DashToAbout") {
@@ -88,7 +90,7 @@ class DashboardVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "DashToTest") {
-
+            (segue.destinationViewController as! ExperienceReceiver).experience = experience
         } else if (segue.identifier == "DashToScores") {
         
         } else if (segue.identifier == "DashToAbout") {

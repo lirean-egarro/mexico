@@ -8,8 +8,9 @@
 
 import UIKit
 
-class TrialViewController: UIViewController {
+class TrialViewController: UIViewController, ExperienceReceiver {
     
+    var experience:Experience!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

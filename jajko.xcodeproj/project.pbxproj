@@ -14,6 +14,7 @@
 		33113A1D1B309B3300F87275 /* TextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A1C1B309B3300F87275 /* TextBox.swift */; };
 		331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AD1B33EA1000907980 /* CountryHelper.swift */; };
 		331672B01B354AE400907980 /* OtherPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AF1B354AE400907980 /* OtherPlaces.swift */; };
+		333DCA2C1B3DB5F500E77BB5 /* ExperienceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */; };
 		335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */; };
 		335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */; };
 		3368AD331B31089800F7D9CA /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD321B31089800F7D9CA /* Segments.swift */; };
@@ -52,6 +53,7 @@
 		33113A1C1B309B3300F87275 /* TextBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBox.swift; sourceTree = "<group>"; };
 		331672AD1B33EA1000907980 /* CountryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryHelper.swift; sourceTree = "<group>"; };
 		331672AF1B354AE400907980 /* OtherPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPlaces.swift; sourceTree = "<group>"; };
+		333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceNavigationController.swift; sourceTree = "<group>"; };
 		335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp3ViewController.swift; sourceTree = "<group>"; };
 		335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp4ViewController.swift; sourceTree = "<group>"; };
 		3368AD321B31089800F7D9CA /* Segments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segments.swift; sourceTree = "<group>"; };
@@ -109,6 +111,16 @@
 			name = CustomViews;
 			sourceTree = "<group>";
 		};
+		333DCA2A1B3DB54300E77BB5 /* TrainingTestingControllers */ = {
+			isa = PBXGroup;
+			children = (
+				333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */,
+				3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */,
+				3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */,
+			);
+			name = TrainingTestingControllers;
+			sourceTree = "<group>";
+		};
 		3368AD341B31140100F7D9CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +158,7 @@
 		33F133A01B294D4400CED73C /* jajko */ = {
 			isa = PBXGroup;
 			children = (
+				333DCA2A1B3DB54300E77BB5 /* TrainingTestingControllers */,
 				33F140861B39B83300D55770 /* Core */,
 				33F3D93A1B37E0ED00F5FE4D /* SingletonsAndHelpers */,
 				33F3D9391B37E0A100F5FE4D /* QuestionnaireControllers */,
@@ -158,8 +171,6 @@
 				33F3D93D1B37EEC500F5FE4D /* DashboardVC.swift */,
 				3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */,
 				3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */,
-				3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */,
-				3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */,
 				33F133C71B29C53E00CED73C /* Main.storyboard */,
 				33F133AA1B294D4500CED73C /* Images.xcassets */,
 				33F133AC1B294D4500CED73C /* LaunchScreen.xib */,
@@ -312,6 +323,7 @@
 				3300E8C81B3D1ABC00D93EB7 /* AboutViewController.swift in Sources */,
 				33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */,
 				33731D381B315328009814EE /* Extensions.swift in Sources */,
+				333DCA2C1B3DB5F500E77BB5 /* ExperienceNavigationController.swift in Sources */,
 				33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */,
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
 				33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */,
@@ -451,13 +463,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Esteban Garro (KK9GR7E87Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Esteban Garro (KK9GR7E87Y)";
 				INFOPLIST_FILE = jajko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0a5aa97d-166d-4d15-af0f-38f7c7f4907e";
 				SWIFT_OBJC_BRIDGING_HEADER = "jajko/jajko-Bridging-Header.h";
 			};
 			name = Release;

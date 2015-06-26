@@ -53,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="296" y="-1859"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Experience Navigation Controller-->
         <scene sceneID="QvV-pO-9cq">
             <objects>
-                <navigationController navigationBarHidden="YES" id="wxU-kp-n7z" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="wxU-kp-n7z" customClass="ExperienceNavigationController" customModule="jajko" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FAi-Ly-Am4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -80,9 +80,65 @@
                     <view key="view" contentMode="scaleToFill" id="q0B-C3-LML">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QV8-UA-mwr" userLabel="Green Container">
+                                <rect key="frame" x="0.0" y="301" width="600" height="299"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JsS-Gf-ucY">
+                                        <rect key="frame" x="201" y="228" width="198" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="tMn-n6-N2d"/>
+                                        </constraints>
+                                        <state key="normal" image="Arrow">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="j0a-di-M1A" kind="show" identifier="StartTest" id="vr6-xq-h6Z"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Click on the arrow with you are ready!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxi-vr-jmG">
+                                        <rect key="frame" x="0.0" y="20" width="600" height="164"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2901960784" green="0.79215686269999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="jxi-vr-jmG" secondAttribute="centerX" id="EmJ-w1-U8s"/>
+                                    <constraint firstItem="JsS-Gf-ucY" firstAttribute="width" secondItem="QV8-UA-mwr" secondAttribute="width" multiplier="0.4" id="KWN-dX-gdO"/>
+                                    <constraint firstAttribute="width" secondItem="jxi-vr-jmG" secondAttribute="width" id="Oxl-pz-jbh"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="JsS-Gf-ucY" secondAttribute="bottom" constant="20" id="fXm-k6-t2G"/>
+                                    <constraint firstAttribute="height" secondItem="jxi-vr-jmG" secondAttribute="height" multiplier="0.65" id="jRC-TC-Q2v"/>
+                                    <constraint firstAttribute="centerX" secondItem="JsS-Gf-ucY" secondAttribute="centerX" id="mtD-tv-3lr"/>
+                                    <constraint firstAttribute="centerY" secondItem="jxi-vr-jmG" secondAttribute="centerY" id="tcw-jW-2qH"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This task will take you approximately 30 min.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-T9-10Y">
+                                <rect key="frame" x="0.0" y="50" width="600" height="243"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="omc-JL-DuZ" firstAttribute="top" secondItem="QV8-UA-mwr" secondAttribute="bottom" id="0Cj-Nu-i89"/>
+                            <constraint firstItem="QV8-UA-mwr" firstAttribute="height" secondItem="q0B-C3-LML" secondAttribute="height" multiplier="0.5" id="7Gd-zq-yx2"/>
+                            <constraint firstAttribute="height" secondItem="fQS-T9-10Y" secondAttribute="height" multiplier="2.5" id="LDi-Xq-6nO"/>
+                            <constraint firstItem="QV8-UA-mwr" firstAttribute="leading" secondItem="q0B-C3-LML" secondAttribute="leading" id="Q0f-aS-LvK"/>
+                            <constraint firstAttribute="centerX" secondItem="fQS-T9-10Y" secondAttribute="centerX" id="maw-vT-PBS"/>
+                            <constraint firstAttribute="trailing" secondItem="QV8-UA-mwr" secondAttribute="trailing" id="ts5-9x-t4d"/>
+                            <constraint firstItem="fQS-T9-10Y" firstAttribute="top" secondItem="yLa-Jw-e87" secondAttribute="bottom" constant="30" id="z7d-h3-Oa0"/>
+                            <constraint firstAttribute="width" secondItem="fQS-T9-10Y" secondAttribute="width" id="zaC-yq-k2n"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Dd-SF-Mkk"/>
+                    <connections>
+                        <outlet property="arrowButton" destination="JsS-Gf-ucY" id="wZj-aq-v8R"/>
+                        <outlet property="greenLabel" destination="jxi-vr-jmG" id="7eC-Mh-ayc"/>
+                        <outlet property="whiteLabel" destination="fQS-T9-10Y" id="pKJ-Vo-Po6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="buN-A2-chZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1191,6 +1247,7 @@
     </scenes>
     <resources>
         <image name="+" width="75" height="75"/>
+        <image name="Arrow" width="22" height="21"/>
         <image name="Eggs" width="150" height="72"/>
         <image name="LetterLogo" width="300" height="159"/>
         <image name="LineFiller" width="1" height="1"/>
