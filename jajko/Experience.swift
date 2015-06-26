@@ -5,6 +5,14 @@
 //  Created by Esteban Garro on 2015-06-25.
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
+/*
+    This is the class that contains all the hardcoded information regarding this instance of a Jajko study.
+    In the future, we may want to move this and create experiences on the fly from config files in JSON.
+
+    Unsure how to achieve this, for example, when it comes to the ExperienceProgress enum.
+
+    Since all the changeable stuff is on this single file, this solution may not be too bad.
+*/
 
 import Foundation
 
@@ -59,8 +67,8 @@ class Experience : NSObject {
         }
     }
     
-    override convenience init() {
-        self.init()
+   override init() {
+        super.init()
         self.progress = .Start
     }
     
@@ -95,7 +103,7 @@ class Experience : NSObject {
         
         //Init score matrix:
         for var t = 1 ; t <= 8 ; t++ {
-            for var s = 1 ; s <= 4 ; t++ {
+            for var s = 1 ; s <= 4 ; s++ {
                 let key = String(format:"train%dBlock%dScore",t,s)
                 if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSNumber {
                     self.setValue(propertyValue, forKey: key)
@@ -134,7 +142,7 @@ class Experience : NSObject {
         
         //Encode the matrix! :)
         for var t = 1 ; t <= 8 ; t++ {
-            for var s = 1 ; s <= 4 ; t++ {
+            for var s = 1 ; s <= 4 ; s++ {
                 let key = String(format:"train%dBlock%dScore",t,s)
                 if let propertyValue = self.valueForKey(key) as? NSNumber {
                     aCoder.encodeObject(propertyValue, forKey: key)

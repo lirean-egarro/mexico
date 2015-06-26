@@ -33,6 +33,12 @@ class Webservice: NSObject {
         return Static.instance!
     }
     
+    func logout(completion:WebserviceThreeWayClosure? = nil) {
+        self.session.invalidateAndCancel()
+        self.session = NSURLSession.sharedSession()
+        completion?(response: true)
+    }
+    
     func login(username: String, password: String, completion:WebserviceThreeWayClosure? = nil) {
         
         let url = NSURL(string: "http://54.85.171.8:8082/login")

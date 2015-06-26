@@ -41,6 +41,10 @@ class TextBox : UIView, UITextFieldDelegate, UIPopoverControllerDelegate, Taggab
     @IBInspectable var secure:Bool = false {
         didSet {
             self.textField.secureTextEntry = secure
+            if !oldValue {
+                self.textField.clearButtonMode = .Always
+                self.textField.clearsOnBeginEditing = true
+            }
         }
     }
     

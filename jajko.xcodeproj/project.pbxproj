@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3300E8C81B3D1ABC00D93EB7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */; };
+		3300E8CA1B3D1AFE00D93EB7 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */; };
+		3300E8CC1B3D1C1600D93EB7 /* GettingReadyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */; };
+		3300E8CE1B3D1C5A00D93EB7 /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */; };
 		33113A1D1B309B3300F87275 /* TextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A1C1B309B3300F87275 /* TextBox.swift */; };
 		331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AD1B33EA1000907980 /* CountryHelper.swift */; };
 		331672B01B354AE400907980 /* OtherPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AF1B354AE400907980 /* OtherPlaces.swift */; };
@@ -41,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
+		3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingReadyVC.swift; sourceTree = "<group>"; };
+		3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
 		33113A1C1B309B3300F87275 /* TextBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBox.swift; sourceTree = "<group>"; };
 		331672AD1B33EA1000907980 /* CountryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryHelper.swift; sourceTree = "<group>"; };
 		331672AF1B354AE400907980 /* OtherPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPlaces.swift; sourceTree = "<group>"; };
@@ -148,6 +156,10 @@
 				33F133A31B294D4400CED73C /* AppDelegate.swift */,
 				33F133A51B294D4400CED73C /* LoginViewController.swift */,
 				33F3D93D1B37EEC500F5FE4D /* DashboardVC.swift */,
+				3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */,
+				3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */,
+				3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */,
+				3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */,
 				33F133C71B29C53E00CED73C /* Main.storyboard */,
 				33F133AA1B294D4500CED73C /* Images.xcassets */,
 				33F133AC1B294D4500CED73C /* LaunchScreen.xib */,
@@ -284,17 +296,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				331672B01B354AE400907980 /* OtherPlaces.swift in Sources */,
+				3300E8CC1B3D1C1600D93EB7 /* GettingReadyVC.swift in Sources */,
 				33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */,
 				33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */,
 				33F3D9381B378B8F00F5FE4D /* PromptManager.swift in Sources */,
 				33731D331B3128D2009814EE /* ControlsConfig.swift in Sources */,
 				331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */,
+				3300E8CE1B3D1C5A00D93EB7 /* TrialViewController.swift in Sources */,
 				337124AA1B3B698600D3917B /* TestingBlock.swift in Sources */,
 				33731D351B314B13009814EE /* LanguageHelper.swift in Sources */,
 				33F133CB1B2AAD4900CED73C /* SignUp2ViewController.swift in Sources */,
 				33F133A61B294D4400CED73C /* LoginViewController.swift in Sources */,
 				335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */,
 				335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */,
+				3300E8C81B3D1ABC00D93EB7 /* AboutViewController.swift in Sources */,
 				33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */,
 				33731D381B315328009814EE /* Extensions.swift in Sources */,
 				33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */,
@@ -305,6 +320,7 @@
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
 				337124A81B3B02DE00D3917B /* Session.swift in Sources */,
 				33F140881B39B85600D55770 /* Corpus.swift in Sources */,
+				3300E8CA1B3D1AFE00D93EB7 /* ScoresViewController.swift in Sources */,
 				33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */,
 				337124B01B3BCB9100D3917B /* Experience.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
