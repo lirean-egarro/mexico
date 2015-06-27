@@ -22,14 +22,16 @@ enum MPWOrder:Int {
 }
 
 struct MinimalPair : Hashable {
+    var uid:Int
     var mpw:Int
     var ipa1:String
     var ipa2:String
     var type:CorpusType
-    var contrastIdx:Int
+    var contrastIdx:Int // <-- Minimal Pair contrastIdx cannot be zero.
     var order:MPWOrder
     
-    init(mpw:Int,ipa1:String,ipa2:String,type:CorpusType,contrastIndex:Int,order:MPWOrder) {
+    init(uid: Int, mpw:Int,ipa1:String,ipa2:String,type:CorpusType,contrastIndex:Int,order:MPWOrder) {
+        self.uid = uid
         self.mpw = mpw
         self.ipa1 = ipa1
         self.ipa2 = ipa2
@@ -58,11 +60,8 @@ struct MinimalPair : Hashable {
     }
     
     var hashValue: Int {
-        get {
-            return mpw + 10*ipa1.hashValue + ipa2.hashValue + type.rawValue + contrastIdx + order.rawValue
-        }
+        return self.uid
     }
-    
 }
 
 //This is our Corpus singleton:
@@ -78,6 +77,7 @@ class Corpus: NSObject {
         if let txtPath = NSBundle.mainBundle().pathForResource("MinimalPairs", ofType: "txt") {
             if let file = String(contentsOfFile: txtPath, encoding: NSUTF8StringEncoding, error: nil) {
                 let allLines = file.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\r\n"))
+                var i = 0
                 for line in allLines {
                     let tmpPieces = line.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).filter({!isEmpty($0)})
                     if count(tmpPieces) > 5 {
@@ -89,10 +89,10 @@ class Corpus: NSObject {
                         var pair:MinimalPair?
                         switch tmpPieces[4] {
                         case "test":
-                            pair = MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Test, contrastIndex: contrast!,order:.Original)
+                            pair = MinimalPair(uid:i, mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Test, contrastIndex: contrast!,order:.Original)
                             minimalPairWords.append(pair!)
                         case "train":
-                            pair = MinimalPair(mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Training, contrastIndex: contrast!,order:.Original)
+                            pair = MinimalPair(uid:i, mpw: mpw!, ipa1: ipa1, ipa2: ipa2, type: .Training, contrastIndex: contrast!,order:.Original)
                             minimalPairWords.append(pair!)
                         default:
                             println("Unknown Type found for minimal pair word: \(tmpPieces[4])")
@@ -100,6 +100,7 @@ class Corpus: NSObject {
                         
                         //Also append the reversed words:
                         minimalPairWords.append(~(pair!))
+                        i++
                     } else {
                         println("Cannot process line from file: \(line)")
                     }
@@ -110,7 +111,7 @@ class Corpus: NSObject {
         } else {
             println("Problems reading file MinimalPairs.txt from Bundle")
         }
-        
+                
         super.init()
     }
 
@@ -154,13 +155,14 @@ class Corpus: NSObject {
         let discardPool = Set(usedPairs)
         let possiblePairs = filteredPool.subtract(discardPool)
         if possiblePairs.count == 0 {
-            println("WARNING: Cannot find a mpw with contrast \(contrast) and type \(type) in the remaining corpus: \(minimalPairWords). Calling Corpus.reset() and trying again!")
+            println("WARNING: Cannot find a mpw with contrast \(contrast) and type \(type.rawValue) in the remaining corpus \(usedPairs.count)/\(minimalPairWords.count). Calling Corpus.reset() and trying again!")
             self.reset()
             return self.extractAvailablePairFor(contrast,andType:type)
         }
         
         let resp = randomElement(possiblePairs)
         usedPairs.append(resp)
+        minimalPairWords = minimalPairWords.filter({ $0.uid != resp.uid })
         
         return resp
     }

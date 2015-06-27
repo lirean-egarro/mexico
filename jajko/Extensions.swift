@@ -12,10 +12,6 @@ protocol NavigationPusher {
     weak var nextController:UIViewController? { get set }
 }
 
-protocol ExperienceReceiver: NSObjectProtocol {
-    var experience:Experience! { get set }
-}
-
 protocol JSONReceivable: NSObjectProtocol {
     var submissionJSON:[String:AnyObject]! { get set }
 }
@@ -38,13 +34,13 @@ protocol InputDelegate : NSObjectProtocol {
 }
 
 prefix func ~(rhs: MinimalPair) -> MinimalPair {
-    return MinimalPair(mpw: rhs.mpw, ipa1: rhs.ipa2, ipa2: rhs.ipa1, type: rhs.type, contrastIndex: rhs.contrastIdx, order:MPWOrder(rawValue:(rhs.order.rawValue+1)%2)!)
+    return MinimalPair(uid:1000-rhs.uid, mpw: rhs.mpw, ipa1: rhs.ipa2, ipa2: rhs.ipa1, type: rhs.type, contrastIndex: rhs.contrastIdx, order:MPWOrder(rawValue:(rhs.order.rawValue+1)%2)!)
 }
 
 //Strong comparison used for Hashable, and Equatable.
 //For example, mpw's "koście - koszcie" and "koszcie - koście" are different
 func == (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
-    return (lhs.ipa1 == rhs.ipa1 && lhs.ipa2 == rhs.ipa2)
+    return lhs.uid == rhs.uid
 }
 
 //Weak comparison.

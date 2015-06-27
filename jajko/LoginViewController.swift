@@ -86,10 +86,12 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         println("Logging out!")
         Webservice.sharedInstance.logout()
         self.passwordField.text = ""
+        nextController = self
     }
     
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
         println("Canceling into Login Page")
+        nextController = self
     }
     
     @IBAction func savePlayerDetail(segue:UIStoryboardSegue) {

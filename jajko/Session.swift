@@ -58,6 +58,27 @@ class Trial : NSObject {
     func generatePair(contrastIndex:Int,inCorpus type:CorpusType) -> MinimalPair {
         return Corpus.sharedInstance.extractAvailablePairFor(contrastIdx, andType: type)
     }
+    
+    func displayString() -> String {
+        //Remember MinimalPair object's contrastIdx cannot be zero; it is the number specified on the MinimalPairs.txt file
+        let subs = applicationContrasts[minimalPair.contrastIdx - 1]
+        let word = minimalPair.ipa1
+        var newWord = word
+        for str in subs {
+            let components = split(str) { $0 == "-" }
+            let tmpWord = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1])
+            if tmpWord == minimalPair.ipa2 {
+                var replacementString = ""
+                for t in 0..<count(components[0]) {
+                    replacementString += "❔"
+                }
+                newWord = word.stringByReplacingOccurrencesOfString(components[0], withString: replacementString)
+                break
+            }
+        }
+        
+        return newWord
+    }
 }
 
 class Block : NSObject {
@@ -76,10 +97,8 @@ class Block : NSObject {
 }
 
 class Session : NSObject {
-    var availableFrom:NSDate!
-    var availableTo:NSDate!
     var type:SessionType!
-    var executionDate:NSDate?
+    var creationDate:NSDate?
     var startTime:NSDate?
     var endTime:NSDate?
     
@@ -88,7 +107,21 @@ class Session : NSObject {
     convenience init(type:SessionType) {
         self.init()
         self.type = type
+        self.creationDate = NSDate()
         
-        
-    }
+        self.blocks = [Block]()
+        switch type {
+        case .Pretest:
+            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+//          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+        case .Training:
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+        case .Posttest:
+            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+//          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+        }
+    }    
 }

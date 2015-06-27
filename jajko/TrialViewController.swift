@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrialViewController: UIViewController, ExperienceReceiver {
+class TrialViewController: UIViewController {
     
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
@@ -17,14 +17,14 @@ class TrialViewController: UIViewController, ExperienceReceiver {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     
-    var experience:Experience!
+    var trial:Trial!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        fatalError("Experience Navigation Controller must load from storyboard!")
     }
     
     override func viewDidLoad() {

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class GettingReadyVC: UIViewController, ExperienceReceiver {
+class SessionMessageVC: UIViewController {
     
     @IBOutlet weak var whiteLabel: UILabel!
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
-    
-    var experience:Experience!
+
+    @IBOutlet weak var messageIcon: UIImageView!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,7 +30,9 @@ class GettingReadyVC: UIViewController, ExperienceReceiver {
         var instructions = ""
         var message = ""
         
-        switch experience!.progress! {
+        var progress = (self.navigationController! as! ExperienceNavigationController).experience.progress!
+        
+        switch progress {
         case .Start:
             instructions = "This excercise should take you about 30 minutes.\n\n"
             instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
@@ -57,10 +59,15 @@ class GettingReadyVC: UIViewController, ExperienceReceiver {
         self.greenLabel.text = message
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "StartTest") {
-            (segue.destinationViewController as! ExperienceReceiver).experience = experience
-        }
+    func startTest() {
+    
     }
     
+    func takeBrake() {
+    
+    }
+    
+    func finishSession() {
+    
+    }
 }

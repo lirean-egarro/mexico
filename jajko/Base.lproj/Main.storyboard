@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="933" y="-1863"/>
         </scene>
-        <!--Getting ReadyVC-->
+        <!--Session MessageVC-->
         <scene sceneID="Ehm-Or-Ogw">
             <objects>
-                <viewController id="KCh-Nd-fSs" customClass="GettingReadyVC" customModule="jajko" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KCh-Nd-fSs" customClass="SessionMessageVC" customModule="jajko" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yLa-Jw-e87"/>
                         <viewControllerLayoutGuide type="bottom" id="omc-JL-DuZ"/>
@@ -115,12 +115,19 @@
                                     <constraint firstAttribute="centerY" secondItem="jxi-vr-jmG" secondAttribute="centerY" id="tcw-jW-2qH"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This task will take you approximately 30 min.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-T9-10Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This task will take you approximately 30 min.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fQS-T9-10Y">
                                 <rect key="frame" x="0.0" y="50" width="600" height="243"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="XGy-zB-Zif">
+                                <rect key="frame" x="242" y="118" width="116" height="107"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="6ht-Q6-TB5"/>
+                                    <constraint firstAttribute="width" secondItem="XGy-zB-Zif" secondAttribute="height" multiplier="116:107" id="DNo-cy-Zep"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -128,16 +135,19 @@
                             <constraint firstItem="QV8-UA-mwr" firstAttribute="height" secondItem="q0B-C3-LML" secondAttribute="height" multiplier="0.5" id="7Gd-zq-yx2"/>
                             <constraint firstAttribute="height" secondItem="fQS-T9-10Y" secondAttribute="height" multiplier="2.5" id="LDi-Xq-6nO"/>
                             <constraint firstItem="QV8-UA-mwr" firstAttribute="leading" secondItem="q0B-C3-LML" secondAttribute="leading" id="Q0f-aS-LvK"/>
+                            <constraint firstAttribute="centerX" secondItem="XGy-zB-Zif" secondAttribute="centerX" id="e46-sa-hNG"/>
                             <constraint firstAttribute="centerX" secondItem="fQS-T9-10Y" secondAttribute="centerX" id="maw-vT-PBS"/>
+                            <constraint firstItem="fQS-T9-10Y" firstAttribute="centerY" secondItem="XGy-zB-Zif" secondAttribute="centerY" id="qZc-KU-fv6"/>
                             <constraint firstAttribute="trailing" secondItem="QV8-UA-mwr" secondAttribute="trailing" id="ts5-9x-t4d"/>
                             <constraint firstItem="fQS-T9-10Y" firstAttribute="top" secondItem="yLa-Jw-e87" secondAttribute="bottom" constant="30" id="z7d-h3-Oa0"/>
-                            <constraint firstAttribute="width" secondItem="fQS-T9-10Y" secondAttribute="width" id="zaC-yq-k2n"/>
+                            <constraint firstAttribute="width" secondItem="fQS-T9-10Y" secondAttribute="width" multiplier="1.1" id="zaC-yq-k2n"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Dd-SF-Mkk"/>
                     <connections>
                         <outlet property="arrowButton" destination="JsS-Gf-ucY" id="wZj-aq-v8R"/>
                         <outlet property="greenLabel" destination="jxi-vr-jmG" id="7eC-Mh-ayc"/>
+                        <outlet property="messageIcon" destination="XGy-zB-Zif" id="1Zv-Pm-fxo"/>
                         <outlet property="whiteLabel" destination="fQS-T9-10Y" id="pKJ-Vo-Po6"/>
                     </connections>
                 </viewController>
@@ -1386,6 +1396,7 @@
         <image name="+" width="75" height="75"/>
         <image name="Arrow" width="22" height="21"/>
         <image name="Audio" width="150" height="113"/>
+        <image name="Clock" width="150" height="134"/>
         <image name="Eggs" width="150" height="72"/>
         <image name="LetterLogo" width="300" height="159"/>
         <image name="LineFiller" width="1" height="1"/>

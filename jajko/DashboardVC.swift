@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
 
-class DashboardVC: UIViewController {
+class DashboardVC: UIViewController, NavigationPusher {
     
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var scoresButton: UIButton!
@@ -16,6 +16,7 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     
     var experience:Experience?
+    weak var nextController:UIViewController?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,7 +43,10 @@ class DashboardVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        layoutSubviews()
+    }
+    
+    func layoutSubviews() {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .FullStyle
         formatter.timeStyle = .MediumStyle
@@ -78,9 +82,15 @@ class DashboardVC: UIViewController {
         self.scoresButton.setBackgroundImage(bg, forState: .Normal)
         self.logoutButton.setBackgroundImage(bg, forState: .Normal)
     }
+
+    @IBAction func finishSessionIntoDashboard(segue:UIStoryboardSegue) {
+        layoutSubviews()
+        nextController = self
+    }
     
     @IBAction func cancelToDashboard(segue:UIStoryboardSegue) {
         println("Back into dashboard")
+        nextController = self
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
@@ -101,7 +111,8 @@ class DashboardVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "DashToTest") {
-            (segue.destinationViewController as! ExperienceReceiver).experience = experience
+            nextController = segue.destinationViewController as? UIViewController
+            (nextController as! ExperienceNavigationController).experience = experience
         } else if (segue.identifier == "DashToScores") {
         
         } else if (segue.identifier == "DashToAbout") {

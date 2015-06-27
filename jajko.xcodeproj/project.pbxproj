@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3300E8C81B3D1ABC00D93EB7 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */; };
 		3300E8CA1B3D1AFE00D93EB7 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */; };
-		3300E8CC1B3D1C1600D93EB7 /* GettingReadyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */; };
+		3300E8CC1B3D1C1600D93EB7 /* SessionMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8CB1B3D1C1600D93EB7 /* SessionMessageVC.swift */; };
 		3300E8CE1B3D1C5A00D93EB7 /* TrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */; };
 		33113A1D1B309B3300F87275 /* TextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33113A1C1B309B3300F87275 /* TextBox.swift */; };
 		331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AD1B33EA1000907980 /* CountryHelper.swift */; };
@@ -48,7 +48,7 @@
 /* Begin PBXFileReference section */
 		3300E8C71B3D1ABC00D93EB7 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3300E8C91B3D1AFE00D93EB7 /* ScoresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
-		3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingReadyVC.swift; sourceTree = "<group>"; };
+		3300E8CB1B3D1C1600D93EB7 /* SessionMessageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionMessageVC.swift; sourceTree = "<group>"; };
 		3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialViewController.swift; sourceTree = "<group>"; };
 		33113A1C1B309B3300F87275 /* TextBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBox.swift; sourceTree = "<group>"; };
 		331672AD1B33EA1000907980 /* CountryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryHelper.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */,
-				3300E8CB1B3D1C1600D93EB7 /* GettingReadyVC.swift */,
+				3300E8CB1B3D1C1600D93EB7 /* SessionMessageVC.swift */,
 				3300E8CD1B3D1C5A00D93EB7 /* TrialViewController.swift */,
 			);
 			name = TrainingTestingControllers;
@@ -307,7 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				331672B01B354AE400907980 /* OtherPlaces.swift in Sources */,
-				3300E8CC1B3D1C1600D93EB7 /* GettingReadyVC.swift in Sources */,
+				3300E8CC1B3D1C1600D93EB7 /* SessionMessageVC.swift in Sources */,
 				33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */,
 				33F133C41B29681800CED73C /* SignUp1ViewController.swift in Sources */,
 				33F3D9381B378B8F00F5FE4D /* PromptManager.swift in Sources */,
