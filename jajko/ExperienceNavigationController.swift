@@ -40,8 +40,26 @@ class ExperienceNavigationController: UINavigationController {
         }
     }
     
+    func loadNext() {
+        println("Should load next trial")
+    }
+    
     func startTest() {
         println("Start the test!")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let trialVC = storyboard.instantiateViewControllerWithIdentifier("TrialViewController") as! TrialViewController
+        if let firstBlock = session.blocks?[0] {
+            if let firstTrial = firstBlock.trials?[0] {
+                trialVC.trial = firstTrial
+                trialVC.trialIdx = 0
+                trialVC.blockSize = firstBlock.trials!.count
+                self.pushViewController(trialVC, animated: true)
+            } else {
+                println("First block doesn't have a first trial")
+            }
+        } else {
+            println("Session doesn't have a first block")
+        }
     }
     
     func finishSession() {

@@ -59,25 +59,24 @@ class Trial : NSObject {
         return Corpus.sharedInstance.extractAvailablePairFor(contrastIdx, andType: type)
     }
     
-    func displayString() -> String {
+    func displayStrings() -> (original: String, value: String?, right: String?, wrong: String?) {
         //Remember MinimalPair object's contrastIdx cannot be zero; it is the number specified on the MinimalPairs.txt file
         let subs = applicationContrasts[minimalPair.contrastIdx - 1]
         let word = minimalPair.ipa1
-        var newWord = word
         for str in subs {
             let components = split(str) { $0 == "-" }
-            let tmpWord = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1])
-            if tmpWord == minimalPair.ipa2 {
-                var replacementString = ""
-                for t in 0..<count(components[0]) {
-                    replacementString += "❔"
-                }
-                newWord = word.stringByReplacingOccurrencesOfString(components[0], withString: replacementString)
-                break
+            let tmpWord1 = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1])
+            let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0])
+            if tmpWord1 == minimalPair.ipa2 {
+                let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔")
+                return (word,val,components[0],components[1])
+            } else if tmpWord2 == minimalPair.ipa2 {
+                let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔")
+                return (word,val,components[1],components[0])
             }
         }
         
-        return newWord
+        return (word,nil,nil,nil)
     }
 }
 

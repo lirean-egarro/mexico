@@ -18,8 +18,13 @@ class TrialViewController: UIViewController {
     @IBOutlet weak var rightButton: UIButton!
     
     var trial:Trial!
+    var trialIdx:Int!
+    var blockSize:Int!
+    
+    private var playCount:Int
     
     required init(coder aDecoder: NSCoder) {
+        playCount = 0
         super.init(coder: aDecoder)
     }
     
@@ -33,10 +38,43 @@ class TrialViewController: UIViewController {
         var bg = UIImage(named: "WhiteTile")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 7, 7, 7))
         self.leftButton.setBackgroundImage(bg, forState: .Normal)
         self.rightButton.setBackgroundImage(bg, forState: .Normal)
+        
+        let strings = trial.displayStrings()
+        println(strings)
+        
+        self.wordLabel.text = strings.value
+        if Int(arc4random_uniform(UInt32(100))) > 49 {
+            self.leftButton.tag = 100
+            self.leftButton.setTitle(strings.right, forState: .Normal)
+            self.rightButton.tag = 200
+            self.rightButton.setTitle(strings.wrong, forState: .Normal)
+        } else {
+            self.leftButton.tag = 200
+            self.leftButton.setTitle(strings.wrong, forState: .Normal)
+            self.rightButton.tag = 100
+            self.rightButton.setTitle(strings.right, forState: .Normal)
+        }
+        
+        self.progressLabel.text = String(format:"%d/%d",trialIdx+1,blockSize)
     }
     
     @IBAction func play(sender:AnyObject?) {
-        println("Should play file")
+        self.playCount++
+        if playCount == 2 {
+            self.leftButton.hidden = false
+            self.rightButton.hidden = false
+        }
+    }
+    
+    @IBAction func selectedAnswer(sender:AnyObject?) {
+        var tag = (sender as! UIButton).tag
+        if tag == 100 {
+            println("Good Answer")
+        } else {
+            println("Bad Answer")
+        }
+        
+        (self.navigationController! as! ExperienceNavigationController).loadNext()
     }
 }
 
