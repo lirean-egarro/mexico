@@ -13,6 +13,7 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     
     var experience:Experience?
     
@@ -47,20 +48,30 @@ class DashboardVC: UIViewController {
         formatter.timeStyle = .MediumStyle
         self.dateLabel.text = formatter.stringFromDate(NSDate())
         
+        let availability = experience!.isCurrentProgressAvailableToday()
         
-        switch experience!.progress! {
-        case .Start:
-            self.startButton.setTitle("READY FOR YOUR FIRST TEST?", forState: .Normal)
-        case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
-            let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor())
-            self.startButton.setTitle("WELCOME BACK TO TRAIN SESSION " + digit, forState: .Normal)
-        case .Test:
-            self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
-        case .End:
-            self.startButton.setTitle("NO MORE EXCERCISES AVAILABLE", forState: .Normal)
+        if availability.ok {
+            switch experience!.progress! {
+            case .Start:
+                self.startButton.setTitle("READY FOR YOUR FIRST TEST?", forState: .Normal)
+            case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
+                let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor())
+                self.startButton.setTitle("WELCOME BACK TO TRAIN SESSION " + digit, forState: .Normal)
+            case .Test:
+                self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
+            case .End:
+                self.startButton.setTitle("NO MORE EXCERCISES AVAILABLE", forState: .Normal)
+                self.startButton.enabled = false
+            default:
+                println("Unknow progress state found")
+            }
+        } else {
+            self.startButton.setTitle("", forState: .Normal)
             self.startButton.enabled = false
-        default:
-            println("Unknow progress state found")
+            
+            self.view.bringSubviewToFront(self.errorLabel)
+            self.errorLabel.text = availability.message
+            self.errorLabel.hidden = false
         }
         
         var bg = UIImage(named: "WhiteTile")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 7, 7, 7))
@@ -69,7 +80,7 @@ class DashboardVC: UIViewController {
     }
     
     @IBAction func cancelToDashboard(segue:UIStoryboardSegue) {
-        println("Submission canceled")
+        println("Back into dashboard")
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {

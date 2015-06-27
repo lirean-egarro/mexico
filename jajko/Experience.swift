@@ -152,13 +152,92 @@ class Experience : NSObject {
 
     }
     
+#if DEBUG
+    func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
+        return (true,nil)
+    }
+#else
+    func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .FullStyle
+        formatter.timeStyle = .ShortStyle
+        
+        var now = NSDate()
+        var comparePoint = NSDate()
+        var resp = now.compare(comparePoint)
+        
+        switch progress! {
+        case .Start:
+            comparePoint = preTestStartDate()
+            resp = now.compare(comparePoint)
+            if resp == .OrderedDescending {
+                comparePoint = preTestEndDate()
+                resp = now.compare(comparePoint)
+                if resp != .OrderedDescending {
+                    return (true,nil)
+                } else {
+                   return (false, "Test no longer available")
+                }
+            } else {
+                return (false, "Available from: \(formatter.stringFromDate(comparePoint))")
+            }
+        case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
+            let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor()).toInt()!
+            comparePoint = trainingStartDate()
+            resp = now.compare(comparePoint)
+            if resp == .OrderedDescending {
+                comparePoint = trainingEndDate()
+                resp = now.compare(comparePoint)
+                if resp != .OrderedDescending {
+                    if digit > 1 {
+                        let propertyName = "train" + String(digit-1) + "Date"
+                        comparePoint = self.valueForKey(propertyName) as! NSDate
+                        resp = now.compare(comparePoint)
+                         if resp == .OrderedDescending {
+                            return (true,nil)
+                         } else {
+                            return (false, "Cannot do two train sessions the same day!")
+                         }
+                    } else {
+                        return (true,nil)
+                    }
+                } else {
+                    return (false, "Training no longer available")
+                }
+            } else {
+                return (false, "Training starts on: \(formatter.stringFromDate(comparePoint))")
+            }
+        case .Test:
+            comparePoint = postTestStartDate()
+            resp = now.compare(comparePoint)
+            if resp == .OrderedDescending {
+                comparePoint = postTestEndDate()
+                resp = now.compare(comparePoint)
+                if resp != .OrderedDescending {
+                    return (true,nil)
+                } else {
+                    return (false, "Jajko is no longer available")
+                }
+            } else {
+                return (false, "Available from: \(formatter.stringFromDate(comparePoint))")
+            }
+        case .End:
+                return (false, "Thank you for using Jajko!")
+        default:
+            println("Unknow progress state found")
+        }
+        
+        return (false, "We are sorry: Unknown progress state!")
+    }
+#endif
+    
     func preTestStartDate() -> NSDate {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
         var components = NSDateComponents()
         components.setValue(4, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -166,9 +245,9 @@ class Experience : NSObject {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
         var components = NSDateComponents()
-        components.setValue(4, forComponent: NSCalendarUnit.CalendarUnitDay)
+        components.setValue(5, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -176,9 +255,9 @@ class Experience : NSObject {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
         var components = NSDateComponents()
-        components.setValue(4, forComponent: NSCalendarUnit.CalendarUnitDay)
+        components.setValue(5, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -186,9 +265,9 @@ class Experience : NSObject {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
         var components = NSDateComponents()
-        components.setValue(17, forComponent: NSCalendarUnit.CalendarUnitDay)
+        components.setValue(18, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -198,7 +277,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(17, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -206,9 +285,9 @@ class Experience : NSObject {
         let calendar = NSCalendar.currentCalendar()
         let date = NSDate()
         var components = NSDateComponents()
-        components.setValue(19, forComponent: NSCalendarUnit.CalendarUnitDay)
+        components.setValue(20, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitMonth)
+        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }

@@ -299,6 +299,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F68-OE-22G" userLabel="Error Label">
+                                <rect key="frame" x="16" y="20" width="568" height="234"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0w6-yV-3KW">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="292"/>
                                 <color key="backgroundColor" red="0.29019607843137257" green="0.792156862745098" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
@@ -317,9 +323,10 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="110" id="Bmx-fy-PBI"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ZLN-I1-jnS"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                 <state key="normal" title="SCORES">
                                     <color key="titleColor" red="0.2901960784" green="0.79215686269999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.86971275250000002" green="0.86971275250000002" blue="0.86971275250000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="iQZ-Ry-9ws" kind="presentation" identifier="DashToScores" id="F7C-WZ-mo8"/>
@@ -327,7 +334,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5d-Kw-u2R">
                                 <rect key="frame" x="318" y="316" width="246" height="122"/>
-                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
                                 <state key="normal" title="LOGOUT">
                                     <color key="titleColor" red="0.29019607843137257" green="0.792156862745098" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.86971275252525249" green="0.86971275252525249" blue="0.86971275252525249" alpha="1" colorSpace="calibratedRGB"/>
@@ -375,6 +382,7 @@
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="bottom" secondItem="t5d-Kw-u2R" secondAttribute="bottom" id="Ixd-uV-0U0"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="height" secondItem="t5d-Kw-u2R" secondAttribute="height" id="Mer-Wt-kpO"/>
                             <constraint firstItem="Lmv-aU-NwE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="t5d-Kw-u2R" secondAttribute="bottom" constant="5" id="PR2-iZ-aEn"/>
+                            <constraint firstItem="F68-OE-22G" firstAttribute="leading" secondItem="hPB-18-ClS" secondAttribute="leadingMargin" id="PsB-9F-Fr0"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="top" secondItem="t5d-Kw-u2R" secondAttribute="top" id="QfB-0y-cue"/>
                             <constraint firstItem="Lmv-aU-NwE" firstAttribute="height" secondItem="uAV-L1-b7A" secondAttribute="height" multiplier="1.5" id="RsC-8X-qQj"/>
                             <constraint firstAttribute="trailing" secondItem="0w6-yV-3KW" secondAttribute="trailing" id="V5b-NP-vyL"/>
@@ -383,16 +391,20 @@
                             <constraint firstAttribute="centerX" secondItem="Lmv-aU-NwE" secondAttribute="centerX" id="dzc-fe-3Zs"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="leading" secondItem="hPB-18-ClS" secondAttribute="leadingMargin" constant="15" id="o6m-GC-HIv"/>
                             <constraint firstItem="0w6-yV-3KW" firstAttribute="top" secondItem="hPB-18-ClS" secondAttribute="top" id="oRp-mh-Z8e"/>
+                            <constraint firstItem="F68-OE-22G" firstAttribute="trailing" secondItem="hPB-18-ClS" secondAttribute="trailingMargin" id="ohQ-7N-Wgl"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="top" secondItem="TqT-gT-dif" secondAttribute="bottom" constant="15" id="qVy-af-7sh"/>
+                            <constraint firstItem="F68-OE-22G" firstAttribute="top" secondItem="MFX-9h-lGa" secondAttribute="bottom" id="qsK-IR-Iga"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2xe-Gb-twQ" secondAttribute="trailing" constant="20" id="uID-kF-0L1"/>
                             <constraint firstItem="0w6-yV-3KW" firstAttribute="leading" secondItem="hPB-18-ClS" secondAttribute="leading" id="wcR-hQ-Xaq"/>
                             <constraint firstItem="Hhd-fI-Qh7" firstAttribute="top" secondItem="2xe-Gb-twQ" secondAttribute="bottom" constant="20" id="xPy-kx-OGR"/>
+                            <constraint firstItem="cuz-3h-feA" firstAttribute="top" secondItem="F68-OE-22G" secondAttribute="bottom" constant="15" id="y8x-mT-rHG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XpV-jZ-p8z"/>
                     <connections>
                         <outlet property="aboutButton" destination="2xe-Gb-twQ" id="yir-Ni-yMi"/>
                         <outlet property="dateLabel" destination="cuz-3h-feA" id="PMM-8Q-Qrz"/>
+                        <outlet property="errorLabel" destination="F68-OE-22G" id="jFd-OS-z00"/>
                         <outlet property="logoutButton" destination="t5d-Kw-u2R" id="OIv-kj-bId"/>
                         <outlet property="scoresButton" destination="uAV-L1-b7A" id="2bH-oD-lc4"/>
                         <outlet property="startButton" destination="0w6-yV-3KW" id="4p4-mj-EPK"/>

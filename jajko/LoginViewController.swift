@@ -46,10 +46,14 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         usernameField.setUpView()
         passwordField.setUpView()
     }
-        
+
+#if DEBUG
     @IBAction func login(sender: AnyObject) {
-//        self.performSegueWithIdentifier("goToDashboard", sender: nil)
-//        return
+        Webservice.sharedInstance.currentUser = self.usernameField.text
+        self.performSegueWithIdentifier("goToDashboard", sender: nil)
+    }
+#else
+    @IBAction func login(sender: AnyObject) {
         if let username = self.usernameField.text,
             let password = self.passwordField.text {
                 if isValid(username) {
@@ -76,7 +80,8 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
             show("Please enter your user name and password")
         }
     }
-
+#endif
+    
     @IBAction func logoutIntoLoginVC(segue:UIStoryboardSegue) {
         println("Logging out!")
         Webservice.sharedInstance.logout()
@@ -84,7 +89,7 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
     }
     
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
-        println("Submission canceled")
+        println("Canceling into Login Page")
     }
     
     @IBAction func savePlayerDetail(segue:UIStoryboardSegue) {
