@@ -30,10 +30,23 @@ enum ExperienceProgress: String {
     case End = "end"
     
     static let allProgressPoints = [Start, Train1, Train2, Train3, Train4, Train5, Train6, Train7, Train8, Test, End]
-    static let dateProperties:[String] = {
+    static let startDateProperties:[String] = {
         var resp = [String]()
         for progressPoint in ExperienceProgress.allProgressPoints {
-            resp.append(progressPoint.rawValue + "Date")
+            if progressPoint != .End {
+                resp.append(progressPoint.rawValue + "BeggingDate")
+            } else {
+                resp.append(progressPoint.rawValue + "Date")
+            }
+        }
+        return resp
+    }()
+    static let endDateProperties:[String] = {
+        var resp = [String]()
+        for progressPoint in ExperienceProgress.allProgressPoints {
+            if progressPoint != .End {
+                resp.append(progressPoint.rawValue + "EndDate")
+            }
         }
         return resp
     }()
@@ -43,9 +56,11 @@ enum ExperienceProgress: String {
 @objc(Experience)
 class Experience : NSObject {
     
-    var startDate, endDate: NSDate?
-    var train1Date, train2Date, train3Date, train4Date, train5Date, train6Date, train7Date, train8Date: NSDate?
-    var testDate: NSDate?
+    var startBeggingDate, startEndDate: NSDate?
+    var train1BeggingDate, train2BeggingDate, train3BeggingDate, train4BeggingDate, train5BeggingDate, train6BeggingDate, train7BeggingDate, train8BeggingDate: NSDate?
+    var train1EndDate, train2EndDate, train3EndDate, train4EndDate, train5EndDate, train6EndDate, train7EndDate, train8EndDate: NSDate?
+    var testBeggingDate, testEndDate: NSDate?
+    var endDate: NSDate?
     
     var pretestBlock1Score, pretestBlock2Score: NSNumber?
     var train1Block1Score, train1Block2Score, train1Block3Score, train1Block4Score: NSNumber?
@@ -62,7 +77,23 @@ class Experience : NSObject {
     var progress: ExperienceProgress? {
         willSet {
             if let val = newValue {
-                self.setValue(NSDate(), forKey: val.rawValue + "Date")
+                if val != .End {
+                    self.setValue(NSDate(), forKey: val.rawValue + "BeggingDate")
+                } else {
+                    self.setValue(NSDate(), forKey: val.rawValue + "Date")
+                }
+            }
+        }
+    }
+    
+    var finishSession:ExperienceProgress? {
+        willSet {
+            if let val = newValue {
+                if val != .End {
+                    self.setValue(NSDate(), forKey: val.rawValue + "EndDate")
+                } else {
+                    self.setValue(NSDate(), forKey: val.rawValue + "Date")
+                }
             }
         }
     }
@@ -82,7 +113,12 @@ class Experience : NSObject {
         }
         
         //Init all dates:
-        for key in ExperienceProgress.dateProperties {
+        for key in ExperienceProgress.startDateProperties {
+            if let propertyValue = aDecoder.decodeObjectForKey(key) as? String {
+                self.setValue(propertyValue, forKey: key)
+            }
+        }
+        for key in ExperienceProgress.endDateProperties {
             if let propertyValue = aDecoder.decodeObjectForKey(key) as? String {
                 self.setValue(propertyValue, forKey: key)
             }
@@ -121,7 +157,12 @@ class Experience : NSObject {
             aCoder.encodeObject(progress.rawValue, forKey: "progress")
         }
         //Encode all dates:
-        for key in ExperienceProgress.dateProperties {
+        for key in ExperienceProgress.startDateProperties {
+            if let propertyValue = self.valueForKey(key) as? NSDate {
+                aCoder.encodeObject(propertyValue, forKey: key)
+            }
+        }
+        for key in ExperienceProgress.endDateProperties {
             if let propertyValue = self.valueForKey(key) as? NSDate {
                 aCoder.encodeObject(propertyValue, forKey: key)
             }
@@ -153,8 +194,54 @@ class Experience : NSObject {
     }
 
     func toJSONDictionary() -> [String:AnyObject] {
-    
-        return ["hello" : "world"]
+        var exp = [String:AnyObject]()
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .FullStyle
+        formatter.timeStyle = .FullStyle
+        
+        var Pre = [String:AnyObject]()
+        if startBeggingDate != nil && startEndDate != nil && pretestBlock1Score != nil && pretestBlock2Score != nil {
+            Pre["startdate"] = formatter.stringFromDate(startBeggingDate!)
+            Pre["percentages"] = ["block1":pretestBlock1Score!,"block2":pretestBlock2Score!]
+            Pre["enddate"] = formatter.stringFromDate(startEndDate!)
+        }
+        exp["pretest"] = Pre
+        
+        var Train = [String:AnyObject]()
+        for var t = 1 ; t <= 8 ; t++ {
+            var Sess = [String:AnyObject]()
+            let begKey = String(format:"train%dBeggingDate",t)
+            let endKey = String(format:"train%dEndDate",t)
+            if let propertyBegVal = self.valueForKey(begKey) as? NSDate,
+                let propertyEndVal = self.valueForKey(endKey) as? NSDate {
+                    Sess["startdate"] = formatter.stringFromDate(propertyBegVal)
+                    Sess["enddate"] = formatter.stringFromDate(propertyEndVal)
+                    var Percentages = [String:AnyObject]()
+                    for var s = 1 ; s <= 4 ; s++ {
+                        let key = String(format:"train%dBlock%dScore",t,s)
+                        if let scoreValue = self.valueForKey(key) as? NSNumber {
+                            Percentages["block"+String(s)] = scoreValue
+                        }
+                    }
+                    Sess["percentages"] = Percentages
+                }
+            Train["session"+String(t)] = Sess
+        }
+        exp["training"] = Train
+
+        var Post = [String:AnyObject]()
+        if testBeggingDate != nil && testEndDate != nil && posttestBlock1Score != nil && posttestBlock2Score != nil {
+            Post["startdate"] = formatter.stringFromDate(testBeggingDate!)
+            Post["percentages"] = ["block1":posttestBlock1Score!,"block2":posttestBlock2Score!]
+            Post["enddate"] = formatter.stringFromDate(testEndDate!)
+        }
+        exp["posttest"] = Post
+        
+        if endDate != nil {
+            exp["completed"] = formatter.stringFromDate(endDate!)
+        }
+        
+        return exp
     }
     
 #if DEBUG
@@ -195,7 +282,7 @@ class Experience : NSObject {
                 resp = now.compare(comparePoint)
                 if resp != .OrderedDescending {
                     if digit > 1 {
-                        let propertyName = "train" + String(digit-1) + "Date"
+                        let propertyName = "train" + String(digit-1) + "BeggingDate"
                         comparePoint = self.valueForKey(propertyName) as! NSDate
                         resp = now.compare(comparePoint)
                          if resp == .OrderedDescending {
