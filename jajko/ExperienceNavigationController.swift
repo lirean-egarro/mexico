@@ -24,6 +24,7 @@ class ExperienceNavigationController: UINavigationController {
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        (self.viewControllers[0] as! SessionMessageVC).type = .Intro
         //Create the session!
         if let progress = experience.progress {
             switch progress {
@@ -37,6 +38,46 @@ class ExperienceNavigationController: UINavigationController {
                 session = Session(type: .Training)
             }
         }
+    }
+    
+    func startTest() {
+        println("Start the test!")
+    }
+    
+    func finishSession() {
+        let ud = NSUserDefaults.standardUserDefaults()
+        //Store data locally
+        if let user = Webservice.sharedInstance.currentUser {
+            ud.setObject(NSKeyedArchiver.archivedDataWithRootObject(experience), forKey: "Experience_" + user)
+        } else {
+            println("This is a fatal error. Sessions must have a currentUser!")
+        }
+        //Encode and send results
+        if experience.progress == .End {
+            println("Sending experience to our server...")
+            Webservice.sharedInstance.sendExperience(experience.toJSONDictionary(), completion: { (resp) in
+                if resp {
+                    self.backToDashboard()
+                } else {
+                    var options:NSDictionary = [
+                        "message" : "There was a problem saving your answers. Verify your internet connection and try again. If you decide to cancel now, you will loose all test results!",
+                        "yes" : "Cancel",
+                        "no" : "Try again"
+                    ]
+                    PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                        if !resp {
+                            self.finishSession()
+                        }
+                    }
+                }
+            })
+        } else {
+            backToDashboard()
+        }
+    }
+    
+    func backToDashboard() {
+        self.performSegueWithIdentifier("finishSession", sender: self)
     }
 }
 

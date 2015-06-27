@@ -130,8 +130,39 @@ class Webservice: NSObject {
             println("Not supposed to call /questionnaire without setting the session user first!")
         }
     }
+
+    func sendExperience(experience:[String:AnyObject], completion:WebserviceBooleanClosure? = nil) {
+        if let username = currentUser, let token = self.sessionToken {
+            let url = NSURL(string: "http://54.85.171.8:8082/experience")
+            let request = NSMutableURLRequest(URL: url!)
+            request.HTTPMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField:"Content-Type")
+            var requestBody = [String:AnyObject]()
+            requestBody["cookies"] = ["user": username, "token": token]
+            requestBody["experience"] = experience
+            if let postData = NSJSONSerialization.dataWithJSONObject(requestBody as NSDictionary, options: .allZeros, error: nil) {
+                request.HTTPBody = postData
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                session.dataTaskWithRequest(request as NSURLRequest, completionHandler: { (data, response, error) -> Void in
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    if let httpResp = response as? NSHTTPURLResponse {
+                        if (httpResp.statusCode == 200) {
+                            completion?(response: true)
+                        } else {
+                            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                            completion?(response: false)
+                        }
+                    } else {
+                        completion?(response: false)
+                    }
+                }).resume()
+            }
+        } else {
+            println("Not supposed to call /experience without setting the session user first!")
+        }
+    }
     
-// MARK: Helper Methods:
+// MARK: Helper Methods:    
     func createNewSession(data: NSData, forUser username:String) {
         self.currentUser = username
         NSUserDefaults.standardUserDefaults().setObject(username, forKey: "lastUser")

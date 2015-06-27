@@ -13,8 +13,18 @@ let contrast2:Contrast = ["ź-ż","zi-żi"]
 
 let applicationContrasts = [contrast1,contrast2]
 
-enum CorpusType: Int {
+enum CorpusType: Int, Printable {
     case Training = 0, Test
+    var description : String {
+        get {
+            switch(self) {
+            case Training:
+                return "Training"
+            case Test:
+                return "Test"
+            }
+        }
+    }
 }
 
 enum MPWOrder:Int {
@@ -155,7 +165,7 @@ class Corpus: NSObject {
         let discardPool = Set(usedPairs)
         let possiblePairs = filteredPool.subtract(discardPool)
         if possiblePairs.count == 0 {
-            println("WARNING: Cannot find a mpw with contrast \(contrast) and type \(type.rawValue) in the remaining corpus \(usedPairs.count)/\(minimalPairWords.count). Calling Corpus.reset() and trying again!")
+            println("WARNING: Cannot find a mpw with contrast \(contrast) and type \(type.description) in the remaining corpus \(usedPairs.count)/\(minimalPairWords.count). Calling Corpus.reset() and trying again!")
             self.reset()
             return self.extractAvailablePairFor(contrast,andType:type)
         }

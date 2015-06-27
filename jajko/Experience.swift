@@ -151,6 +151,11 @@ class Experience : NSObject {
         }
 
     }
+
+    func toJSONDictionary() -> [String:AnyObject] {
+    
+        return ["hello" : "world"]
+    }
     
 #if DEBUG
     func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
