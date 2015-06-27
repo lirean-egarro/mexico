@@ -13,7 +13,18 @@ class ExperienceNavigationController: UINavigationController {
     var experience:Experience!
     var session:Session!
     
+    var currentBlock:Int
+    var numberOfBlocks:Int
+    var currentBlockScore:Int
+    var currentTrial:Int
+    
+    var progress:ExperienceProgress!
+    
     required init(coder aDecoder: NSCoder) {
+        currentBlock = 0
+        numberOfBlocks = 0
+        currentBlockScore = 0
+        currentTrial = 0
         super.init(coder: aDecoder)
     }
     
@@ -26,8 +37,9 @@ class ExperienceNavigationController: UINavigationController {
         
         (self.viewControllers[0] as! SessionMessageVC).type = .Intro
         //Create the session!
-        if let progress = experience.progress {
-            switch progress {
+        progress = experience.progress
+        if progress != nil {
+            switch progress! {
             case .Start:
                 session = Session(type: .Pretest)
             case .Test:
@@ -38,28 +50,73 @@ class ExperienceNavigationController: UINavigationController {
                 session = Session(type: .Training)
             }
         }
+        
+        if let num = session.blocks?.count {
+            numberOfBlocks = num
+        } else {
+             println("Session doesn't have blocks")
+        }
     }
     
-    func loadNext() {
-        println("Should load next trial")
+    func loadNextTrial(response:Bool?) {
+        //Store the result from previous trial:
+        if response == nil {
+            currentBlockScore = 0
+            currentTrial = 0
+            if currentBlock == 0 {
+                experience.progress = progress
+            }
+        } else {
+            currentTrial++
+            if response! {
+                currentBlockScore++
+            }
+        }
+        
+        let SB = UIStoryboard(name: "Main", bundle: nil)
+        if let thisBlock = session.blocks?[currentBlock] {
+            if currentTrial < thisBlock.trials!.count {
+                if let thisTrial = thisBlock.trials?[currentTrial] {
+                    let trialVC = SB.instantiateViewControllerWithIdentifier("TrialViewController") as! TrialViewController
+                    trialVC.trial = thisTrial
+                    trialVC.trialIdx = currentTrial
+                    trialVC.blockSize = thisBlock.trials!.count
+                    self.popViewControllerAnimated(false)
+                    self.pushViewController(trialVC, animated: false)
+                } else {
+                    println("Block \(currentBlock) doesn't have trial \(currentTrial)")
+                }
+            } else {
+                //Finished with all trials in block! Check if there is any more blocks and go to break or finish session:
+                if currentBlock < numberOfBlocks - 1 {
+                    //Break time
+                    (self.viewControllers[0] as! SessionMessageVC).type = .Break
+                    
+                    //Calculate and store block scores:
+                    experience.record(currentBlockScore*100/thisBlock.trials!.count, forBlock: currentBlock+1, atProgress: progress)
+
+                    //Prepeare for next loadNextTrail() call
+                    currentBlock++
+                } else {
+                    //You are done!
+                    (self.viewControllers[0] as! SessionMessageVC).type = .Finish
+                    
+                    //Calculate and store block scores:
+                    experience.record(currentBlockScore*100/thisBlock.trials!.count, forBlock: currentBlock+1, atProgress: progress)
+                    
+                    //Mark this session as completed!
+                    experience.finishSession = progress
+                }
+                
+                self.popToRootViewControllerAnimated(true)
+            }
+        } else {
+            println("Session doesn't have block \(currentBlock)!")
+        }
     }
     
     func startTest() {
-        println("Start the test!")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let trialVC = storyboard.instantiateViewControllerWithIdentifier("TrialViewController") as! TrialViewController
-        if let firstBlock = session.blocks?[0] {
-            if let firstTrial = firstBlock.trials?[0] {
-                trialVC.trial = firstTrial
-                trialVC.trialIdx = 0
-                trialVC.blockSize = firstBlock.trials!.count
-                self.pushViewController(trialVC, animated: true)
-            } else {
-                println("First block doesn't have a first trial")
-            }
-        } else {
-            println("Session doesn't have a first block")
-        }
+        loadNextTrial(nil)
     }
     
     func finishSession() {

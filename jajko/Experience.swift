@@ -50,6 +50,17 @@ enum ExperienceProgress: String {
         }
         return resp
     }()
+    
+    func nextState() -> ExperienceProgress {
+        var resp = ExperienceProgress.End
+        for var i = 0 ; i < ExperienceProgress.allProgressPoints.count - 1; i++ {
+            if self == ExperienceProgress.allProgressPoints[i] {
+                resp = ExperienceProgress.allProgressPoints[i+1]
+                break
+            }
+        }
+        return resp
+    }
 }
 
 
@@ -94,10 +105,41 @@ class Experience : NSObject {
                 } else {
                     self.setValue(NSDate(), forKey: val.rawValue + "Date")
                 }
+                
+                self.progress = val.nextState()
             }
         }
     }
-    
+   
+    func record(score:Int, forBlock block:Int, atProgress prog:ExperienceProgress) {
+        switch prog {
+        case .Start:
+            if block < 3 && block > 0 {
+                let key = "pretestBlock" + String(block) + "Score"
+                self.setValue(score, forKey: key)
+            } else {
+                println("Attempting to set Pretest score for non recordable block \(block)")
+            }
+        case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
+            if block < 9 && block > 0 {
+                let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor())
+                let key = "train" + digit + "Block" + String(block) + "Score"
+                self.setValue(score, forKey: key)
+            } else {
+                println("Attempting to set Training score for non recordable block \(block)")
+            }
+        case .Test:
+            if block < 3 && block > 0 {
+                let key = "posttestBlock" + String(block) + "Score"
+                self.setValue(score, forKey: key)
+            } else {
+                println("Attempting to set Posttest score for non recordable block \(block)")
+            }
+        default:
+            println("Cannot record score for progress \(prog.rawValue)")
+        }
+    }
+        
    override init() {
         super.init()
         self.progress = .Start

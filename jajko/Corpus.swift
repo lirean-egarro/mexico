@@ -145,6 +145,7 @@ class Corpus: NSObject {
     }
     
     func extractAvailablePairFor(contrast:Int,andType type:CorpusType) -> MinimalPair {
+        println("Extracting word with contrast: \(contrast)")
         //Remember that contrast = 0 means any contrast index!
         if minimalPairWords.count == 0 {
             println("WARNING: No more mpw's available in the corpus and requesting one. Calling Corpus.reset()!")
@@ -173,6 +174,22 @@ class Corpus: NSObject {
         let resp = randomElement(possiblePairs)
         usedPairs.append(resp)
         minimalPairWords = minimalPairWords.filter({ $0.uid != resp.uid })
+        
+        return resp
+    }
+
+    func allMinimalPairWordsAndReverseMatches(ofType type:CorpusType, forContrast contrast:Int,limit:Int) -> [MinimalPair] {
+        self.reset()
+        if limit < 0 {
+            return minimalPairWords.filter({ $0.type == type && $0.contrastIdx == contrast })
+        }
+        
+        var resp = [MinimalPair]()
+        var tmp = minimalPairWords.filter({ $0.type == type && $0.contrastIdx == contrast })
+        for var i = 0 ; i < limit && i < tmp.count ; i++ {
+            resp.append(tmp[i])
+            resp.append(~tmp[i])
+        }
         
         return resp
     }

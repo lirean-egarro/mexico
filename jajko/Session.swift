@@ -65,13 +65,13 @@ class Trial : NSObject {
         let word = minimalPair.ipa1
         for str in subs {
             let components = split(str) { $0 == "-" }
-            let tmpWord1 = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1])
-            let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0])
-            if tmpWord1 == minimalPair.ipa2 {
-                let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔")
+            let tmpWord1 = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1], options:.LiteralSearch, range:word.rangeOfString(components[0]))
+            let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0], options:.LiteralSearch, range:word.rangeOfString(components[1]))
+            if tmpWord1.lowercaseString == minimalPair.ipa2.lowercaseString {
+                let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[0]))
                 return (word,val,components[0],components[1])
-            } else if tmpWord2 == minimalPair.ipa2 {
-                let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔")
+            } else if tmpWord2.lowercaseString == minimalPair.ipa2.lowercaseString {
+                let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[1]))
                 return (word,val,components[1],components[0])
             }
         }
@@ -115,9 +115,9 @@ class Session : NSObject {
 //          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
         case .Training:
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
-            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
-            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+            blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
         case .Posttest:
             blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
 //          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))

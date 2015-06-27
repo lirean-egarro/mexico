@@ -54,6 +54,8 @@ class DashboardVC: UIViewController, NavigationPusher {
         
         let availability = experience!.isCurrentProgressAvailableToday()
         
+        self.startButton.titleLabel?.numberOfLines = 2
+        self.startButton.titleLabel?.textAlignment = .Center
         if availability.ok {
             switch experience!.progress! {
             case .Start:

@@ -51,6 +51,10 @@ class SessionMessageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navVC = self.navigationController
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         var instructions = ""
         var message = ""

@@ -49,7 +49,8 @@ class TrainingBlock : Block {
                 }
             }
         } else if condition == .MultiTalker {
-            activeCorpus = Corpus.sharedInstance.allMinimalPairWords(.Training,limit:sizeMPWs)
+            activeCorpus = Corpus.sharedInstance.allMinimalPairWordsAndReverseMatches(ofType: .Training, forContrast: contrastIndex, limit: sizeMPWs)
+            
             //Initialize the multitalkerPool:
             var projectedTrials = [Trial]()
             for var i = 0 ; i < activeCorpus!.count ; i++ {

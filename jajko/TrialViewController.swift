@@ -40,7 +40,6 @@ class TrialViewController: UIViewController {
         self.rightButton.setBackgroundImage(bg, forState: .Normal)
         
         let strings = trial.displayStrings()
-        println(strings)
         
         self.wordLabel.text = strings.value
         if Int(arc4random_uniform(UInt32(100))) > 49 {
@@ -68,13 +67,12 @@ class TrialViewController: UIViewController {
     
     @IBAction func selectedAnswer(sender:AnyObject?) {
         var tag = (sender as! UIButton).tag
+        var resp = false
         if tag == 100 {
-            println("Good Answer")
-        } else {
-            println("Bad Answer")
+            resp = true
         }
         
-        (self.navigationController! as! ExperienceNavigationController).loadNext()
+        (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
     }
 }
 
