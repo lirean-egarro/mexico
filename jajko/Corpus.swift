@@ -56,12 +56,16 @@ struct MinimalPair : Hashable {
         switch (type, order) {
         case (.Training, .Original):
             resp += String(format: "%02dipa1rec", mpw)
+            resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
         case (.Training, .Reversed):
             resp += String(format: "%02dipa2rec", mpw)
+            resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
         case (.Test, .Original):
             resp += String(format: "%dipa1rec", mpw)
+            resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
         case (.Test, .Reversed):
             resp += String(format: "%dipa2rec", mpw)
+            resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
         default:
             println("(type,order) = (\(type),\(order)) not found")
         }

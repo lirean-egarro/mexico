@@ -291,6 +291,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="7hc-sc-qMt" id="jcS-wN-qMn"/>
                         <outlet property="leftButton" destination="hPs-7f-huK" id="egM-yy-aLc"/>
                         <outlet property="playButton" destination="txY-yj-A4K" id="gZY-gy-oZ1"/>
                         <outlet property="progressLabel" destination="Ubk-4V-MXh" id="J4Z-b2-God"/>
@@ -1097,7 +1098,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="80" width="250" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

@@ -78,9 +78,20 @@ class ExperienceNavigationController: UINavigationController {
             if currentTrial < thisBlock.trials!.count {
                 if let thisTrial = thisBlock.trials?[currentTrial] {
                     let trialVC = SB.instantiateViewControllerWithIdentifier("TrialViewController") as! TrialViewController
+                    
+                    //Provide TrialViewController with its required init unwrapped optionals:
                     trialVC.trial = thisTrial
                     trialVC.trialIdx = currentTrial
                     trialVC.blockSize = thisBlock.trials!.count
+                    switch progress! {
+                    case .Start:
+                        trialVC.feedbacks = false
+                    case .Test:
+                        trialVC.feedbacks = false
+                    default:
+                        trialVC.feedbacks = true
+                    }
+                    
                     self.popViewControllerAnimated(false)
                     self.pushViewController(trialVC, animated: false)
                 } else {

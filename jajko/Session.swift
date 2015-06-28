@@ -59,10 +59,32 @@ class Trial : NSObject {
         return Corpus.sharedInstance.extractAvailablePairFor(contrastIdx, andType: type)
     }
     
+    func audioFileName() -> String {
+        return "T" + String(self.talkerID) + self.minimalPair.recordingTag()
+    }
+    
+    func complementaryFileName() -> String? {
+        let r = audioFileName().componentsSeparatedByString("ipa")
+        let c = r[1][r[1].startIndex]
+        if c == "1" {
+            return r[0] + "ipa2" + r[1].substringFromIndex(r[1].startIndex.successor())
+        } else if c == "2" {
+            return r[0] + "ipa1" + r[1].substringFromIndex(r[1].startIndex.successor())
+        }
+        return nil
+    }
+    
     func displayStrings() -> (original: String, value: String?, right: String?, wrong: String?) {
         //Remember MinimalPair object's contrastIdx cannot be zero; it is the number specified on the MinimalPairs.txt file
         let subs = applicationContrasts[minimalPair.contrastIdx - 1]
         let word = minimalPair.ipa1
+        
+        if word == "Grzesiek" {
+            return ("Grzesiek","Grze❔ek","si","szi")
+        } else if word == "grzeszek" {
+            return ("grzeszek","grze❔ek","ś","sz")
+        }
+        
         for str in subs {
             let components = split(str) { $0 == "-" }
             let tmpWord1 = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1], options:.LiteralSearch, range:word.rangeOfString(components[0]))
