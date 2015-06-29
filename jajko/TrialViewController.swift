@@ -96,6 +96,11 @@ class TrialViewController: UIViewController {
                 self.leftButton.hidden = false
                 self.rightButton.hidden = false
             }
+            
+            if self.sessionType == SessionType.Pretest || self.sessionType == SessionType.Posttest {
+                self.leftButton.hidden = false
+                self.rightButton.hidden = false
+            }
         }
     }
     

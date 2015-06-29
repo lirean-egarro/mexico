@@ -39,13 +39,48 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="LetterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="x8r-Rh-a58">
                                 <rect key="frame" x="150" y="59" width="300" height="159"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyW-eL-RdK">
+                                <rect key="frame" x="16" y="226" width="568" height="328"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">What?This is the mobile research app for a University College London (UCL) research study, whose aim is to test how mobile training techniques can improve native English speakers’ perceptual skills for Polish fricative sounds. These sounds have no exact equivalents in English and are typically difficult to distinguish for English speakers.Why?Similar digital trainers were shown to at least slightly, if not moderately improve users’ perceptual skills in the sounds of other languages. This study tests whether a similar design can be effective for improving perceptual skills in the Polish language. What are these words?Keep in mind that this is a perceptual skills study, not a vocabulary learning study. Therefore, the words used in this app have been chosen for their phonological properties and not for how commonly they are used in everyday communication (ex. some words are street names, others lastnames).Who?Principal Investigator:        Genevieve Mathis, MRes UCL + Lirean Ltd.Project Supervisor: 	         Dr. Paul Iverson, UCLApp Design &amp; Coding: 	 Esteban Garro, Lirean Ltd.Jajko Logo Design:	         Matteo Alabiso, Lirean Ltd.Contact: genevieve.mathis.14@ucl.ac.uk</mutableString>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Lirean" translatesAutoresizingMaskIntoConstraints="NO" id="teB-Nk-lwe">
+                                <rect key="frame" x="426" y="562" width="158" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="158" id="Dnb-PI-Bsf"/>
+                                    <constraint firstAttribute="height" constant="30" id="qP1-o7-QRy"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qt-DZ-TqL">
+                                <rect key="frame" x="358" y="577" width="60" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="8kj-YZ-8hy"/>
+                                    <constraint firstAttribute="height" constant="15" id="jUy-2Z-BMR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="10"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="x8r-Rh-a58" secondAttribute="centerX" id="6Ny-0l-nFB"/>
+                            <constraint firstItem="teB-Nk-lwe" firstAttribute="trailing" secondItem="1fK-bm-unk" secondAttribute="trailingMargin" id="7aB-du-qEY"/>
+                            <constraint firstItem="FpR-oG-UVi" firstAttribute="top" secondItem="teB-Nk-lwe" secondAttribute="bottom" constant="8" id="8IM-aD-MPx"/>
+                            <constraint firstItem="teB-Nk-lwe" firstAttribute="leading" secondItem="3qt-DZ-TqL" secondAttribute="trailing" constant="8" id="Hgw-wf-lmv"/>
                             <constraint firstItem="azU-wt-EWH" firstAttribute="top" secondItem="qUO-hQ-ZHI" secondAttribute="bottom" constant="14" id="NH1-Yz-jGJ"/>
                             <constraint firstItem="x8r-Rh-a58" firstAttribute="top" secondItem="qUO-hQ-ZHI" secondAttribute="bottom" constant="40" id="NU5-2R-Mmh"/>
+                            <constraint firstItem="eyW-eL-RdK" firstAttribute="top" secondItem="x8r-Rh-a58" secondAttribute="bottom" constant="8" id="RPH-Zq-GsO"/>
+                            <constraint firstItem="teB-Nk-lwe" firstAttribute="bottom" secondItem="3qt-DZ-TqL" secondAttribute="bottom" id="TIQ-2O-3Ru"/>
+                            <constraint firstItem="eyW-eL-RdK" firstAttribute="trailing" secondItem="1fK-bm-unk" secondAttribute="trailingMargin" id="Uu4-aA-g7l"/>
                             <constraint firstItem="azU-wt-EWH" firstAttribute="leading" secondItem="1fK-bm-unk" secondAttribute="leadingMargin" constant="15" id="anC-WG-rrs"/>
+                            <constraint firstItem="FpR-oG-UVi" firstAttribute="top" secondItem="3qt-DZ-TqL" secondAttribute="bottom" constant="8" id="caj-hg-ubZ"/>
+                            <constraint firstItem="eyW-eL-RdK" firstAttribute="leading" secondItem="1fK-bm-unk" secondAttribute="leadingMargin" id="qo7-1y-VuL"/>
+                            <constraint firstItem="FpR-oG-UVi" firstAttribute="top" secondItem="eyW-eL-RdK" secondAttribute="bottom" constant="40" id="w4b-BB-foI"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -1176,7 +1211,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="80" width="250" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1484,6 +1519,7 @@
         <image name="Eggs" width="150" height="72"/>
         <image name="LetterLogo" width="300" height="159"/>
         <image name="LineFiller" width="1" height="1"/>
+        <image name="Lirean" width="176" height="34"/>
         <image name="X" width="75" height="75"/>
     </resources>
 </document>
