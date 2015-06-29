@@ -831,6 +831,7 @@
 		33793F931B3F9A1F00FEB0A2 /* wrong.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33793F911B3F9A1F00FEB0A2 /* wrong.caf */; };
 		33793F951B40F32700FEB0A2 /* FinalTestingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33793F941B40F32700FEB0A2 /* FinalTestingBlock.swift */; };
 		33793F971B40F61A00FEB0A2 /* FinalTrainingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33793F961B40F61A00FEB0A2 /* FinalTrainingBlock.swift */; };
+		33974AF41B410B5F002EB65F /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33974AF31B410B5F002EB65F /* CalendarDay.swift */; };
 		33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */; };
 		33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
@@ -1677,6 +1678,7 @@
 		33793F911B3F9A1F00FEB0A2 /* wrong.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wrong.caf; path = Assets/Audio/Jingle/wrong.caf; sourceTree = "<group>"; };
 		33793F941B40F32700FEB0A2 /* FinalTestingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTestingBlock.swift; sourceTree = "<group>"; };
 		33793F961B40F61A00FEB0A2 /* FinalTrainingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTrainingBlock.swift; sourceTree = "<group>"; };
+		33974AF31B410B5F002EB65F /* CalendarDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
 		33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPopoverVC.swift; sourceTree = "<group>"; };
 		33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyingNavigationController.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1713,6 +1715,7 @@
 			isa = PBXGroup;
 			children = (
 				33113A1C1B309B3300F87275 /* TextBox.swift */,
+				33974AF31B410B5F002EB65F /* CalendarDay.swift */,
 				33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */,
 				3368AD321B31089800F7D9CA /* Segments.swift */,
 				33F3D92E1B375B0400F5FE4D /* SimpleCheckbox.swift */,
@@ -3578,6 +3581,7 @@
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
 				33793F951B40F32700FEB0A2 /* FinalTestingBlock.swift in Sources */,
 				33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */,
+				33974AF41B410B5F002EB65F /* CalendarDay.swift in Sources */,
 				33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
 				33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */,
