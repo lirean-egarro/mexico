@@ -68,22 +68,20 @@ class SessionMessageVC: UIViewController {
             switch progress {
             case .Start:
                 instructions = "This excercise should take you about 30 minutes.\n\n"
-                instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
-                instructions += "Make your choice to move on to the next file."
-            
-                message = "Ready?"
+                instructions += "The audio button will play the word once more. You will then be presented with two options. Only one option is correct.\n\n"
+                instructions += "Make your choice to move on to the next word."
+                message = "Listen for the ❔sound in the word displayed.\nPossible answers are:\n\n"
+                message += "the [ś] sound, as in: cześć!\n"
+                message += "the [sz] sound, as in: co robisz?\n"
+                message += "the [ź/z(i)] sound, as in: jeździć\n"
+                message += "the [ż] sound, as in: duży"
             case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
-                instructions = "This excercise should take you about 30 minutes.\n\n"
-                instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
-                instructions += "Make your choice to move on to the next file."
-
-                message = "Ready?"
+                instructions = "Focus on the ❔sound (ex. duży).\n\n"
+                message =  "Learn:\n\n"
+                message += "(1) the sound's acoustic characteristics,\n(2) the sound-to-letter(s) association (ex. sound-to-'ż')"
             case .Test:
-                instructions = "This excercise should take you about 30 minutes.\n\n"
-                instructions += "You will listen to each audio sample two times. After that you will be presented with two options to choose from. Only one option is correct.\n\n"
-                instructions += "Make your choice to move on to the next file."
-
-                message = "Ready?"
+                instructions = "Focus on the ❔sound.\nWhich sound is it?"
+                message =  "Ready?"
             default:
                 println("You shouldn't be here...")
             }

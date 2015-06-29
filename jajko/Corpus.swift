@@ -50,22 +50,38 @@ struct MinimalPair : Hashable {
         self.order = order
     }
     
-    func recordingTag() -> String {
+    func recordingTag(rec:Int) -> String {
         var resp = "ct" + String(contrastIdx) + "mpw"
         
         switch (type, order) {
         case (.Training, .Original):
             resp += String(format: "%02dipa1rec", mpw)
-            resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
+            if rec == 0 {
+                resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
+            } else {
+                resp += String(rec)
+            }
         case (.Training, .Reversed):
             resp += String(format: "%02dipa2rec", mpw)
-            resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
+            if rec == 0 {
+                resp += String(Int(arc4random_uniform(UInt32(2))) + 1)
+            } else {
+                resp += String(rec)
+            }
         case (.Test, .Original):
             resp += String(format: "%dipa1rec", mpw)
-            resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
+            if rec == 0 {
+                resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
+            } else {
+                resp += String(rec)
+            }
         case (.Test, .Reversed):
             resp += String(format: "%dipa2rec", mpw)
-            resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
+            if rec == 0 {
+                resp += String(Int(arc4random_uniform(UInt32(4))) + 1)
+            } else {
+                resp += String(rec)
+            }
         default:
             println("(type,order) = (\(type),\(order)) not found")
         }
@@ -149,7 +165,6 @@ class Corpus: NSObject {
     }
     
     func extractAvailablePairFor(contrast:Int,andType type:CorpusType) -> MinimalPair {
-        println("Extracting word with contrast: \(contrast)")
         //Remember that contrast = 0 means any contrast index!
         if minimalPairWords.count == 0 {
             println("WARNING: No more mpw's available in the corpus and requesting one. Calling Corpus.reset()!")

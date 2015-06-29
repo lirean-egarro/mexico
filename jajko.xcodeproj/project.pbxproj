@@ -829,6 +829,8 @@
 		33793F8E1B3F8D9F00FEB0A2 /* T2ct2mpw5ipa2rec4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33793EEE1B3F8D9F00FEB0A2 /* T2ct2mpw5ipa2rec4.caf */; };
 		33793F921B3F9A1F00FEB0A2 /* correct.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33793F901B3F9A1F00FEB0A2 /* correct.caf */; };
 		33793F931B3F9A1F00FEB0A2 /* wrong.caf in Resources */ = {isa = PBXBuildFile; fileRef = 33793F911B3F9A1F00FEB0A2 /* wrong.caf */; };
+		33793F951B40F32700FEB0A2 /* FinalTestingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33793F941B40F32700FEB0A2 /* FinalTestingBlock.swift */; };
+		33793F971B40F61A00FEB0A2 /* FinalTrainingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33793F961B40F61A00FEB0A2 /* FinalTrainingBlock.swift */; };
 		33BB11A81B35DD4B00F90F4C /* InputPopoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */; };
 		33BB11AA1B3606C600F90F4C /* NotifyingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */; };
 		33F133A41B294D4400CED73C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F133A31B294D4400CED73C /* AppDelegate.swift */; };
@@ -1673,6 +1675,8 @@
 		33793EEE1B3F8D9F00FEB0A2 /* T2ct2mpw5ipa2rec4.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = T2ct2mpw5ipa2rec4.caf; path = Assets/Audio/Test/T2ct2mpw5ipa2rec4.caf; sourceTree = "<group>"; };
 		33793F901B3F9A1F00FEB0A2 /* correct.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = correct.caf; path = Assets/Audio/Jingle/correct.caf; sourceTree = "<group>"; };
 		33793F911B3F9A1F00FEB0A2 /* wrong.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wrong.caf; path = Assets/Audio/Jingle/wrong.caf; sourceTree = "<group>"; };
+		33793F941B40F32700FEB0A2 /* FinalTestingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTestingBlock.swift; sourceTree = "<group>"; };
+		33793F961B40F61A00FEB0A2 /* FinalTrainingBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTrainingBlock.swift; sourceTree = "<group>"; };
 		33BB11A71B35DD4B00F90F4C /* InputPopoverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputPopoverVC.swift; sourceTree = "<group>"; };
 		33BB11A91B3606C600F90F4C /* NotifyingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyingNavigationController.swift; sourceTree = "<group>"; };
 		33F1339E1B294D4400CED73C /* jajko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jajko.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2633,7 +2637,9 @@
 				337124A71B3B02DE00D3917B /* Session.swift */,
 				337124AF1B3BCB9100D3917B /* Experience.swift */,
 				337124A91B3B698600D3917B /* TestingBlock.swift */,
+				33793F941B40F32700FEB0A2 /* FinalTestingBlock.swift */,
 				337124AB1B3B6A8200D3917B /* TrainingBlock.swift */,
+				33793F961B40F61A00FEB0A2 /* FinalTrainingBlock.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -3570,6 +3576,7 @@
 				333DCA2C1B3DB5F500E77BB5 /* ExperienceNavigationController.swift in Sources */,
 				33F3D92F1B375B0400F5FE4D /* SimpleCheckbox.swift in Sources */,
 				3368AD381B31146200F7D9CA /* UISegmentedControl+Resize.m in Sources */,
+				33793F951B40F32700FEB0A2 /* FinalTestingBlock.swift in Sources */,
 				33F3D92D1B37581800F5FE4D /* TermsViewController.swift in Sources */,
 				33F3D93E1B37EEC500F5FE4D /* DashboardVC.swift in Sources */,
 				33113A1D1B309B3300F87275 /* TextBox.swift in Sources */,
@@ -3578,6 +3585,7 @@
 				33F140881B39B85600D55770 /* Corpus.swift in Sources */,
 				3300E8CA1B3D1AFE00D93EB7 /* ScoresViewController.swift in Sources */,
 				33F3D93C1B37E16400F5FE4D /* Webservice.swift in Sources */,
+				33793F971B40F61A00FEB0A2 /* FinalTrainingBlock.swift in Sources */,
 				337124B01B3BCB9100D3917B /* Experience.swift in Sources */,
 				3368AD331B31089800F7D9CA /* Segments.swift in Sources */,
 				337124AC1B3B6A8200D3917B /* TrainingBlock.swift in Sources */,

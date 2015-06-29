@@ -47,7 +47,7 @@ class ExperienceNavigationController: UINavigationController {
             case .End:
                 fatalError("Shouldn't try to start session after all sessions are done")
             default:
-                session = Session(type: .Training)
+                session = Session(type: SessionType.Training, trainIdx: progress.trainIdx())
             }
         }
         
@@ -82,7 +82,9 @@ class ExperienceNavigationController: UINavigationController {
                     //Provide TrialViewController with its required init unwrapped optionals:
                     trialVC.trial = thisTrial
                     trialVC.trialIdx = currentTrial
+                    trialVC.trainIdx = session.trainIdx
                     trialVC.blockSize = thisBlock.trials!.count
+                    trialVC.sessionType = session.type
                     switch progress! {
                     case .Start:
                         trialVC.feedbacks = false

@@ -1,12 +1,12 @@
 //
-//  Training.swift
+//  FinalTrainingBlock.swift
 //  jajko
 //
-//  Created by Esteban Garro on 2015-06-24.
+//  Created by Esteban Garro on 2015-06-28.
 //  Copyright (c) 2015 transcriptics. All rights reserved.
 //
 
-class TrainingBlock : Block {
+class FinalTrainingBlock : Block {
     static var multitalkerPool = Array(count:Corpus.sharedInstance.sizeOfCorpus(.Training), repeatedValue:[3,4,5,6])
     static var talkersPool = [3,4,5,6]
     
@@ -31,7 +31,7 @@ class TrainingBlock : Block {
         self.contrastIdx = contrastIndex
         self.sizeMPWs = num
         self.repetitions = times
-                
+        
         if condition == .SingleTalker {
             var allTalkers:Int = TrainingBlock.talkersPool.count
             if allTalkers == 0 {

@@ -16,6 +16,17 @@
 
 import Foundation
 
+let ResponseWeights: [String: UInt8] = [
+    "train1": 	0x01,
+    "train2": 	0x02,
+    "train3":	0x04,
+    "train4":	0x08,
+    "train5":   0x10,
+    "train6":	0x20,
+    "train7":	0x40,
+    "train8":	0x80
+]
+
 enum ExperienceProgress: String {
     case Start = "start"
     case Train1 = "train1"
@@ -51,6 +62,13 @@ enum ExperienceProgress: String {
         return resp
     }()
     
+    func trainIdx() -> Int? {
+        if self.rawValue.contains("train") {
+            return self.rawValue.substringFromIndex(self.rawValue.endIndex.predecessor()).toInt()
+        }
+        return nil
+    }
+    
     func nextState() -> ExperienceProgress {
         var resp = ExperienceProgress.End
         for var i = 0 ; i < ExperienceProgress.allProgressPoints.count - 1; i++ {
@@ -83,6 +101,9 @@ class Experience : NSObject {
     var train7Block1Score, train7Block2Score, train7Block3Score, train7Block4Score: NSNumber?
     var train8Block1Score, train8Block2Score, train8Block3Score, train8Block4Score: NSNumber?
     var posttestBlock1Score, posttestBlock2Score: NSNumber?
+    
+    var train1Responses, train2Responses, train3Responses, train4Responses: NSDictionary?
+    var train5Responses, train6Responses, train7Responses, train8Responses: NSDictionary?
     
     var user: String?
     var progress: ExperienceProgress? {
@@ -122,7 +143,7 @@ class Experience : NSObject {
             }
         case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
             if block < 9 && block > 0 {
-                let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor())
+                let digit = String(p.trainIdx()!)
                 let key = "train" + digit + "Block" + String(block) + "Score"
                 self.setValue(score, forKey: key)
             } else {
@@ -189,6 +210,13 @@ class Experience : NSObject {
             }
         }
         
+        //Init Responses:
+        for var t = 1 ; t <= 8 ; t++ {
+            let key = String(format:"train%dResponses",t)
+            if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSDictionary {
+                self.setValue(propertyValue, forKey: key)
+            }
+        }
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -230,6 +258,14 @@ class Experience : NSObject {
                 if let propertyValue = self.valueForKey(key) as? NSNumber {
                     aCoder.encodeObject(propertyValue, forKey: key)
                 }
+            }
+        }
+        
+        //Encode responses:
+        for var t = 1 ; t <= 8 ; t++ {
+            let key = String(format:"train%dResponses",t)
+            if let propertyValue = self.valueForKey(key) as? NSDictionary {
+                aCoder.encodeObject(propertyValue, forKey: key)
             }
         }
 
@@ -283,7 +319,55 @@ class Experience : NSObject {
             exp["completed"] = formatter.stringFromDate(endDate!)
         }
         
+        
+        var Responses = [String:AnyObject]()
+        for var t = 1 ; t <= 8 ; t++ {
+            let key = String(format:"train%dResponses",t)
+            if let responsesDic = self.valueForKey(key) as? NSDictionary {
+                Train["train"+String(t)] = responsesDic
+            }
+        }
+        exp["responses"] = Responses
+        
         return exp
+    }
+    
+    func recordResponseFor(word:String, atTrainSession num:Int, correct:Bool) {
+        let key = String(format:"train%dResponses",num)
+        if let trialDic = self.valueForKey(key) as? NSMutableDictionary {
+            if let existingWord:NSNumber = nullToNil(trialDic.objectForKey(word)) as? NSNumber {
+                //Existing Word:
+                if correct {
+                    if let inc = ResponseWeights["train" + String(num)] {
+                        if let existingValue = (trialDic.valueForKey(word) as? NSNumber)?.unsignedCharValue {
+                            let newValue = existingValue | inc
+                            trialDic.setValue(NSNumber(unsignedChar: newValue), forKey: word)
+                        }
+                    }
+                }
+            } else {
+                //New word!
+                if correct {
+                    if let inc = ResponseWeights["train" + String(num)] {
+                        let value = NSNumber(unsignedChar: inc)
+                        trialDic.setValue(value, forKey: word)
+                    }
+                } else {
+                    trialDic.setValue(NSNumber(int: 0), forKey: word)
+                }
+            }
+            
+            self.setValue(trialDic as NSDictionary, forKey: key)
+        } else {
+            if correct {
+                if let inc = ResponseWeights["train" + String(num)] {
+                    let value = NSNumber(unsignedChar: inc)
+                    self.setValue(NSDictionary(object: value, forKey: word), forKey:key)
+                }
+            } else {
+                self.setValue(NSDictionary(object: NSNumber(int: 0), forKey: word), forKey:key)
+            }
+        }
     }
     
 #if DEBUG
@@ -316,7 +400,7 @@ class Experience : NSObject {
                 return (false, "Available from: \(formatter.stringFromDate(comparePoint))")
             }
         case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
-            let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor()).toInt()!
+            let digit = p.trainIdx()!
             comparePoint = trainingStartDate()
             resp = now.compare(comparePoint)
             if resp == .OrderedDescending {
@@ -371,7 +455,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(4, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2010, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -381,7 +465,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(5, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2019, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -391,7 +475,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(5, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2010, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -401,7 +485,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(18, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2019, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -411,7 +495,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(17, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2010, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
@@ -421,7 +505,7 @@ class Experience : NSObject {
         var components = NSDateComponents()
         components.setValue(20, forComponent: NSCalendarUnit.CalendarUnitDay)
         components.setValue(7, forComponent: NSCalendarUnit.CalendarUnitMonth)
-        components.setValue(2015, forComponent: NSCalendarUnit.CalendarUnitYear)
+        components.setValue(2019, forComponent: NSCalendarUnit.CalendarUnitYear)
         
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }

@@ -31,26 +31,30 @@ class Trial : NSObject {
     var minimalPair:MinimalPair!
     var corpus:CorpusType!
     var currentState:TrialState!
+    var recording:Int? = 0
     
     var contrastIdx:Int! //Index 0 means any random contrast.
     
     var startTime:NSDate?
     var endTime:NSDate?
     
-    convenience init(talker:Int,contrastIndex:Int,corpusType:CorpusType) {
+    convenience init(talker:Int,contrastIndex:Int,corpusType:CorpusType,rec:Int) {
         self.init()
         corpus = corpusType
         currentState = .Queued
         talkerID = talker
+        recording = rec
         self.contrastIdx = contrastIndex
         self.minimalPair = generatePair(contrastIndex,inCorpus:corpusType)
+        
     }
     
-    convenience init(mpw:MinimalPair, talker:Int) {
+    convenience init(mpw:MinimalPair, talker:Int,rec:Int) {
         self.init()
         corpus = mpw.type
         currentState = .Queued
         talkerID = talker
+        recording = rec
         self.contrastIdx = mpw.contrastIdx
         self.minimalPair = mpw
     }
@@ -60,7 +64,7 @@ class Trial : NSObject {
     }
     
     func audioFileName() -> String {
-        return "T" + String(self.talkerID) + self.minimalPair.recordingTag()
+        return "T" + String(self.talkerID) + self.minimalPair.recordingTag(recording!)
     }
     
     func complementaryFileName() -> String? {
@@ -122,8 +126,14 @@ class Session : NSObject {
     var creationDate:NSDate?
     var startTime:NSDate?
     var endTime:NSDate?
+    var trainIdx:Int?
     
     var blocks:[Block]?
+    
+    convenience init(type:SessionType, trainIdx:Int?) {
+        self.init(type: type)
+        self.trainIdx = trainIdx
+    }
     
     convenience init(type:SessionType) {
         self.init()
@@ -133,15 +143,14 @@ class Session : NSObject {
         self.blocks = [Block]()
         switch type {
         case .Pretest:
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
-//          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:false))
         case .Training:
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
             blocks!.append(TrainingBlock(condition: .MultiTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
         case .Posttest:
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
+            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:true))
 //          blocks!.append(TestingBlock(condition: .MultiTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2))
         }
     }    

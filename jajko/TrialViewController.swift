@@ -24,7 +24,9 @@ class TrialViewController: UIViewController {
     
     var trial:Trial!
     var trialIdx:Int!
+    var trainIdx:Int?
     var blockSize:Int!
+    var sessionType:SessionType!
     var feedbacks:Bool
     
     var rightFileName:String
@@ -76,6 +78,12 @@ class TrialViewController: UIViewController {
         
         rightFileName = self.trial.audioFileName()
         wrongFileName = self.trial.complementaryFileName()!
+        
+        self.playButton.enabled = false
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.play(nil)
+        }
     }
     
     @IBAction func play(sender:AnyObject?) {
@@ -96,6 +104,12 @@ class TrialViewController: UIViewController {
         var resp = false
         if tag == 100 {
             resp = true
+        } 
+        
+        if sessionType == SessionType.Training {
+            if trainIdx != nil {
+            (self.navigationController! as! ExperienceNavigationController).experience.recordResponseFor(self.trial.minimalPair.ipa1, atTrainSession: trainIdx! + 1, correct: resp)
+            }
         }
         
         if feedbacks {
@@ -125,6 +139,9 @@ class TrialViewController: UIViewController {
                     }
                 }
             }
+        } else {
+            //No feedback! Move on...
+            (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
         }
     }
     

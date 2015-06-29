@@ -61,7 +61,7 @@ class DashboardVC: UIViewController, NavigationPusher {
             case .Start:
                 self.startButton.setTitle("READY FOR YOUR FIRST TEST?", forState: .Normal)
             case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
-                let digit = p.rawValue.substringFromIndex(p.rawValue.endIndex.predecessor())
+                let digit = String(p.trainIdx()!)
                 self.startButton.setTitle("WELCOME BACK TO TRAIN SESSION " + digit, forState: .Normal)
             case .Test:
                 self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
