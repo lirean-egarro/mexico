@@ -3725,7 +3725,7 @@
 				INFOPLIST_FILE = jajko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-D DEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6b2c964a-f22b-4b08-8f9f-84bafa519fde";
 				SWIFT_OBJC_BRIDGING_HEADER = "jajko/jajko-Bridging-Header.h";
