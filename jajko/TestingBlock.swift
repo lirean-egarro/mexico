@@ -35,7 +35,7 @@ class TestingBlock : Block {
                 base = 3
             }
             for var i = 0 ; i < practiceSize ; i++ {
-                trials.append(Trial(talker: randomTalker, contrastIndex: 0, corpusType:.Test, rec:(i%2)+base))
+                trials.append(Trial(talker: randomTalker, contrastIndex: 0, corpusType:.Training, rec:(i%2)+base))
             }
             
             for var t = 0 ; t < numberOfTests; t++ {
