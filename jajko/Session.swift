@@ -83,12 +83,6 @@ class Trial : NSObject {
         let subs = applicationContrasts[minimalPair.contrastIdx - 1]
         let word = minimalPair.ipa1
         
-        if word == "Grzesiek" {
-            return ("Grzesiek","Grze❔ek","si","szi")
-        } else if word == "grzeszek" {
-            return ("grzeszek","grze❔ek","ś","sz")
-        }
-        
         for str in subs {
             let components = split(str) { $0 == "-" }
             let tmpWord1 = word.stringByReplacingOccurrencesOfString(components[0], withString:components[1], options:.LiteralSearch, range:word.rangeOfString(components[0]))

@@ -28,16 +28,18 @@ class TestingBlock : Block {
         var totalContrasts = count(applicationContrasts)
         
         if condition == .SingleTalker {
-            let randomTalker:Int = Int(arc4random_uniform(2)) + 1
+            let rTalker:Int = Int(arc4random_uniform(4)) + 3
             var base:Int = 1
+            for var i = 0 ; i < practiceSize ; i++ {
+                trials.append(Trial(talker: rTalker, contrastIndex: 0, corpusType:.Training, rec:(i%2)+base))
+            }
+
+            let randomTalker:Int = Int(arc4random_uniform(2)) + 1
+            base = 1
             if isPostTest {
                 //Use recordings "3 & 4"
                 base = 3
             }
-            for var i = 0 ; i < practiceSize ; i++ {
-                trials.append(Trial(talker: randomTalker, contrastIndex: 0, corpusType:.Training, rec:(i%2)+base))
-            }
-            
             for var t = 0 ; t < numberOfTests; t++ {
                 for var i = 0 ; i < taskSize ; i++ {
                     var cIdx = t%totalContrasts + 1
