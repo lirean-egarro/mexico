@@ -12,16 +12,13 @@ let CALENDAR_FONT_SIZE:CGFloat = 14.0
 let CALENDAR_DOT_SIZE:CGFloat = 6.0
 
 protocol CalendarDayDelegate : NSObjectProtocol {
-    func calandarDayDidTurnOn(id:Int)
+    func calandarDayDidTurnOn(day:Int?)
 }
 
 class CalendarDay: UIView {
-    static var id:Int = 0
-    
     var mainLabel:UILabel!
     var hasInfo:Bool
     weak var delegate:CalendarDayDelegate?
-    var udid:Int
     var isOn:Bool {
         willSet {
             self.setNeedsDisplay()
@@ -35,7 +32,6 @@ class CalendarDay: UIView {
     override init(frame: CGRect) {
         hasInfo = false
         isOn = false
-        udid = CalendarDay.id++
         super.init(frame: frame)
     }
     
@@ -49,7 +45,6 @@ class CalendarDay: UIView {
         mainLabel.font = ControlsConfig.textFontOfSize(CALENDAR_FONT_SIZE)
         mainLabel.textAlignment = .Center
         mainLabel.text = title
-        
         
         self.hasInfo = hasInfo
 
@@ -93,7 +88,7 @@ class CalendarDay: UIView {
             self.isOn = false
         } else {
             self.isOn = true
-            self.delegate?.calandarDayDidTurnOn(self.udid)
+            self.delegate?.calandarDayDidTurnOn(self.mainLabel.text?.toInt())
         }
     }
 }

@@ -131,6 +131,44 @@ class Experience : NSObject {
             }
         }
     }
+    
+    func arrayOfScoresForDate(date:NSDate) -> [Int] {
+        var resp = [Int]()
+        for property in ExperienceProgress.endDateProperties {
+            if let eventfulDate = self.valueForKey(property) as? NSDate {
+                let calendar = NSCalendar.currentCalendar()
+                if calendar.compareDate(date, toDate: eventfulDate, toUnitGranularity: .DayCalendarUnit) == .OrderedSame {
+                    let prefix = property.componentsSeparatedByString("EndDate")[0]
+                    switch prefix {
+                        case "start":
+                            if let s1 = pretestBlock1Score as? Int {
+                                resp.append(s1)
+                            }
+                            if let s2 = pretestBlock2Score as? Int {
+                                resp.append(s2)
+                            }
+                        case "test":
+                            if let s1 = posttestBlock1Score as? Int {
+                                resp.append(s1)
+                            }
+                            if let s2 = posttestBlock2Score as? Int {
+                                resp.append(s2)
+                            }
+                        case "end":
+                            println("No scores for absolute endDate")
+                        default:
+                            //This must be a Train block!
+                            for var b = 1 ; b <= 4 ; b++ {
+                                if let s = self.valueForKey(prefix + "Block" + String(b) + "Score") as? Int {
+                                    resp.append(s)
+                                }
+                            }
+                    }
+                }
+            } 
+        }
+        return resp
+    }
    
     func record(score:Int, forBlock block:Int, atProgress prog:ExperienceProgress) {
         switch prog {

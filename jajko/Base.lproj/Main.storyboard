@@ -903,18 +903,73 @@
                         <subviews>
                             <view contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m8e-6X-2As" userLabel="Green Calendar">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="294"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="X" translatesAutoresizingMaskIntoConstraints="NO" id="7ll-r8-NJa">
+                                        <rect key="frame" x="16" y="16" width="30" height="30"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="BAh-cF-RQO"/>
+                                            <constraint firstAttribute="height" constant="30" id="QCc-YB-IC3"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Rpe-Dm-0QH" appends="YES" id="aYF-HH-6SY"/>
+                                        </connections>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.2901960784" green="0.79215686269999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7ll-r8-NJa" firstAttribute="top" secondItem="m8e-6X-2As" secondAttribute="top" constant="16" id="7RX-xS-lMC"/>
+                                    <constraint firstItem="7ll-r8-NJa" firstAttribute="leading" secondItem="m8e-6X-2As" secondAttribute="leading" constant="16" id="kJg-Eq-ERq"/>
+                                </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-yg-4RU">
                                 <rect key="frame" x="0.0" y="294" width="600" height="308"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="simpleCell" id="WjK-ed-yHU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="simpleCell" textLabel="6m0-Oi-M7S" style="IBUITableViewCellStyleDefault" id="WjK-ed-yHU">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="simpleCell" tableViewCell="WjK-ed-yHU" id="cmr-ux-rr5">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="6m0-Oi-M7S">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="instructionCell" textLabel="a02-c8-gGm" style="IBUITableViewCellStyleDefault" id="20y-qp-QMA">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="20y-qp-QMA" id="sir-wg-0Bf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Days with available scores are marked with a dot. Select a date from above." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" enabled="NO" id="a02-c8-gGm">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noContentCell" textLabel="9Fe-j6-xf8" style="IBUITableViewCellStyleDefault" id="eTw-vs-yac">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eTw-vs-yac" id="yV4-a8-Jim">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="No scores available for the date you selected." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" id="9Fe-j6-xf8">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -940,9 +995,16 @@
                     </view>
                     <connections>
                         <outlet property="calendar" destination="m8e-6X-2As" id="l3i-G6-3Md"/>
+                        <outlet property="scoreTable" destination="Y5r-yg-4RU" id="tL7-xa-YW2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qak-DV-JZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XS3-eL-AA2" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="Rpe-Dm-0QH">
+                    <connections>
+                        <segue destination="XS3-eL-AA2" kind="unwind" unwindAction="cancelToDashboard:" id="ClL-yC-qWk"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="298" y="-1189"/>
         </scene>

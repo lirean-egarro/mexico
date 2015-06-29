@@ -101,13 +101,10 @@ class DashboardVC: UIViewController, NavigationPusher {
                 return false
             }
         } else if (identifier == "DashToScores") {
-            
-        } else if (identifier == "DashToAbout") {
-            
-        } else if (identifier == "DashLogout") {
-            
+            if experience == nil {
+                return false
+            }
         }
-        
         return true
     }
     
@@ -116,11 +113,8 @@ class DashboardVC: UIViewController, NavigationPusher {
             nextController = segue.destinationViewController as? UIViewController
             (nextController as! ExperienceNavigationController).experience = experience
         } else if (segue.identifier == "DashToScores") {
-        
-        } else if (segue.identifier == "DashToAbout") {
-            
-        } else if (segue.identifier == "DashLogout") {
-        
+            nextController = segue.destinationViewController as? UIViewController
+            (nextController as! ScoresViewController).experience = experience
         }
     }
 }
