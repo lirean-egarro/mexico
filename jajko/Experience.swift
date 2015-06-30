@@ -434,11 +434,11 @@ class Experience : NSObject {
         }
     }
     
-#if DEBUG
-    func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
-        return (true,nil)
-    }
-#else
+//#if DEBUG
+//    func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
+//        return (true,nil)
+//    }
+//#else
     func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .FullStyle
@@ -475,10 +475,10 @@ class Experience : NSObject {
                         let propertyName = "train" + String(digit-1) + "BeggingDate"
                         comparePoint = self.valueForKey(propertyName) as! NSDate
                         resp = now.compare(comparePoint)
-                         if resp == .OrderedDescending {
+                         if resp == .OrderedDescending && !now.isSameDayAs(comparePoint) {
                             return (true,nil)
                          } else {
-                            return (false, "Cannot do two train sessions the same day!")
+                            return (false, "Can not do two train sessions the same day!")
                          }
                     } else {
                         return (true,nil)
@@ -511,7 +511,7 @@ class Experience : NSObject {
         
         return (false, "We are sorry: Unknown progress state!")
     }
-#endif
+//#endif
     
     func preTestStartDate() -> NSDate {
         let calendar = NSCalendar.currentCalendar()
