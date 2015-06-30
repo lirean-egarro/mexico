@@ -17,7 +17,8 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var scoreTable:UITableView!
     
     var experience:Experience!
-    private var availableScores:[Int]?
+    private var availableScores:[String:Int]?
+    private var displayKeys:[AnyObject]?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,21 +55,21 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
                     title = String(d-2)
                     notEmpty = true
                     var thisDate = createJulyDateForDay(d-2)
-                    if experience.arrayOfScoresForDate(thisDate).count > 0 {
+                    if experience.dictionaryOfScoresForDate(thisDate).count > 0 {
                         hasInfo = true
                     }
-                } else if r == 5 && d < 3 {
-                    title = String(28+d)
+                } else if r == 5 && d < 6 {
+                    title = String(26+d)
                     notEmpty = true
-                    var thisDate = createJulyDateForDay(28+d)
-                    if experience.arrayOfScoresForDate(thisDate).count > 0 {
+                    var thisDate = createJulyDateForDay(26+d)
+                    if experience.dictionaryOfScoresForDate(thisDate).count > 0 {
                         hasInfo = true
                     }
                 } else if r > 1 && r < 5 {
-                    title = String((r-1)*7+d)
+                    title = String((r-1)*7+d-2)
                     notEmpty = true
-                    var thisDate = createJulyDateForDay((r-1)*7+d)
-                    if experience.arrayOfScoresForDate(thisDate).count > 0 {
+                    var thisDate = createJulyDateForDay((r-1)*7+d-2)
+                    if experience.dictionaryOfScoresForDate(thisDate).count > 0 {
                         hasInfo = true
                     }
                 }
@@ -95,7 +96,8 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     func calandarDayDidTurnOn(day:Int?) {
         if day != nil {
             var thisDate = createJulyDateForDay(day!)
-            availableScores = experience.arrayOfScoresForDate(thisDate)
+            availableScores = experience.dictionaryOfScoresForDate(thisDate)
+            displayKeys = (availableScores! as NSDictionary).allKeys.sorted { ($0 as! String) < ($1 as! String) }
             scoreTable.reloadData()
             
             for tmp in calendar.subviews {
@@ -109,9 +111,9 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
 // MARK: UITableViewController Delegate Methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if availableScores != nil {
-            if availableScores!.count > 0 {
-                return availableScores!.count
+        if displayKeys != nil {
+            if displayKeys!.count > 0 {
+                return displayKeys!.count
             }
             return 1
         }
@@ -119,14 +121,15 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if availableScores != nil {
-            if availableScores!.count == 0 {
+        if displayKeys != nil {
+            if displayKeys!.count == 0 {
                 var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("noContentCell") as! UITableViewCell
                 return cell
             } else {
                 var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("simpleCell") as! UITableViewCell
                 
-                cell.textLabel?.text = "Block " + String(indexPath.row + 1) + " score: " + String(availableScores![indexPath.row]) + "%"
+                let txt = displayKeys![indexPath.row] as! String
+                cell.textLabel?.text = txt + String(format:" score: %d",availableScores![txt]!) + "%"
                 
                 return cell
             }

@@ -133,13 +133,7 @@ class ExperienceNavigationController: UINavigationController {
     }
     
     func finishSession() {
-        let ud = NSUserDefaults.standardUserDefaults()
-        //Store data locally
-        if let user = Webservice.sharedInstance.currentUser {
-            ud.setObject(NSKeyedArchiver.archivedDataWithRootObject(experience), forKey: "Experience_" + user)
-        } else {
-            println("This is a fatal error. Sessions must have a currentUser!")
-        }
+        saveExperience()
         //Encode and send results
         if experience.progress == .End {
             println("Sending experience to our server...")
@@ -161,6 +155,16 @@ class ExperienceNavigationController: UINavigationController {
             })
         } else {
             backToDashboard()
+        }
+    }
+    
+    func saveExperience() {
+        //Store data locally
+        let ud = NSUserDefaults.standardUserDefaults()
+        if let user = Webservice.sharedInstance.currentUser {
+            ud.setObject(NSKeyedArchiver.archivedDataWithRootObject(experience), forKey: "Experience_" + user)
+        } else {
+            println("This is a fatal error. Sessions must have a currentUser!")
         }
     }
     

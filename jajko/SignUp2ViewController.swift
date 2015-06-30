@@ -65,6 +65,8 @@ class SignUp2ViewController: UIViewController, SegmentsDelegate, JSONReceivable 
             }
             
             switch tag {
+                case 10:
+                    println("No need to hide anything now")
                 case 20:
                     visualField.hidden = hide
                 case 30:

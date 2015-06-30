@@ -93,6 +93,24 @@ extension String {
     }
 }
 
+extension NSDate {
+    func isSameDayAs(date:NSDate) -> Bool {
+        var resp = false
+        let calendar = NSCalendar.currentCalendar()
+        let thisComponents = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit, fromDate: self)
+        let thatComponents = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit, fromDate: date)
+        
+        if thisComponents.day == thatComponents.day &&
+           thisComponents.month == thatComponents.month &&
+           thisComponents.year == thatComponents.year {
+            return true
+        }
+        
+        return resp
+    }
+}
+
+
 extension NSDictionary {
     func toJSONString() -> NSString? {
         var error: NSError?

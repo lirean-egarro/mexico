@@ -47,12 +47,6 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         passwordField.setUpView()
     }
 
-#if DEBUG
-    @IBAction func login(sender: AnyObject) {
-        Webservice.sharedInstance.currentUser = self.usernameField.text
-        self.performSegueWithIdentifier("goToDashboard", sender: nil)
-    }
-#else
     @IBAction func login(sender: AnyObject) {
         if let username = self.usernameField.text,
             let password = self.passwordField.text {
@@ -80,7 +74,6 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
             show("Please enter your user name and password")
         }
     }
-#endif
     
     @IBAction func logoutIntoLoginVC(segue:UIStoryboardSegue) {
         println("Logging out!")
@@ -119,14 +112,6 @@ class LoginViewController: UIViewController, InputDelegate, NavigationPusher {
         }
     }
     
-    func doLogin() -> Bool {
-        var didLogin = false
-        let username = self.usernameField.text
-        let password = self.passwordField.text
-        
-        return didLogin
-    }
-
 // MARK: Utility methods
     func isValid(email:String) -> Bool {
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"

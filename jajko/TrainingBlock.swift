@@ -9,6 +9,7 @@
 class TrainingBlock : Block {
     static var multitalkerPool = Array(count:Corpus.sharedInstance.sizeOfCorpus(.Training), repeatedValue:[3,4,5,6])
     static var talkersPool = [3,4,5,6]
+    static var randomTalker:Int?
     
     var contrastIdx:Int!
     var sizeMPWs:Int!
@@ -39,13 +40,16 @@ class TrainingBlock : Block {
                 TrainingBlock.resetTalkersPool()
                 allTalkers = TrainingBlock.talkersPool.count
             }
-            let randomIdx:Int = Int(arc4random_uniform(UInt32(allTalkers)))
-            let randomTalker = TrainingBlock.talkersPool[randomIdx]
-            TrainingBlock.talkersPool.removeAtIndex(randomIdx)
+            
+            if TrainingBlock.randomTalker == nil {
+                let randomIdx:Int = Int(arc4random_uniform(UInt32(allTalkers)))
+                TrainingBlock.randomTalker = TrainingBlock.talkersPool[randomIdx]
+                TrainingBlock.talkersPool.removeAtIndex(randomIdx)
+            }
             
             for var r = 0 ; r < repetitions ; r++ {
                 for var i = 0 ; i < 2*sizeMPWs ; i++ {
-                    trials.append(Trial(talker: randomTalker, contrastIndex: contrastIdx, corpusType:.Training, rec:0))
+                    trials.append(Trial(talker: TrainingBlock.randomTalker!, contrastIndex: contrastIdx, corpusType:.Training, rec:0))
                 }
             }
         } else if condition == .MultiTalker {

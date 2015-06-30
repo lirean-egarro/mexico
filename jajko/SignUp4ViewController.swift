@@ -71,11 +71,13 @@ class SignUp4ViewController: UIViewController, SegmentsDelegate, InputDelegate, 
                     placesInfo["sinceAge"] = a
                     placesInfo["totalMonths"] = h
                     
-                    var other = [[String:AnyObject]]()
-                    for var i = 0 ; i < places.count ; i++ {
-                        other.append(places[i].dictionary)
+                    if places.count > 0 {
+                        var other = [[String:AnyObject]]()
+                        for var i = 0 ; i < places.count ; i++ {
+                            other.append(places[i].dictionary)
+                        }
+                        placesInfo["other"] = other
                     }
-                    placesInfo["other"] = other
                     
                     submissionJSON["places"] = placesInfo
                     return true

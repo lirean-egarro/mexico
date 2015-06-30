@@ -159,20 +159,22 @@ class Webservice: NSObject {
             }
         } else {
             println("Not supposed to call /experience without setting the session user first!")
+            completion?(response: false)
         }
     }
     
 // MARK: Helper Methods:    
     func createNewSession(data: NSData, forUser username:String) {
+        println("Creating new session...")
         self.currentUser = username
         NSUserDefaults.standardUserDefaults().setObject(username, forKey: "lastUser")
         
         self.sessionToken = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
         
         var config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        config.HTTPAdditionalHeaders = [
-            "cookies" : ["user":username, "token":self.sessionToken!]
-        ]
+//        config.HTTPAdditionalHeaders = [
+//            "cookies" : ["user":username, "token":self.sessionToken!]
+//        ]
         self.session = NSURLSession(configuration: config)
     }
     

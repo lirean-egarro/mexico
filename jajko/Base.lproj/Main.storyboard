@@ -42,7 +42,23 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyW-eL-RdK">
                                 <rect key="frame" x="16" y="226" width="568" height="328"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">What?This is the mobile research app for a University College London (UCL) research study, whose aim is to test how mobile training techniques can improve native English speakers’ perceptual skills for Polish fricative sounds. These sounds have no exact equivalents in English and are typically difficult to distinguish for English speakers.Why?Similar digital trainers were shown to at least slightly, if not moderately improve users’ perceptual skills in the sounds of other languages. This study tests whether a similar design can be effective for improving perceptual skills in the Polish language. What are these words?Keep in mind that this is a perceptual skills study, not a vocabulary learning study. Therefore, the words used in this app have been chosen for their phonological properties and not for how commonly they are used in everyday communication (ex. some words are street names, others lastnames).Who?Principal Investigator:        Genevieve Mathis, MRes UCL + Lirean Ltd.Project Supervisor: 	         Dr. Paul Iverson, UCLApp Design &amp; Coding: 	 Esteban Garro, Lirean Ltd.Jajko Logo Design:	         Matteo Alabiso, Lirean Ltd.Contact: genevieve.mathis.14@ucl.ac.uk</mutableString>
+                                <string key="text">What?
+This is the mobile research app for a University College London (UCL) research study, whose aim is to test how mobile training techniques can improve native English speakers’ perceptual skills for Polish fricative sounds. These sounds have no exact equivalents in English and are typically difficult to distinguish for English speakers.
+
+Why?
+Similar digital trainers were shown to at least slightly, if not moderately improve users’ perceptual skills in the sounds of other languages. This study tests whether a similar design can be effective for improving perceptual skills in the Polish language. 
+
+What are these words?
+Keep in mind that this is a perceptual skills study, not a vocabulary learning study. Therefore, the words used in this app have been chosen for their phonological properties and not for how commonly they are used in everyday communication (ex. some words are street names, others lastnames).
+
+Who?
+Principal Investigator:        Genevieve Mathis, MRes UCL + Lirean Ltd.
+Project Supervisor: 	         Dr. Paul Iverson, UCL
+App Design &amp; Coding: 	 Esteban Garro, Lirean Ltd.
+Jajko Logo Design:	         Matteo Alabiso, Lirean Ltd.
+
+Contact: genevieve.mathis.14@ucl.ac.uk
+</string>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -1211,7 +1227,7 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="80" width="250" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

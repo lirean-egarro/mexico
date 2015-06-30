@@ -34,8 +34,9 @@ class SessionMessageVC: UIViewController {
     
     var type: SessionMessageType!
     var navVC:UINavigationController!
+    var didSend:Bool!
+    
     required init(coder aDecoder: NSCoder) {
-        println("Don't forget to set the session message type before using this controller!")
         super.init(coder: aDecoder)
     }
     
@@ -51,6 +52,7 @@ class SessionMessageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navVC = self.navigationController
+        didSend = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -111,12 +113,19 @@ class SessionMessageVC: UIViewController {
             }
             
             arrowButton.removeTarget(navVC, action: "startTest", forControlEvents:.TouchUpInside)
-            arrowButton.addTarget(navVC, action: "finishSession", forControlEvents: .TouchUpInside)
+            arrowButton.addTarget(self, action: "forwardFinishMessage", forControlEvents: .TouchUpInside)
         } else {
             println("Session Message type \(type.description) not supported!")
         }
         
         self.whiteLabel.text = instructions
         self.greenLabel.text = message
+    }
+    
+    func forwardFinishMessage() {
+        if !didSend {
+            (navVC as! ExperienceNavigationController).finishSession()
+            didSend = true
+        }
     }
 }

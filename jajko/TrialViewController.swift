@@ -54,7 +54,11 @@ class TrialViewController: UIViewController {
         self.rightButton.setBackgroundImage(bg, forState: .Normal)
         
         let strings = trial.displayStrings()
-        
+
+#if DEBUG
+        println(strings)
+#endif
+
         self.wordLabel.text = strings.value
         if Int(arc4random_uniform(UInt32(100))) > 49 {
             self.leftButton.tag = 100
@@ -105,6 +109,9 @@ class TrialViewController: UIViewController {
     }
     
     @IBAction func selectedAnswer(sender:AnyObject?) {
+        self.leftButton.enabled = false
+        self.rightButton.enabled = false
+        
         var tag = (sender as! UIButton).tag
         var resp = false
         if tag == 100 {
@@ -113,7 +120,7 @@ class TrialViewController: UIViewController {
         
         if sessionType == SessionType.Training {
             if trainIdx != nil {
-            (self.navigationController! as! ExperienceNavigationController).experience.recordResponseFor(self.trial.minimalPair.ipa1, atTrainSession: trainIdx! + 1, correct: resp)
+            (self.navigationController! as! ExperienceNavigationController).experience.recordResponseFor(self.trial.minimalPair.ipa1, atTrainSession: trainIdx!, correct: resp)
             }
         }
         
@@ -123,6 +130,8 @@ class TrialViewController: UIViewController {
                 AudioPlayer.sharedInstance.play("correct") {
                     self.wordLabel.text = self.trial.minimalPair.ipa1
                     AudioPlayer.sharedInstance.play(self.rightFileName, delayTime:1.0) {
+                        self.leftButton.enabled = true
+                        self.rightButton.enabled = true
                         (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
                     }
                 }
@@ -137,6 +146,8 @@ class TrialViewController: UIViewController {
                             AudioPlayer.sharedInstance.play(self.rightFileName, delayTime:1.0) {
                                 self.wordLabel.text = self.trial.minimalPair.ipa2
                                 AudioPlayer.sharedInstance.play(self.wrongFileName, delayTime:1.0) {
+                                    self.leftButton.enabled = true
+                                    self.rightButton.enabled = true
                                     (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
                                 }
                             }
@@ -146,6 +157,8 @@ class TrialViewController: UIViewController {
             }
         } else {
             //No feedback! Move on...
+            self.leftButton.enabled = true
+            self.rightButton.enabled = true
             (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
         }
     }

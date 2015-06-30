@@ -132,44 +132,44 @@ class Experience : NSObject {
         }
     }
     
-    func arrayOfScoresForDate(date:NSDate) -> [Int] {
-        var resp = [Int]()
+    func dictionaryOfScoresForDate(date:NSDate) -> [String:Int] {
+        var resp = [String:Int]()
+        
         for property in ExperienceProgress.endDateProperties {
             if let eventfulDate = self.valueForKey(property) as? NSDate {
-                let calendar = NSCalendar.currentCalendar()
-                if calendar.compareDate(date, toDate: eventfulDate, toUnitGranularity: .DayCalendarUnit) == .OrderedSame {
+                if date.isSameDayAs(eventfulDate) {
                     let prefix = property.componentsSeparatedByString("EndDate")[0]
                     switch prefix {
                         case "start":
                             if let s1 = pretestBlock1Score as? Int {
-                                resp.append(s1)
+                                resp["Testing Block 1"] = s1
                             }
                             if let s2 = pretestBlock2Score as? Int {
-                                resp.append(s2)
+                                resp["Testing Block 2"] = s2
                             }
                         case "test":
                             if let s1 = posttestBlock1Score as? Int {
-                                resp.append(s1)
+                                resp["Final Test Block 1"] = s1
                             }
                             if let s2 = posttestBlock2Score as? Int {
-                                resp.append(s2)
+                                resp["Final Test Block 2"] = s2
                             }
-                        case "end":
-                            println("No scores for absolute endDate")
-                        default:
-                            //This must be a Train block!
+                        case let p where p == "train1" || p == "train2" || p == "train3" || p == "train4" || p == "train5" || p == "train6" || p == "train7" || p == "train8":
+                            let digit = p.substringFromIndex(p.endIndex.predecessor())
                             for var b = 1 ; b <= 4 ; b++ {
                                 if let s = self.valueForKey(prefix + "Block" + String(b) + "Score") as? Int {
-                                    resp.append(s)
+                                    resp["Training \(digit), Block " + String(b)] = s
                                 }
-                            }
+                        }
+                        default:
+                            println("No scores for absolute endDate")
                     }
                 }
             } 
         }
         return resp
     }
-   
+    
     func record(score:Int, forBlock block:Int, atProgress prog:ExperienceProgress) {
         switch prog {
         case .Start:
@@ -215,12 +215,12 @@ class Experience : NSObject {
         
         //Init all dates:
         for key in ExperienceProgress.startDateProperties {
-            if let propertyValue = aDecoder.decodeObjectForKey(key) as? String {
+            if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSDate {
                 self.setValue(propertyValue, forKey: key)
             }
         }
         for key in ExperienceProgress.endDateProperties {
-            if let propertyValue = aDecoder.decodeObjectForKey(key) as? String {
+            if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSDate {
                 self.setValue(propertyValue, forKey: key)
             }
         }
@@ -357,14 +357,39 @@ class Experience : NSObject {
             exp["completed"] = formatter.stringFromDate(endDate!)
         }
         
+        //Flatten the responses:
+        var Responses = [String:String]()
         
-        var Responses = [String:AnyObject]()
-        for var t = 1 ; t <= 8 ; t++ {
-            let key = String(format:"train%dResponses",t)
+        var allWords = Set<String>()
+        for var s = 1 ; s <= 8 ; s++ {
+            let key = String(format:"train%dResponses",s)
             if let responsesDic = self.valueForKey(key) as? NSDictionary {
-                Train["train"+String(t)] = responsesDic
+                allWords = allWords.union(Set(responsesDic.allKeys.map({ $0 as! String})))
             }
         }
+        
+        for str in allWords {
+            var val = ""
+            for var s = 1 ; s <= 8 ; s++ {
+                let key = String(format:"train%dResponses",s)
+                if let responsesDic = self.valueForKey(key) as? NSDictionary {
+                    if let bit = nullToNil(responsesDic.objectForKey(str)) as? Int {
+                        if bit >= 1 {
+                            val += "1"
+                        } else {
+                            val += "0"
+                        }
+                    } else {
+                        val += "-"
+                    }
+                } else {
+                    val += "-"
+                }
+            }
+            
+            Responses[str] = val
+        }
+        
         exp["responses"] = Responses
         
         return exp
@@ -372,7 +397,8 @@ class Experience : NSObject {
     
     func recordResponseFor(word:String, atTrainSession num:Int, correct:Bool) {
         let key = String(format:"train%dResponses",num)
-        if let trialDic = self.valueForKey(key) as? NSMutableDictionary {
+        if let trialDicFixed = self.valueForKey(key) as? NSDictionary {
+            var trialDic = trialDicFixed.mutableCopy() as! NSMutableDictionary
             if let existingWord:NSNumber = nullToNil(trialDic.objectForKey(word)) as? NSNumber {
                 //Existing Word:
                 if correct {

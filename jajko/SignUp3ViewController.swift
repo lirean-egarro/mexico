@@ -86,13 +86,16 @@ class SignUp3ViewController: UIViewController, InputDelegate, JSONReceivable {
                     languageInfo["mother"] = m
                     languageInfo["father"] = f
                     
-                    var otherLanguages = [String]()
-                    for var i = 0 ; i < otherFields.count ; i++ {
-                        if let t = otherFields[i].text {
-                            otherLanguages.append(t)
+                    if otherFields.count > 0 {
+                        var otherLanguages = [String]()
+                        for var i = 0 ; i < otherFields.count ; i++ {
+                            if let t = otherFields[i].text {
+                                otherLanguages.append(t)
+                            }
                         }
+                        languageInfo["other"] = otherLanguages
                     }
-                    languageInfo["other"] = otherLanguages
+                    
                     submissionJSON["languageInfo"] = languageInfo
                     return true
             } else {
