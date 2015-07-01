@@ -42,8 +42,8 @@ class TestingBlock : Block {
             }
             for var t = 0 ; t < numberOfTests; t++ {
                 for var i = 0 ; i < taskSize ; i++ {
-                    var cIdx = t%totalContrasts + 1
-                    trials.append(Trial(talker: randomTalker, contrastIndex: cIdx, corpusType:.Test, rec:((t+1)%2)+base))
+                    //var cIdx = t%totalContrasts + 1
+                    trials.append(Trial(talker: randomTalker, contrastIndex: 0, corpusType:.Test, rec:((t+1)%2)+base))
                 }
             }
             

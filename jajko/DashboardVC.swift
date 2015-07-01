@@ -66,7 +66,7 @@ class DashboardVC: UIViewController, NavigationPusher {
             case .Test:
                 self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
             case .End:
-                self.startButton.setTitle("NO MORE EXCERCISES AVAILABLE", forState: .Normal)
+                self.startButton.setTitle("NO MORE EXERCISES AVAILABLE", forState: .Normal)
                 self.startButton.enabled = false
             default:
                 println("Unknow progress state found")

@@ -81,10 +81,11 @@ class Trial : NSObject {
     func displayStrings() -> (original: String, value: String?, right: String?, wrong1: String?, wrong2: String?, wrong3: String?) {
         //Remember MinimalPair object's contrastIdx cannot be zero; it is the number specified on the MinimalPairs.txt file
         let subs = applicationContrasts[minimalPair.contrastIdx - 1]
+        let osubs = applicationContrasts[minimalPair.contrastIdx%2]
         var wsubs = [String]()
         var w1 = ""
         var w2 = ""
-        for str in subs {
+        for str in osubs {
             let components = split(str) { $0 == "-" }
             wsubs.append(components[0])
             wsubs.append(components[1])
