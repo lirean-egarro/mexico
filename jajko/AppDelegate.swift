@@ -12,11 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var isDebug:Bool?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.        
         
+        let defaults = ["mode_debug" : false]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+
+        
+        isDebug = NSUserDefaults.standardUserDefaults().boolForKey("mode_debug")
+
         return true
     }
 

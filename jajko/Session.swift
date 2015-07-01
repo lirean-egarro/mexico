@@ -78,9 +78,18 @@ class Trial : NSObject {
         return nil
     }
     
-    func displayStrings() -> (original: String, value: String?, right: String?, wrong: String?) {
+    func displayStrings() -> (original: String, value: String?, right: String?, wrong1: String?, wrong2: String?, wrong3: String?) {
         //Remember MinimalPair object's contrastIdx cannot be zero; it is the number specified on the MinimalPairs.txt file
         let subs = applicationContrasts[minimalPair.contrastIdx - 1]
+        var wsubs = [String]()
+        var w1 = ""
+        var w2 = ""
+        for str in subs {
+            let components = split(str) { $0 == "-" }
+            wsubs.append(components[0])
+            wsubs.append(components[1])
+        }
+        
         let word = minimalPair.ipa1
         
         //Try first occurence from beginning:
@@ -90,10 +99,12 @@ class Trial : NSObject {
             let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0], options:.LiteralSearch, range:word.rangeOfString(components[1]))
             if tmpWord1.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[0]))
-                return (word,val,components[0],components[1])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[0],components[1],strings.w1,strings.w2)
             } else if tmpWord2.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[1]))
-                return (word,val,components[1],components[0])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[1],components[0],strings.w1,strings.w2)
             }
         }
         
@@ -104,10 +115,12 @@ class Trial : NSObject {
             let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0], options:.LiteralSearch, range:word.rangeOfString(components[1], options:.BackwardsSearch))
             if tmpWord1.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[0], options:.BackwardsSearch))
-                return (word,val,components[0],components[1])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[0],components[1],strings.w1,strings.w2)
             } else if tmpWord2.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔", options:.LiteralSearch, range:word.rangeOfString(components[1], options:.BackwardsSearch))
-                return (word,val,components[1],components[0])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[1],components[0],strings.w1,strings.w2)
             }
         }
         
@@ -118,15 +131,41 @@ class Trial : NSObject {
             let tmpWord2 = word.stringByReplacingOccurrencesOfString(components[1], withString:components[0])
             if tmpWord1.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[0], withString: "❔")
-                return (word,val,components[0],components[1])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[0],components[1],strings.w1,strings.w2)
             } else if tmpWord2.lowercaseString == minimalPair.ipa2.lowercaseString {
                 let val = word.stringByReplacingOccurrencesOfString(components[1], withString: "❔")
-                return (word,val,components[1],components[0])
+                let strings = generateWrongTuple(wsubs,a:components[0],b:components[1])
+                return (word,val,components[1],components[0],strings.w1,strings.w2)
             }
         }
         
-        return (word,nil,nil,nil)
+        return (word,nil,nil,nil,nil,nil)
     }
+    
+    private func generateWrongTuple(options:[String],a:String,b:String) -> (w1: String,w2: String) {
+        var resp1 = ""
+        var resp2 = ""
+        if options.count > 3 {
+            var tmp = options.filter({ $0 != a && $0 != b })
+            if tmp.count > 0 {
+                resp1 = tmp[0]
+                tmp = options.filter({ $0 != resp1 })
+                if tmp.count > 0 {
+                    resp2 = tmp[0]
+                } else {
+                    println("2 - Could not generate tuple")
+                }
+            } else {
+                println("1 - Could not generate tuple")
+            }
+        } else {
+            println("Cannot generate touple for array of length <= 3")
+        }
+        
+        return (resp1, resp2)
+    }
+    
 }
 
 class Block : NSObject {
@@ -164,29 +203,29 @@ class Session : NSObject {
         self.creationDate = NSDate()
         
         self.blocks = [Block]()
-        switch type {
-        case .Pretest:
-#if DEBUG
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 5, taskSize: 5, andNumberOfTests: 1, isPostTest:false))
-#else
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:false))
-#endif
-        case .Training:
-#if DEBUG
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 2, repeated: 1))
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 2, repeated: 1))
-#else
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
-            blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
-#endif
-        case .Posttest:
-#if DEBUG
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 5, taskSize: 5, andNumberOfTests: 1, isPostTest:true))
-#else
-            blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:true))
-#endif
+        
+        if (UIApplication.sharedApplication().delegate as! AppDelegate).isDebug! {
+            switch type {
+            case .Pretest:
+                    blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 5, taskSize: 5, andNumberOfTests: 1, isPostTest:false))
+            case .Training:
+                    blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 2, repeated: 1))
+                    blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 2, repeated: 1))
+            case .Posttest:
+                    blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 5, taskSize: 5, andNumberOfTests: 1, isPostTest:true))
+            }
+        } else {
+            switch type {
+            case .Pretest:
+                blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:false))
+            case .Training:
+                blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+                blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
+                blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 1, andNumberOfMPWs: 10, repeated: 3))
+                blocks!.append(TrainingBlock(condition: .SingleTalker, contrastIndex: 2, andNumberOfMPWs: 10, repeated: 3))
+            case .Posttest:
+                blocks!.append(TestingBlock(condition: .SingleTalker, practiceSize: 10, taskSize: 20, andNumberOfTests: 2, isPostTest:true))
+            }
         }
-    }    
+    }
 }

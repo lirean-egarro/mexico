@@ -18,9 +18,13 @@ class TrialViewController: UIViewController {
     
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButtonUp: UIButton!
+    @IBOutlet weak var rightButtonUp: UIButton!
+    @IBOutlet weak var leftButtonDown: UIButton!
+    @IBOutlet weak var rightButtonDown: UIButton!
     
     var button_correct:UIButton!
-    var button_wrong:UIButton!
+    var button_wrong:[UIButton]
     
     var trial:Trial!
     var trialIdx:Int!
@@ -39,6 +43,7 @@ class TrialViewController: UIViewController {
         rightFileName = ""
         wrongFileName = ""
         feedbacks = false
+        button_wrong = [UIButton]()
         super.init(coder: aDecoder)
     }
     
@@ -52,6 +57,10 @@ class TrialViewController: UIViewController {
         var bg = UIImage(named: "WhiteTile")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 7, 7, 7))
         self.leftButton.setBackgroundImage(bg, forState: .Normal)
         self.rightButton.setBackgroundImage(bg, forState: .Normal)
+        self.leftButtonUp.setBackgroundImage(bg, forState: .Normal)
+        self.rightButtonUp.setBackgroundImage(bg, forState: .Normal)
+        self.leftButtonDown.setBackgroundImage(bg, forState: .Normal)
+        self.rightButtonDown.setBackgroundImage(bg, forState: .Normal)
         
         let strings = trial.displayStrings()
 
@@ -60,23 +69,112 @@ class TrialViewController: UIViewController {
 #endif
 
         self.wordLabel.text = strings.value
-        if Int(arc4random_uniform(UInt32(100))) > 49 {
-            self.leftButton.tag = 100
-            self.leftButton.setTitle(strings.right, forState: .Normal)
-            self.button_correct = self.leftButton
-
-            self.rightButton.tag = 200
-            self.rightButton.setTitle(strings.wrong, forState: .Normal)
-            self.button_wrong = self.rightButton
+        let left:Bool = Int(arc4random_uniform(UInt32(100))) > 49
+        let up:Bool = Int(arc4random_uniform(UInt32(100))) > 49
+        
+        if sessionType == SessionType.Training {
+        
+            switch left {
+            case true:
+                self.leftButton.tag = 100
+                self.leftButton.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.leftButton
+                
+                self.rightButton.tag = 200
+                self.rightButton.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.rightButton)
+            case false:
+                self.leftButton.tag = 200
+                self.leftButton.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.leftButton)
+                
+                self.rightButton.tag = 100
+                self.rightButton.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.rightButton
+            default:
+                println("If you ever get here, fuck it.")
+            }
         } else {
-            self.leftButton.tag = 200
-            self.leftButton.setTitle(strings.wrong, forState: .Normal)
-            self.button_wrong = self.leftButton
-            
-            self.rightButton.tag = 100
-            self.rightButton.setTitle(strings.right, forState: .Normal)
-            self.button_correct = self.rightButton
+        
+            switch (left,up) {
+            case (true,true):
+                self.leftButtonUp.tag = 100
+                self.leftButtonUp.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.leftButtonUp
+                
+                self.rightButtonUp.tag = 200
+                self.rightButtonUp.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.rightButtonUp)
+                
+                self.leftButtonDown.tag = 200
+                self.leftButtonDown.setTitle(strings.wrong2, forState: .Normal)
+                self.button_wrong.append(self.leftButtonDown)
+                
+                self.rightButtonDown.tag = 200
+                self.rightButtonDown.setTitle(strings.wrong3, forState: .Normal)
+                self.button_wrong.append(self.rightButtonDown)
+            case (true,false):
+                self.leftButtonDown.tag = 100
+                self.leftButtonDown.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.leftButtonDown
+                
+                self.rightButtonUp.tag = 200
+                self.rightButtonUp.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.rightButtonUp)
+                
+                self.leftButtonUp.tag = 200
+                self.leftButtonUp.setTitle(strings.wrong2, forState: .Normal)
+                self.button_wrong.append(self.leftButtonUp)
+                
+                self.rightButtonDown.tag = 200
+                self.rightButtonDown.setTitle(strings.wrong3, forState: .Normal)
+                self.button_wrong.append(self.rightButtonDown)
+            case (false,true):
+                self.rightButtonUp.tag = 100
+                self.rightButtonUp.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.rightButtonUp
+                
+                self.leftButtonUp.tag = 200
+                self.leftButtonUp.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.leftButtonUp)
+                
+                self.leftButtonDown.tag = 200
+                self.leftButtonDown.setTitle(strings.wrong2, forState: .Normal)
+                self.button_wrong.append(self.leftButtonDown)
+                
+                self.rightButtonDown.tag = 200
+                self.rightButtonDown.setTitle(strings.wrong3, forState: .Normal)
+                self.button_wrong.append(self.rightButtonDown)
+            case (false,false):
+                self.rightButtonDown.tag = 100
+                self.rightButtonDown.setTitle(strings.right, forState: .Normal)
+                self.button_correct = self.rightButtonDown
+                
+                self.leftButtonUp.tag = 200
+                self.leftButtonUp.setTitle(strings.wrong1, forState: .Normal)
+                self.button_wrong.append(self.leftButtonUp)
+                
+                self.rightButtonUp.tag = 200
+                self.rightButtonUp.setTitle(strings.wrong2, forState: .Normal)
+                self.button_wrong.append(self.rightButtonUp)
+                
+                self.leftButtonDown.tag = 200
+                self.leftButtonDown.setTitle(strings.wrong3, forState: .Normal)
+                self.button_wrong.append(self.leftButtonDown)
+            default:
+                println("Stupid compiler!")
+            }
         }
+        
+
+        
+        self.rightButtonUp.hidden = true
+        self.leftButtonUp.hidden = true
+        self.rightButtonDown.hidden = true
+        self.leftButtonDown.hidden = true
+        self.rightButton.hidden = true
+        self.leftButton.hidden = true
+
         
         self.progressLabel.text = String(format:"%d/%d",trialIdx+1,blockSize)
         
@@ -94,23 +192,24 @@ class TrialViewController: UIViewController {
         self.playCount++
         self.playButton.enabled = false
         AudioPlayer.sharedInstance.play(rightFileName) {
-            if self.playCount < 2 {
-                self.playButton.enabled = true
+            if self.sessionType == SessionType.Training {
+                if self.playCount < 2 {
+                    self.playButton.enabled = true
+                }
+                
+                self.leftButton.hidden = false
+                self.rightButton.hidden = false
             } else {
-                self.leftButton.hidden = false
-                self.rightButton.hidden = false
-            }
-            
-            if self.sessionType == SessionType.Pretest || self.sessionType == SessionType.Posttest {
-                self.leftButton.hidden = false
-                self.rightButton.hidden = false
+                self.leftButtonUp.hidden = false
+                self.rightButtonUp.hidden = false
+                self.leftButtonDown.hidden = false
+                self.rightButtonDown.hidden = false
             }
         }
     }
     
     @IBAction func selectedAnswer(sender:AnyObject?) {
-        self.leftButton.enabled = false
-        self.rightButton.enabled = false
+        disableButtons()
         
         var tag = (sender as! UIButton).tag
         var resp = false
@@ -130,8 +229,7 @@ class TrialViewController: UIViewController {
                 AudioPlayer.sharedInstance.play("correct") {
                     self.wordLabel.text = self.trial.minimalPair.ipa1
                     AudioPlayer.sharedInstance.play(self.rightFileName, delayTime:1.0) {
-                        self.leftButton.enabled = true
-                        self.rightButton.enabled = true
+                        self.enableButtons()
                         (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
                     }
                 }
@@ -146,8 +244,7 @@ class TrialViewController: UIViewController {
                             AudioPlayer.sharedInstance.play(self.rightFileName, delayTime:1.0) {
                                 self.wordLabel.text = self.trial.minimalPair.ipa2
                                 AudioPlayer.sharedInstance.play(self.wrongFileName, delayTime:1.0) {
-                                    self.leftButton.enabled = true
-                                    self.rightButton.enabled = true
+                                    self.enableButtons()
                                     (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
                                 }
                             }
@@ -157,10 +254,27 @@ class TrialViewController: UIViewController {
             }
         } else {
             //No feedback! Move on...
-            self.leftButton.enabled = true
-            self.rightButton.enabled = true
+            enableButtons()
             (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
         }
+    }
+    
+    func enableButtons() {
+        self.leftButton.enabled = true
+        self.rightButton.enabled = true
+        self.leftButtonUp.enabled = true
+        self.rightButtonUp.enabled = true
+        self.leftButtonDown.enabled = true
+        self.rightButtonDown.enabled = true
+    }
+    
+    func disableButtons() {
+        self.leftButton.enabled = false
+        self.rightButton.enabled = false
+        self.leftButtonUp.enabled = false
+        self.rightButtonUp.enabled = false
+        self.leftButtonDown.enabled = false
+        self.rightButtonDown.enabled = false
     }
     
     func hightlightCorrect() {
@@ -172,11 +286,13 @@ class TrialViewController: UIViewController {
     }
     
     func hightlightWrong() {
-        self.containerView.backgroundColor = UIColor.redColor()
-        self.button_wrong.layer.shadowColor = UIColor.redColor().CGColor
-        self.button_wrong.layer.shadowOffset = CGSizeMake(5, 5)
-        self.button_wrong.layer.shadowRadius = 5
-        self.button_wrong.layer.shadowOpacity = 1.0
+        for button in self.button_wrong {
+            self.containerView.backgroundColor = UIColor.redColor()
+            button.layer.shadowColor = UIColor.redColor().CGColor
+            button.layer.shadowOffset = CGSizeMake(5, 5)
+            button.layer.shadowRadius = 5
+            button.layer.shadowOpacity = 1.0
+        }
     }
 }
 

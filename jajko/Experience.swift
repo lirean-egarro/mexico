@@ -434,12 +434,11 @@ class Experience : NSObject {
         }
     }
     
-//#if DEBUG
-//    func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
-//        return (true,nil)
-//    }
-//#else
+    
     func isCurrentProgressAvailableToday() ->  (ok: Bool, message: String?) {
+        if (UIApplication.sharedApplication().delegate as! AppDelegate).isDebug! {
+            return (true,nil)
+        }
         let formatter = NSDateFormatter()
         formatter.dateStyle = .FullStyle
         formatter.timeStyle = .ShortStyle
@@ -478,7 +477,7 @@ class Experience : NSObject {
                          if resp == .OrderedDescending && !now.isSameDayAs(comparePoint) {
                             return (true,nil)
                          } else {
-                            return (false, "Can not do two train sessions the same day!")
+                            return (false, "Sorry, you cannot perform two train sessions on one day. Please come back tomorrow!")
                          }
                     } else {
                         return (true,nil)

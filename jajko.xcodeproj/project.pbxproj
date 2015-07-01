@@ -15,6 +15,7 @@
 		331672AE1B33EA1000907980 /* CountryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AD1B33EA1000907980 /* CountryHelper.swift */; };
 		331672B01B354AE400907980 /* OtherPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331672AF1B354AE400907980 /* OtherPlaces.swift */; };
 		333DCA2C1B3DB5F500E77BB5 /* ExperienceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */; };
+		3349E9021B43F334000A9B74 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3349E9011B43F334000A9B74 /* Settings.bundle */; };
 		335201BC1B2AADDC004718B0 /* SignUp3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */; };
 		335201BE1B2AAE05004718B0 /* SignUp4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */; };
 		3368AD331B31089800F7D9CA /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368AD321B31089800F7D9CA /* Segments.swift */; };
@@ -860,6 +861,7 @@
 		331672AD1B33EA1000907980 /* CountryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryHelper.swift; sourceTree = "<group>"; };
 		331672AF1B354AE400907980 /* OtherPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherPlaces.swift; sourceTree = "<group>"; };
 		333DCA2B1B3DB5F500E77BB5 /* ExperienceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceNavigationController.swift; sourceTree = "<group>"; };
+		3349E9011B43F334000A9B74 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		335201BB1B2AADDC004718B0 /* SignUp3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp3ViewController.swift; sourceTree = "<group>"; };
 		335201BD1B2AAE05004718B0 /* SignUp4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUp4ViewController.swift; sourceTree = "<group>"; };
 		3368AD321B31089800F7D9CA /* Segments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segments.swift; sourceTree = "<group>"; };
@@ -2629,6 +2631,7 @@
 			isa = PBXGroup;
 			children = (
 				33F133A21B294D4400CED73C /* Info.plist */,
+				3349E9011B43F334000A9B74 /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2861,6 +2864,7 @@
 				33793CBF1B3F8D7E00FEB0A2 /* T4ct2mpw01ipa1rec1.caf in Resources */,
 				33793DE51B3F8D7E00FEB0A2 /* T6ct1mpw14ipa2rec1.caf in Resources */,
 				33793D761B3F8D7E00FEB0A2 /* T5ct2mpw06ipa2rec2.caf in Resources */,
+				3349E9021B43F334000A9B74 /* Settings.bundle in Resources */,
 				33793CC01B3F8D7E00FEB0A2 /* T4ct2mpw01ipa1rec2.caf in Resources */,
 				33793E3C1B3F8D7E00FEB0A2 /* T6ct2mpw16ipa1rec2.caf in Resources */,
 				33793BE11B3F8D7E00FEB0A2 /* T3ct1mpw05ipa2rec1.caf in Resources */,
