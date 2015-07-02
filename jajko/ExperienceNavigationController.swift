@@ -135,27 +135,29 @@ class ExperienceNavigationController: UINavigationController {
     func finishSession() {
         saveExperience()
         //Encode and send results
-        if experience.progress == .End {
-            println("Sending experience to our server...")
-            Webservice.sharedInstance.sendExperience(experience.toJSONDictionary(), completion: { (resp) in
-                if resp {
-                    self.backToDashboard()
-                } else {
-                    var options:NSDictionary = [
-                        "message" : "There was a problem saving your answers. Verify your internet connection and try again. If you decide to cancel now, you will loose all test results!",
-                        "yes" : "Cancel",
-                        "no" : "Try again"
-                    ]
-                    PromptManager.sharedInstance.displayAlert(options) { (resp) in
-                        if !resp {
-                            self.finishSession()
-                        }
+        println("Sending experience to our server...")
+        Webservice.sharedInstance.sendExperience(experience.toJSONDictionary(), completion: { (resp) in
+            if resp {
+                self.backToDashboard()
+            } else {
+                (self.viewControllers[0] as! SessionMessageVC).indicator.stopAnimating()
+                (self.viewControllers[0] as! SessionMessageVC).whiteLabel.text = "An error occurred :("
+                var options:NSDictionary = [
+                    "message" : "There was a problem saving your answers. Verify your internet connection and try again. If you decide to cancel now, you will loose all test results!",
+                    "yes" : "Cancel",
+                    "no" : "Try again"
+                ]
+                PromptManager.sharedInstance.displayAlert(options) { (resp) in
+                    if !resp {
+                        (self.viewControllers[0] as! SessionMessageVC).indicator.startAnimating()
+                        (self.viewControllers[0] as! SessionMessageVC).whiteLabel.text = "Uploading..."
+                        self.finishSession()
+                    } else {
+                        self.backToDashboard()
                     }
                 }
-            })
-        } else {
-            backToDashboard()
-        }
+            }
+        })
     }
     
     func saveExperience() {
