@@ -16,15 +16,15 @@
 
 import Foundation
 
-let ResponseWeights: [String: UInt8] = [
-    "train1": 	0x01,
-    "train2": 	0x02,
-    "train3":	0x04,
-    "train4":	0x08,
-    "train5":   0x10,
-    "train6":	0x20,
-    "train7":	0x40,
-    "train8":	0x80
+let ResponseWeights: [String: Int] = [
+    "train8": 	0x01,
+    "train7": 	0x02,
+    "train6":	0x04,
+    "train5":	0x08,
+    "train4":   0x10,
+    "train3":	0x20,
+    "train2":	0x40,
+    "train1":	0x80
 ]
 
 enum ExperienceProgress: String {
@@ -102,8 +102,8 @@ class Experience : NSObject {
     var train8Block1Score, train8Block2Score, train8Block3Score, train8Block4Score: NSNumber?
     var posttestBlock1Score, posttestBlock2Score: NSNumber?
     
-    var train1Responses, train2Responses, train3Responses, train4Responses: NSDictionary?
-    var train5Responses, train6Responses, train7Responses, train8Responses: NSDictionary?
+    var train1Responses, train2Responses, train3Responses, train4Responses: NSMutableDictionary?
+    var train5Responses, train6Responses, train7Responses, train8Responses: NSMutableDictionary?
     
     var user: String?
     var progress: ExperienceProgress? {
@@ -252,7 +252,135 @@ class Experience : NSObject {
         for var t = 1 ; t <= 8 ; t++ {
             let key = String(format:"train%dResponses",t)
             if let propertyValue = aDecoder.decodeObjectForKey(key) as? NSDictionary {
-                self.setValue(propertyValue, forKey: key)
+                self.setValue(propertyValue.mutableCopy(), forKey: key)
+            }
+        }
+    }
+    
+    convenience init(fromDictionary dictionary:NSDictionary) {
+         self.init()
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .FullStyle
+        formatter.timeStyle = .FullStyle
+        
+        if let pretest = nullToNil(dictionary.objectForKey("pretest")) as? NSDictionary {
+            if let dateString = nullToNil(pretest.objectForKey("startdate")) as? String {
+                startBeggingDate = formatter.dateFromString(dateString)
+            }
+            if let dateString = nullToNil(pretest.objectForKey("enddate")) as? String {
+                startEndDate = formatter.dateFromString(dateString)
+            }
+            if let percentages = nullToNil(pretest.objectForKey("percentages")) as? NSDictionary {
+                if let b1 = nullToNil(percentages.objectForKey("block1")) as? NSNumber {
+                    pretestBlock1Score = b1
+                }
+                if let b2 = nullToNil(percentages.objectForKey("block2")) as? NSNumber {
+                    pretestBlock2Score = b2
+                }
+            }
+        }
+        
+        if let posttest = nullToNil(dictionary.objectForKey("posttest")) as? NSDictionary {
+            if let dateString = nullToNil(posttest.objectForKey("startdate")) as? String {
+                testBeggingDate = formatter.dateFromString(dateString)
+            }
+            if let dateString = nullToNil(posttest.objectForKey("enddate")) as? String {
+                testEndDate = formatter.dateFromString(dateString)
+            }
+            if let percentages = nullToNil(posttest.objectForKey("percentages")) as? NSDictionary {
+                if let b1 = nullToNil(percentages.objectForKey("block1")) as? NSNumber {
+                    posttestBlock1Score = b1
+                }
+                if let b2 = nullToNil(percentages.objectForKey("block2")) as? NSNumber {
+                    posttestBlock2Score = b2
+                }
+            }
+        }
+        
+        var maxEndKey = ""
+        if let training = nullToNil(dictionary.objectForKey("training")) as? NSDictionary {
+            for (key, value) in training {
+                let t = (key as! String).substringFromIndex((key as! String).endIndex.predecessor())
+                let begKey = String(format:"train%dBeggingDate",t)
+                let endKey = String(format:"train%dEndDate",t)
+                if let session = value as? NSDictionary {
+                    if let dateString = nullToNil(session.objectForKey("startdate")) as? String {
+                        let aDate = formatter.dateFromString(dateString)
+                        self.setValue(aDate, forKey: begKey)
+                    }
+                    if let dateString = nullToNil(session.objectForKey("enddate")) as? String {
+                        let aDate = formatter.dateFromString(dateString)
+                        self.setValue(aDate, forKey: endKey)
+                        maxEndKey = endKey
+                    }
+                    if let percentages = nullToNil(session.objectForKey("percentages")) as? NSDictionary {
+                        for var s = 1 ; s <= 4 ; s++ {
+                            let key = String(format:"train%dBlock%dScore",t,s)
+                            if let b = nullToNil(percentages.objectForKey("block"+String(s))) as? NSNumber {
+                                self.setValue(b, forKey: key)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if let dateString = nullToNil(dictionary.objectForKey("completed")) as? String {
+            endDate = formatter.dateFromString(dateString)
+            maxEndKey = "testEndDate"
+        }
+        
+        for var t = 1 ; t <= 8 ; t++ {
+            let key = String(format:"train%dResponses",t)
+            self.setValue(NSMutableDictionary(), forKey: key)
+        }
+        
+        if let responses = nullToNil(dictionary.objectForKey("responses")) as? NSDictionary {
+            for (word, value) in responses {
+                if let binaryString = value as? String {
+                    if count(binaryString) > 7 {
+                        for var c = 1 ; c <= 8 ; c++ {
+                            let key = String(format:"train%dResponses",c)
+                            let bit = binaryString[c-1]
+                            if bit == "1" {
+                                if let tmp = self.valueForKey(key) as? NSMutableDictionary {
+                                    if let existingWord = nullToNil(tmp.objectForKey(word)) as? String {
+                                        if let currentValue = tmp.objectForKey(word) as? Int {
+                                            let add = ResponseWeights["train"+String(c)]!
+                                            tmp.setValue(currentValue | add, forKey: word as! String)
+                                        }
+                                    } else {
+                                        tmp.setValue(ResponseWeights["train"+String(c)]!, forKey: word as! String)
+                                    }
+                                }
+                            } else if bit == "0" {
+                                if let tmp = self.valueForKey(key) as? NSMutableDictionary {
+                                    if let existingWord = nullToNil(tmp.objectForKey(word)) as? String {
+                                        println("")
+                                    } else {
+                                        tmp.setValue(0, forKey: word as! String)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if let name = Webservice.sharedInstance.currentUser {
+            self.user = name
+        }
+        
+        if maxEndKey == "" {
+            self.progress = .Start
+        } else if maxEndKey == "testEndDate" {
+            self.progress = .End
+        } else {
+            if maxEndKey.rangeOfString("train") != nil {
+                let rawValue = maxEndKey.substringToIndex(advance(maxEndKey.startIndex, 6))
+                self.progress = ExperienceProgress(rawValue: rawValue)
             }
         }
     }
@@ -397,23 +525,21 @@ class Experience : NSObject {
     
     func recordResponseFor(word:String, atTrainSession num:Int, correct:Bool) {
         let key = String(format:"train%dResponses",num)
-        if let trialDicFixed = self.valueForKey(key) as? NSDictionary {
-            var trialDic = trialDicFixed.mutableCopy() as! NSMutableDictionary
+        if let trialDic = self.valueForKey(key) as? NSMutableDictionary {
             if let existingWord:NSNumber = nullToNil(trialDic.objectForKey(word)) as? NSNumber {
                 //Existing Word:
                 if correct {
                     if let inc = ResponseWeights["train" + String(num)] {
-                        if let existingValue = (trialDic.valueForKey(word) as? NSNumber)?.unsignedCharValue {
-                            let newValue = existingValue | inc
-                            trialDic.setValue(NSNumber(unsignedChar: newValue), forKey: word)
-                        }
+                        let existingValue:Int = Int(trialDic.valueForKey(word) as! NSNumber)
+                        let newValue = existingValue | inc
+                        trialDic.setValue(newValue, forKey: word)
                     }
                 }
             } else {
                 //New word!
                 if correct {
                     if let inc = ResponseWeights["train" + String(num)] {
-                        let value = NSNumber(unsignedChar: inc)
+                        let value = inc
                         trialDic.setValue(value, forKey: word)
                     }
                 } else {
@@ -421,15 +547,15 @@ class Experience : NSObject {
                 }
             }
             
-            self.setValue(trialDic as NSDictionary, forKey: key)
+            self.setValue(trialDic, forKey: key)
         } else {
             if correct {
                 if let inc = ResponseWeights["train" + String(num)] {
-                    let value = NSNumber(unsignedChar: inc)
-                    self.setValue(NSDictionary(object: value, forKey: word), forKey:key)
+                    let value = inc
+                    self.setValue(NSMutableDictionary(object: value, forKey: word), forKey:key)
                 }
             } else {
-                self.setValue(NSDictionary(object: NSNumber(int: 0), forKey: word), forKey:key)
+                self.setValue(NSMutableDictionary(object: NSNumber(int: 0), forKey: word), forKey:key)
             }
         }
     }
