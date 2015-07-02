@@ -29,7 +29,7 @@ class SessionMessageVC: UIViewController {
     @IBOutlet weak var whiteLabel: UILabel!
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var arrowButton: UIButton!
-
+    @IBOutlet weak var indicator:UIActivityIndicatorView!
     @IBOutlet weak var messageIcon: UIImageView!
     
     var type: SessionMessageType!
@@ -124,6 +124,8 @@ class SessionMessageVC: UIViewController {
     
     func forwardFinishMessage() {
         if !didSend {
+            self.whiteLabel.text = "Please wait while we are upload your results..."
+            indicator.startAnimating()
             (navVC as! ExperienceNavigationController).finishSession()
             didSend = true
         }
