@@ -153,9 +153,14 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="uPY-iq-gq1">
+                                        <rect key="frame" x="290" y="200" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.2901960784" green="0.79215686269999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="JsS-Gf-ucY" firstAttribute="top" secondItem="uPY-iq-gq1" secondAttribute="bottom" constant="8" id="2m4-Of-jTh"/>
+                                    <constraint firstAttribute="centerX" secondItem="uPY-iq-gq1" secondAttribute="centerX" id="Aar-zR-QNV"/>
                                     <constraint firstAttribute="centerX" secondItem="jxi-vr-jmG" secondAttribute="centerX" id="EmJ-w1-U8s"/>
                                     <constraint firstItem="JsS-Gf-ucY" firstAttribute="width" secondItem="QV8-UA-mwr" secondAttribute="width" multiplier="0.4" id="KWN-dX-gdO"/>
                                     <constraint firstAttribute="width" secondItem="jxi-vr-jmG" secondAttribute="width" id="Oxl-pz-jbh"/>
@@ -197,6 +202,7 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                     <connections>
                         <outlet property="arrowButton" destination="JsS-Gf-ucY" id="wZj-aq-v8R"/>
                         <outlet property="greenLabel" destination="jxi-vr-jmG" id="7eC-Mh-ayc"/>
+                        <outlet property="indicator" destination="uPY-iq-gq1" id="oVm-IY-Ard"/>
                         <outlet property="messageIcon" destination="XGy-zB-Zif" id="1Zv-Pm-fxo"/>
                         <outlet property="whiteLabel" destination="fQS-T9-10Y" id="pKJ-Vo-Po6"/>
                     </connections>
