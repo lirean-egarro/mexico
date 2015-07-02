@@ -37,12 +37,14 @@ class TrialViewController: UIViewController {
     var wrongFileName:String
     
     private var playCount:Int
+    private var buttonLock:Bool
     
     required init(coder aDecoder: NSCoder) {
         playCount = 0
         rightFileName = ""
         wrongFileName = ""
         feedbacks = false
+        buttonLock = false
         button_wrong = [UIButton]()
         super.init(coder: aDecoder)
     }
@@ -69,8 +71,10 @@ class TrialViewController: UIViewController {
 #endif
 
         self.wordLabel.text = strings.value
-        let left:Bool = Int(arc4random_uniform(UInt32(100))) > 49
-        let up:Bool = Int(arc4random_uniform(UInt32(100))) > 49
+        var random:Int = Int(arc4random_uniform(UInt32(100)))
+        let left:Bool = random > 49
+        random = Int(arc4random_uniform(UInt32(100)))
+        let up:Bool = random > 49
         
         if sessionType == SessionType.Training {
         
@@ -209,6 +213,7 @@ class TrialViewController: UIViewController {
     }
     
     @IBAction func selectedAnswer(sender:AnyObject?) {
+    if (!buttonLock) {
         disableButtons()
         
         var tag = (sender as! UIButton).tag
@@ -258,8 +263,10 @@ class TrialViewController: UIViewController {
             (self.navigationController! as! ExperienceNavigationController).loadNextTrial(resp)
         }
     }
+    }
     
     func enableButtons() {
+        buttonLock = false
         self.leftButton.enabled = true
         self.rightButton.enabled = true
         self.leftButtonUp.enabled = true
@@ -269,6 +276,7 @@ class TrialViewController: UIViewController {
     }
     
     func disableButtons() {
+        buttonLock = true
         self.leftButton.enabled = false
         self.rightButton.enabled = false
         self.leftButtonUp.enabled = false
