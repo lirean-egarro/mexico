@@ -512,6 +512,9 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" image="Eggs" translatesAutoresizingMaskIntoConstraints="NO" id="Lmv-aU-NwE">
                                 <rect key="frame" x="164" y="472" width="272" height="96"/>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4TC-Sx-SqI">
+                                <rect key="frame" x="290" y="295" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -524,6 +527,7 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                             <constraint firstItem="Hhd-fI-Qh7" firstAttribute="top" secondItem="Lmv-aU-NwE" secondAttribute="bottom" constant="50" id="FmX-ug-wQi"/>
                             <constraint firstItem="TqT-gT-dif" firstAttribute="top" secondItem="0w6-yV-3KW" secondAttribute="bottom" id="H33-QM-BYO"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="bottom" secondItem="t5d-Kw-u2R" secondAttribute="bottom" id="Ixd-uV-0U0"/>
+                            <constraint firstAttribute="centerX" secondItem="4TC-Sx-SqI" secondAttribute="centerX" id="Lnj-kv-jT6"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="height" secondItem="t5d-Kw-u2R" secondAttribute="height" id="Mer-Wt-kpO"/>
                             <constraint firstItem="Lmv-aU-NwE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="t5d-Kw-u2R" secondAttribute="bottom" constant="5" id="PR2-iZ-aEn"/>
                             <constraint firstItem="F68-OE-22G" firstAttribute="leading" secondItem="hPB-18-ClS" secondAttribute="leadingMargin" id="PsB-9F-Fr0"/>
@@ -533,6 +537,7 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                             <constraint firstItem="0w6-yV-3KW" firstAttribute="width" secondItem="uAV-L1-b7A" secondAttribute="width" multiplier="2.5" id="aJ5-RJ-RNU"/>
                             <constraint firstItem="Lmv-aU-NwE" firstAttribute="width" secondItem="0w6-yV-3KW" secondAttribute="width" multiplier="0.75" id="daH-Te-0Ns"/>
                             <constraint firstAttribute="centerX" secondItem="Lmv-aU-NwE" secondAttribute="centerX" id="dzc-fe-3Zs"/>
+                            <constraint firstItem="4TC-Sx-SqI" firstAttribute="top" secondItem="0w6-yV-3KW" secondAttribute="bottom" constant="30" id="nxI-eX-alZ"/>
                             <constraint firstItem="uAV-L1-b7A" firstAttribute="leading" secondItem="hPB-18-ClS" secondAttribute="leadingMargin" constant="15" id="o6m-GC-HIv"/>
                             <constraint firstItem="0w6-yV-3KW" firstAttribute="top" secondItem="hPB-18-ClS" secondAttribute="top" id="oRp-mh-Z8e"/>
                             <constraint firstItem="F68-OE-22G" firstAttribute="trailing" secondItem="hPB-18-ClS" secondAttribute="trailingMargin" id="ohQ-7N-Wgl"/>
@@ -549,6 +554,7 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                         <outlet property="aboutButton" destination="2xe-Gb-twQ" id="yir-Ni-yMi"/>
                         <outlet property="dateLabel" destination="cuz-3h-feA" id="PMM-8Q-Qrz"/>
                         <outlet property="errorLabel" destination="F68-OE-22G" id="jFd-OS-z00"/>
+                        <outlet property="indicator" destination="4TC-Sx-SqI" id="knL-Mp-t9c"/>
                         <outlet property="logoutButton" destination="t5d-Kw-u2R" id="OIv-kj-bId"/>
                         <outlet property="scoresButton" destination="uAV-L1-b7A" id="2bH-oD-lc4"/>
                         <outlet property="startButton" destination="0w6-yV-3KW" id="4p4-mj-EPK"/>
@@ -1304,7 +1310,7 @@ Contact: genevieve.mathis.14@ucl.ac.uk
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
+                            <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-CD-oii" customClass="TextBox" customModule="jajko" customModuleProvider="target">
                                 <rect key="frame" x="36" y="80" width="250" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

@@ -209,6 +209,9 @@ class Session : NSObject {
         
         self.blocks = [Block]()
         
+        //ATTENTION!! When changing the number of blocks check the Experience hard-coded properties to ensure consistency!
+        //Max blocks for Testing:2 For Training:4
+        
         if (UIApplication.sharedApplication().delegate as! AppDelegate).isDebug! {
             switch type {
             case .Pretest:

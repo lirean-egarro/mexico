@@ -11,7 +11,7 @@ class Webservice: NSObject {
     
     typealias WebserviceBooleanClosure = ((response: Bool) -> Void)
     typealias WebserviceThreeWayClosure = ((response: Bool?) -> Void)
-    typealias WebserviceStringClosure = ((response: String) -> Void)
+    typealias WebserviceObjectClosure = ((response: NSDictionary?) -> Void)
     
     var currentUser: String?
     private var sessionToken:String?
@@ -163,6 +163,35 @@ class Webservice: NSObject {
         }
     }
     
+    func getExperience(completion:WebserviceObjectClosure? = nil) {
+        if let username = currentUser, let token = self.sessionToken {
+            let url = NSURL(string: "http://54.85.171.8:8082/experience?user=" + username + "&token=" + self.sessionToken!)
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            session.dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                if let httpResp = response as? NSHTTPURLResponse {
+                    if (httpResp.statusCode == 200) {
+                        if let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: nil) {
+                            completion?(response: json as? NSDictionary)
+                        } else {
+                            println("Not a parsable json response!")
+                            println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                            completion?(response: nil)
+                        }
+                    } else {
+                        println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                        completion?(response: nil)
+                    }
+                } else {
+                    completion?(response: nil)
+                }
+            }).resume()
+        } else {
+            println("Not supposed to call /experience without setting the session user first!")
+            completion?(response: nil)
+        }
+    }
+    
 // MARK: Helper Methods:    
     func createNewSession(data: NSData, forUser username:String) {
         println("Creating new session...")
@@ -173,7 +202,7 @@ class Webservice: NSObject {
         
         var config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
 //        config.HTTPAdditionalHeaders = [
-//            "cookies" : ["user":username, "token":self.sessionToken!]
+//            "token" : self.sessionToken!
 //        ]
         self.session = NSURLSession(configuration: config)
     }

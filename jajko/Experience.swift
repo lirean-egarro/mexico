@@ -91,6 +91,7 @@ class Experience : NSObject {
     var testBeggingDate, testEndDate: NSDate?
     var endDate: NSDate?
     
+    //ADJUST HERE THE NUMBER OF HARDCODED PROPERTIES TO MATCH Session...
     var pretestBlock1Score, pretestBlock2Score: NSNumber?
     var train1Block1Score, train1Block2Score, train1Block3Score, train1Block4Score: NSNumber?
     var train2Block1Score, train2Block2Score, train2Block3Score, train2Block4Score: NSNumber?
@@ -264,12 +265,14 @@ class Experience : NSObject {
         formatter.dateStyle = .FullStyle
         formatter.timeStyle = .FullStyle
         
+        var maxEndKey = ""
         if let pretest = nullToNil(dictionary.objectForKey("pretest")) as? NSDictionary {
             if let dateString = nullToNil(pretest.objectForKey("startdate")) as? String {
                 startBeggingDate = formatter.dateFromString(dateString)
             }
             if let dateString = nullToNil(pretest.objectForKey("enddate")) as? String {
                 startEndDate = formatter.dateFromString(dateString)
+                maxEndKey = "startEndDate"
             }
             if let percentages = nullToNil(pretest.objectForKey("percentages")) as? NSDictionary {
                 if let b1 = nullToNil(percentages.objectForKey("block1")) as? NSNumber {
@@ -281,27 +284,11 @@ class Experience : NSObject {
             }
         }
         
-        if let posttest = nullToNil(dictionary.objectForKey("posttest")) as? NSDictionary {
-            if let dateString = nullToNil(posttest.objectForKey("startdate")) as? String {
-                testBeggingDate = formatter.dateFromString(dateString)
-            }
-            if let dateString = nullToNil(posttest.objectForKey("enddate")) as? String {
-                testEndDate = formatter.dateFromString(dateString)
-            }
-            if let percentages = nullToNil(posttest.objectForKey("percentages")) as? NSDictionary {
-                if let b1 = nullToNil(percentages.objectForKey("block1")) as? NSNumber {
-                    posttestBlock1Score = b1
-                }
-                if let b2 = nullToNil(percentages.objectForKey("block2")) as? NSNumber {
-                    posttestBlock2Score = b2
-                }
-            }
-        }
-        
-        var maxEndKey = ""
+        var maxTraining = maxEndKey
         if let training = nullToNil(dictionary.objectForKey("training")) as? NSDictionary {
+            maxTraining = "aaaaaaa"
             for (key, value) in training {
-                let t = (key as! String).substringFromIndex((key as! String).endIndex.predecessor())
+                let t = (key as! String).substringFromIndex((key as! String).endIndex.predecessor()).toInt()!
                 let begKey = String(format:"train%dBeggingDate",t)
                 let endKey = String(format:"train%dEndDate",t)
                 if let session = value as? NSDictionary {
@@ -312,7 +299,9 @@ class Experience : NSObject {
                     if let dateString = nullToNil(session.objectForKey("enddate")) as? String {
                         let aDate = formatter.dateFromString(dateString)
                         self.setValue(aDate, forKey: endKey)
-                        maxEndKey = endKey
+                        if endKey > maxTraining {
+                            maxTraining = endKey
+                        }
                     }
                     if let percentages = nullToNil(session.objectForKey("percentages")) as? NSDictionary {
                         for var s = 1 ; s <= 4 ; s++ {
@@ -324,8 +313,27 @@ class Experience : NSObject {
                     }
                 }
             }
-        }
+        }        
+        maxEndKey = maxTraining
         
+        if let posttest = nullToNil(dictionary.objectForKey("posttest")) as? NSDictionary {
+            if let dateString = nullToNil(posttest.objectForKey("startdate")) as? String {
+                testBeggingDate = formatter.dateFromString(dateString)
+            }
+            if let dateString = nullToNil(posttest.objectForKey("enddate")) as? String {
+                testEndDate = formatter.dateFromString(dateString)
+                maxEndKey = "testEndDate"
+            }
+            if let percentages = nullToNil(posttest.objectForKey("percentages")) as? NSDictionary {
+                if let b1 = nullToNil(percentages.objectForKey("block1")) as? NSNumber {
+                    posttestBlock1Score = b1
+                }
+                if let b2 = nullToNil(percentages.objectForKey("block2")) as? NSNumber {
+                    posttestBlock2Score = b2
+                }
+            }
+        }
+
         if let dateString = nullToNil(dictionary.objectForKey("completed")) as? String {
             endDate = formatter.dateFromString(dateString)
             maxEndKey = "testEndDate"
@@ -375,16 +383,20 @@ class Experience : NSObject {
         
         if maxEndKey == "" {
             self.progress = .Start
+        } else if maxEndKey == "startEndDate" {
+            self.progress = .Train1
         } else if maxEndKey == "testEndDate" {
             self.progress = .End
         } else {
             if maxEndKey.rangeOfString("train") != nil {
                 let rawValue = maxEndKey.substringToIndex(advance(maxEndKey.startIndex, 6))
-                self.progress = ExperienceProgress(rawValue: rawValue)
+                if let tmp = ExperienceProgress(rawValue: rawValue) {
+                    self.progress = tmp.nextState()
+                }
             }
         }
     }
-    
+        
     func encodeWithCoder(aCoder: NSCoder) {
         if let username = self.user {
             aCoder.encodeObject(username, forKey: "username")
@@ -444,10 +456,17 @@ class Experience : NSObject {
         formatter.timeStyle = .FullStyle
         
         var Pre = [String:AnyObject]()
-        if startBeggingDate != nil && startEndDate != nil && pretestBlock1Score != nil && pretestBlock2Score != nil {
+        if startBeggingDate != nil && startEndDate != nil {
             Pre["startdate"] = formatter.stringFromDate(startBeggingDate!)
-            Pre["percentages"] = ["block1":pretestBlock1Score!,"block2":pretestBlock2Score!]
             Pre["enddate"] = formatter.stringFromDate(startEndDate!)
+            var Percentages = [String:AnyObject]()
+            for var s = 1 ; s <= 2 ; s++ {
+                let key = String(format:"pretestBlock%dScore",s)
+                if let scoreValue = self.valueForKey(key) as? NSNumber {
+                    Percentages["block"+String(s)] = scoreValue
+                }
+            }
+            Pre["percentages"] = Percentages
         }
         exp["pretest"] = Pre
         
@@ -474,10 +493,19 @@ class Experience : NSObject {
         exp["training"] = Train
 
         var Post = [String:AnyObject]()
-        if testBeggingDate != nil && testEndDate != nil && posttestBlock1Score != nil && posttestBlock2Score != nil {
+        if testBeggingDate != nil && testEndDate != nil  {
             Post["startdate"] = formatter.stringFromDate(testBeggingDate!)
-            Post["percentages"] = ["block1":posttestBlock1Score!,"block2":posttestBlock2Score!]
             Post["enddate"] = formatter.stringFromDate(testEndDate!)
+            
+            var Percentages = [String:AnyObject]()
+            for var s = 1 ; s <= 2 ; s++ {
+                let key = String(format:"posttestBlock%dScore",s)
+                if let scoreValue = self.valueForKey(key) as? NSNumber {
+                    Percentages["block"+String(s)] = scoreValue
+                }
+            }
+            
+            Post["percentages"] = Percentages
         }
         exp["posttest"] = Post
         

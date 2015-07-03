@@ -14,6 +14,7 @@ class DashboardVC: UIViewController, NavigationPusher {
     @IBOutlet weak var aboutButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     var experience:Experience?
     weak var nextController:UIViewController?
@@ -43,46 +44,92 @@ class DashboardVC: UIViewController, NavigationPusher {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        layoutSubviews()
+        self.scoresButton.hidden = true
+        self.logoutButton.hidden = true
+        self.aboutButton.hidden = true
+        self.startButton.enabled = false
+        
+        self.indicator.startAnimating()
+        self.startButton.setTitle("Please wait while we update your records...", forState: .Normal)
+        Webservice.sharedInstance.getExperience(completion: { (experienceDict) in
+            if experienceDict != nil {
+                //Keep the oldest!
+                var downloadedExperience = Experience(fromDictionary: experienceDict!)
+                if downloadedExperience > self.experience! {
+                    self.experience = downloadedExperience
+                    self.layoutSubviews()
+                } else if self.experience! > downloadedExperience {
+                    Webservice.sharedInstance.sendExperience(self.experience!.toJSONDictionary(), completion: { (resp) in
+                        if !resp {
+                            println("1) We are having problems uploading this user's experience :(")
+                        }
+                        self.layoutSubviews()
+                    })
+                } else {
+                    println("Everything in sync!")
+                    self.layoutSubviews()
+                }
+            } else {
+                //No remote experience found! Must be a new user. If not, upload experience!
+                if self.experience!.progress != .Start {
+                    Webservice.sharedInstance.sendExperience(self.experience!.toJSONDictionary(), completion: { (resp) in
+                        if !resp {
+                            println("2) We are having problems uploading this user's experience :(")
+                        }
+                        self.layoutSubviews()
+                    })
+                } else {
+                    self.layoutSubviews()
+                }
+            }
+        })
     }
     
     func layoutSubviews() {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .FullStyle
-        formatter.timeStyle = .MediumStyle
-        self.dateLabel.text = formatter.stringFromDate(NSDate())
-        
-        let availability = experience!.isCurrentProgressAvailableToday()
-        
-        self.startButton.titleLabel?.numberOfLines = 2
-        self.startButton.titleLabel?.textAlignment = .Center
-        if availability.ok {
-            switch experience!.progress! {
-            case .Start:
-                self.startButton.setTitle("READY FOR YOUR FIRST TEST?", forState: .Normal)
-            case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
-                let digit = String(p.trainIdx()!)
-                self.startButton.setTitle("WELCOME BACK TO TRAIN SESSION " + digit, forState: .Normal)
-            case .Test:
-                self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
-            case .End:
-                self.startButton.setTitle("NO MORE EXERCISES AVAILABLE", forState: .Normal)
-                self.startButton.enabled = false
-            default:
-                println("Unknow progress state found")
-            }
-        } else {
-            self.startButton.setTitle("", forState: .Normal)
-            self.startButton.enabled = false
+        dispatch_async(dispatch_get_main_queue()) {
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .FullStyle
+            formatter.timeStyle = .MediumStyle
+            self.dateLabel.text = formatter.stringFromDate(NSDate())
             
-            self.view.bringSubviewToFront(self.errorLabel)
-            self.errorLabel.text = availability.message
-            self.errorLabel.hidden = false
+            let availability = self.experience!.isCurrentProgressAvailableToday()
+            
+            self.indicator.stopAnimating()
+            self.scoresButton.hidden = false
+            self.logoutButton.hidden = false
+            self.aboutButton.hidden = false
+            self.startButton.enabled = true
+            
+            self.startButton.titleLabel?.numberOfLines = 2
+            self.startButton.titleLabel?.textAlignment = .Center
+            if availability.ok {
+                switch self.experience!.progress! {
+                case .Start:
+                    self.startButton.setTitle("READY FOR YOUR FIRST TEST?", forState: .Normal)
+                case let p where p == .Train1 || p == .Train2 || p == .Train3 || p == .Train4 || p == .Train5 || p == .Train6 || p == .Train7 || p == .Train8:
+                    let digit = String(p.trainIdx()!)
+                    self.startButton.setTitle("WELCOME BACK TO TRAIN SESSION " + digit, forState: .Normal)
+                case .Test:
+                    self.startButton.setTitle("WELCOME TO YOUR FINAL TEST!", forState: .Normal)
+                case .End:
+                    self.startButton.setTitle("NO MORE EXERCISES AVAILABLE", forState: .Normal)
+                    self.startButton.enabled = false
+                default:
+                    println("Unknow progress state found")
+                }
+            } else {
+                self.startButton.setTitle("", forState: .Normal)
+                self.startButton.enabled = false
+                
+                self.view.bringSubviewToFront(self.errorLabel)
+                self.errorLabel.text = availability.message
+                self.errorLabel.hidden = false
+            }
+            
+            var bg = UIImage(named: "WhiteTile")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 7, 7, 7))
+            self.scoresButton.setBackgroundImage(bg, forState: .Normal)
+            self.logoutButton.setBackgroundImage(bg, forState: .Normal)
         }
-        
-        var bg = UIImage(named: "WhiteTile")?.resizableImageWithCapInsets(UIEdgeInsetsMake(7, 7, 7, 7))
-        self.scoresButton.setBackgroundImage(bg, forState: .Normal)
-        self.logoutButton.setBackgroundImage(bg, forState: .Normal)
     }
 
     @IBAction func finishSessionIntoDashboard(segue:UIStoryboardSegue) {

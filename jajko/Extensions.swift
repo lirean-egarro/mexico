@@ -40,6 +40,8 @@ prefix func ~(rhs: MinimalPair) -> MinimalPair {
 //Strong comparison used for Hashable, and Equatable.
 //For example, mpw's "koście - koszcie" and "koszcie - koście" are different
 func == (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
+    
+    
     return lhs.uid == rhs.uid
 }
 
@@ -47,6 +49,37 @@ func == (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
 //For example, mpw's "koście - koszcie" and "koszcie - koście" are the same
 func === (lhs: MinimalPair, rhs: MinimalPair) -> Bool {
     return (lhs.ipa1 == rhs.ipa1 && lhs.ipa2 == rhs.ipa2) || (lhs.ipa1 == rhs.ipa2 && lhs.ipa2 == rhs.ipa1)
+}
+
+
+func > (lhs:ExperienceProgress,rhs:ExperienceProgress) -> Bool {
+    var lhsIdx = 0
+    for ; lhsIdx < ExperienceProgress.allProgressPoints.count ; lhsIdx++ {
+        if lhs == ExperienceProgress.allProgressPoints[lhsIdx] {
+            break
+        }
+    }
+    
+    var rhsIdx = 0
+    for ; rhsIdx < ExperienceProgress.allProgressPoints.count ; rhsIdx++ {
+        if rhs == ExperienceProgress.allProgressPoints[rhsIdx] {
+            break
+        }
+    }
+    
+    return lhsIdx > rhsIdx
+}
+
+func > (lhs:Experience,rhs:Experience) -> Bool {
+    if lhs.progress == nil {
+        return false
+    }
+    
+    if rhs.progress == nil {
+        return true
+    }
+    
+    return lhs.progress! > rhs.progress!
 }
 
 extension Array {

@@ -124,7 +124,8 @@ class SessionMessageVC: UIViewController {
     
     func forwardFinishMessage() {
         if !didSend {
-            self.whiteLabel.text = "Please wait while we are upload your results..."
+            self.whiteLabel.text = "Please wait while we upload your results..."
+            self.greenLabel.text = ""
             indicator.startAnimating()
             (navVC as! ExperienceNavigationController).finishSession()
             didSend = true
