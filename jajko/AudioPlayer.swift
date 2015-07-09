@@ -49,6 +49,8 @@ class AudioPlayer : NSObject {
                 self.avPlayer = nil
                 currentClosure?()
             }
+        } else {
+            println("Player called while playing...")
         }
     }
     func stop() {

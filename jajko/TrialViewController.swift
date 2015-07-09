@@ -195,6 +195,7 @@ class TrialViewController: UIViewController {
     @IBAction func play(sender:AnyObject?) {
         self.playCount++
         self.playButton.enabled = false
+        self.buttonLock = true
         AudioPlayer.sharedInstance.play(rightFileName) {
             if self.sessionType == SessionType.Training {
                 if self.playCount < 2 {
@@ -209,6 +210,7 @@ class TrialViewController: UIViewController {
                 self.leftButtonDown.hidden = false
                 self.rightButtonDown.hidden = false
             }
+            self.buttonLock = false
         }
     }
     
